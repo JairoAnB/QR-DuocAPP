@@ -1,20 +1,35 @@
-<ion-header [translucent]="true">
+
+<!--Header-->
+<ion-header [translucent]="false">
   <ion-toolbar>
-    <ion-title>
-      Blank
+    <ion-title class="text-center shadow-sm">
+      Asistencia QR 
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
+<!--Header-->
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <form>
+<div class=" items-center">
+  <p class="text-2xl text-center font-semibold mt-28 w-10/12 mx-auto" >Por favor ingresa con tus credenciales institucionales</p>
+<ion-input type="text" color="warning" label="Ingresa tu correo" label-placement = "floating" fill="outline" required class="font-bold w-1/2 mx-auto text-center mt-14"></ion-input>
+<ion-input type="password" color="primary" label="Ingresa tu contraseña"label-placement = "floating" fill="outline" class="font-bold w-1/2 mx-auto text-center mt-5 text-white"></ion-input>
+</div>
+<div class="container mt-5 text-center">
+  <ion-button shape="round" color="warning">
+    Ingresar 
+  </ion-button>
+</div>
+<div>
+  <p class="text-center mt-5 text-yellow-400 font-bold">¿Haz olvidado tu contraseña?</p>
+</div>
+</form>
 </ion-content>
+<!--Footer-->
+<ion-footer>
+  <ion-toolbar>
+    <ion-title class="text-center">
+      © Duoc UC 2024
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>
