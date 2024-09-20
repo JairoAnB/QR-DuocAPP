@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,9 @@ import { ToastController } from '@ionic/angular';
 export class HomePage {
 correo: string ='';
 password: string ='';
-  constructor(private toastController: ToastController) {}
+
+  constructor(private toastController: ToastController, private router: Router ) {}
+
 
   async mostrarError(){
     const error= await this.toastController.create({
@@ -37,4 +40,9 @@ password: string ='';
       this.mostrarError();
     }
   }
+ 
+  btnRegistrarse(){
+    this.router.navigate(['/registro'])
+  }
+
 }
