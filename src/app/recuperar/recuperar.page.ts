@@ -46,8 +46,8 @@ async btnBuscar(){
   if(correo.includes('@duocuc.cl')){
     const correo = await this.toastController.create({
 
-      message: 'Se ha enviado un correo a su cuenta institucional....',
-      duration: 0,
+      message: 'su correo es valido!!',
+      duration: 3000,
       color: 'success',
       buttons: [
         {
@@ -61,7 +61,7 @@ async btnBuscar(){
   
     });
     correo.present();
-    this.envioAlHome()
+    this.envioCambioContrasena()
   }else {
     const correo =  await this.toastController.create({
 
@@ -75,6 +75,11 @@ async btnBuscar(){
 
   }
  }
+
+ envioCambioContrasena(){
+  this.router.navigate(['/cambio-contrasena'])
+ }
+ 
 }
 
   

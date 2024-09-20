@@ -22,6 +22,10 @@ const routes: Routes = [
     path: 'ingreso',
     loadChildren: () => import('./ingreso/ingreso.module').then( m => m.IngresoPageModule)
   },
+  {
+    path: 'cambio-contrasena',
+    loadChildren: () => import('./cambio-contrasena/cambio-contrasena.module').then( m => m.CambioContrasenaPageModule)
+  },
 
 ];
 
