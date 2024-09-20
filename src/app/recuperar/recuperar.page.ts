@@ -47,10 +47,21 @@ async btnBuscar(){
     const correo = await this.toastController.create({
 
       message: 'Se ha enviado un correo a su cuenta institucional....',
-      duration: 3000,
-      color: 'success'
+      duration: 0,
+      color: 'success',
+      buttons: [
+        {
+          text: 'aceptar',
+         
+          handler: () => {
+            console.log('Aceptar fue presionado');
+          }
+        }
+      ]
+  
     });
     correo.present();
+    this.envioAlHome()
   }else {
     const correo =  await this.toastController.create({
 
