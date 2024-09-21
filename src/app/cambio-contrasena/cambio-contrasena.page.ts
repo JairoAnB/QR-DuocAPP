@@ -12,8 +12,6 @@ export class CambioContrasenaPage implements OnInit {
   contra1: string = '';
   contra2: string = '';
 
-
-
   constructor( private router: Router, private toastController : ToastController) { }
   
   ngOnInit() {
@@ -31,7 +29,7 @@ export class CambioContrasenaPage implements OnInit {
     if(this.contra1 === this.contra2){
       const mensaje = await this.toastController.create({
         message: 'Se cambio su contraseña',
-        duration: 0,
+        duration: 2000,
         color: 'success',
         buttons: [
           {
@@ -46,7 +44,7 @@ export class CambioContrasenaPage implements OnInit {
     }else{
 const mensaje2 = await this.toastController.create({
   message: 'Sus contraseñas no son iguales',
-  duration:0,
+  duration:2000,
   color: 'danger'
 });
 await mensaje2.present();

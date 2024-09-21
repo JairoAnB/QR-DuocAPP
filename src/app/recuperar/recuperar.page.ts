@@ -3,9 +3,6 @@ import{ Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 
 
-
-
-
 @Component({
   selector: 'app-recuperar',
   templateUrl: './recuperar.page.html',
@@ -46,19 +43,17 @@ async btnBuscar(){
   if(correo.includes('@duocuc.cl')){
     const correo = await this.toastController.create({
 
-      message: 'su correo es valido!!',
+      message: 'Su correo es valido',
       duration: 3000,
       color: 'success',
       buttons: [
         {
           text: 'aceptar',
-         
           handler: () => {
             console.log('Aceptar fue presionado');
           }
         }
       ]
-  
     });
     correo.present();
     this.envioCambioContrasena()
@@ -72,7 +67,6 @@ async btnBuscar(){
     color: 'danger'
   });
   error.present();
-
   }
  }
 

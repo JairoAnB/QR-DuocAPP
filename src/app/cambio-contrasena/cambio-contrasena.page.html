@@ -2,34 +2,32 @@
 <ion-header [translucent]="true" mode="ios">
   <ion-toolbar>
     <ion-title class="text-center">
-      Cambio contraseña Duoc UC</ion-title>
+      Portal de recuperacion Duoc UC
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 <!-- FIN DEL HEADER -->
 
 <!-- CONTENIDO PRINCIPAL -->
 <ion-content [fullscreen]="true">
-  <div>
-    <img src="assets/img/DUOC-PNG.png"  height="350px" width="350px"  alt="duoc" (click)="home()">
+  <div class="absolute ml-6 mr-6 mt-48">
+    <img src="assets/img/DUOC-PNG.png" height="450px" width="450px" alt="duoc">
   </div>
-  <form class="shadow-xl rounded-3xl bg-slate-300 ml-6 mr-3">
-    <div>
-      <p class="text-center font-semibold text-2xl w-10/12 mx-auto text-black">Ingrese su nueva contraseña</p>
+  <form class="shadow-xl rounded-3xl bg-slate-300 ml-6 mr-3 mt-80 py-2 pt-6">
+    <div class="">
+      <p class=" text-center font-semibold text-2xl w-10/12 mx-auto text-black">Ingrese su nueva contraseña</p>
     </div>
     <div>
-      <ion-input [(ngModel)]="contra1"  name="password1" type="password" color="warning" label="Contraseña" labelPlacement="floating" fill="outline" required class="font-bold w-8/12 mx-auto text-center mt-5 text-black"></ion-input>
-      <ion-input  name="password2" type="password" color="warning" label="Nuevamente Contraseña" labelPlacement="floating" fill="outline" required class="font-bold w-8/12 mx-auto text-center mt-5 text-black"></ion-input>
-      
+      <ion-input [(ngModel)]="contra1"  name="password1" type="password" color="warning" label="Nueva contraseña" labelPlacement="floating" fill="outline" required class="font-bold w-8/12 mx-auto text-center mt-2 text-black"></ion-input>
+      <ion-input  name="password2" type="password" color="warning" label="Repita su contraseña" labelPlacement="floating" fill="outline" required class="font-bold w-8/12 mx-auto text-center mt-2 text-black"></ion-input>
     </div>
-    <div class="text-center">
-      <ion-button shape="round" color="warning" (click)="btnCancelar()">Cancelar</ion-button>
+    <div class="text-center mt-2 mb-2">
       <ion-button shape="round" color="primary" (clikc)="btnCambiar()">Cambiar</ion-button>
+      <ion-button shape="round" color="warning" (click)="btnCancelar()">Cancelar</ion-button>
     </div>
-
   </form>
 </ion-content>
 <!-- CONTENIDO PRINCIPAL FINAL -->
-
 <!-- INICIO FOOTER -->
   <ion-footer [translucent]="true" mode="ios">
     <ion-toolbar>
