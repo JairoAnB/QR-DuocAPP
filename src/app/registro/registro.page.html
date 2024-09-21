@@ -3,29 +3,27 @@
 <ion-header [translucent]="true" mode="ios">
   <ion-toolbar>
     <ion-title class="text-center">
-      Registro Duoc UC
+      Portal registro Duoc UC
     </ion-title>
   </ion-toolbar>
 </ion-header>
 <!--Header-->
 
 <ion-content [fullscreen]="true">
-  <div class="absolute ml-6 mr-6 mt-24">
+  <div class="absolute ml-6 mr-6 mt-28">
     <img src="assets/img/DUOC-PNG.png" height="450px" width="450px" alt="duoc" (click)="envioAlHome()">
   </div>
-  <form class="bg-slate-300 rounded-3xl ml-6 mr-6 shadow-xl">
-    <div class="mt-56 pt-10">
-    <p class="text-2xl text-center font-semibold w-10/12 mx-auto text-black" >Registro</p>
+  <form class="bg-slate-300 rounded-3xl ml-6 mr-6 shadow-xl mt-60 py-2 pt-5">
+    <div class="">
+    <p class="text-2xl text-center font-semibold w-10/12 mx-auto text-black" >Por favor rellene los siguientes datos con su informacion.</p>
   </div>
-  <ion-input type="text" name="Nombre" color="warning" label="Nombre:" labelPlacement="floating" fill="outline" required class="font-bold w-8/12 mx-auto text-center mt-5 text-black"></ion-input>
-  <ion-input type="text" name="apellido" color="warning" label="Apellido:" labelPlacement="floating" fill="outline" required class="font-bold w-8/12 mx-auto text-center mt-5 text-black"></ion-input>
-  <ion-input type="number" name="rut" color="warning" label="Rut:" labelPlacement="floating" fill="outline" required class="font-bold w-8/12 mx-auto text-center mt-5 text-black"></ion-input>
-  <ion-input type="email" name="correo" color="warning" label="Correo:" labelPlacement="floating" fill="outline" required class="font-bold w-8/12 mx-auto text-center mt-5 text-black"></ion-input>
-  <ion-input type="date" name="edad" color="warning" label="Edad:" labelPlacement="floating" fill="outline" required class="font-bold w-8/12 mx-auto text-center mt-5 text-black"></ion-input>
-  <ion-input type="text" name="curso" color="warning" label="Curso:" labelPlacement="floating" fill="outline" required class="font-bold w-8/12 mx-auto text-center mt-5 text-black"></ion-input>
-  <div class="container mt-1 mx-auto text-center">
+  <ion-input type="text" name="Nombre" color="warning" label="Nombre" labelPlacement="floating" fill="outline" required class="font-bold w-8/12 mx-auto text-center mt-5 text-black"></ion-input>
+  <ion-input type="text" name="apellido" color="warning" label="Apellido" labelPlacement="floating" fill="outline" required class="font-bold w-8/12 mx-auto text-center mt-2 text-black"></ion-input>
+  <ion-input type="text" name="rut" color="warning" label="Rut" labelPlacement="floating" fill="outline" required class="font-bold w-8/12 mx-auto text-center mt-2 text-black"></ion-input>
+  <ion-input type="email" name="correo" color="warning" label="Correo institucional" labelPlacement="floating" fill="outline" required class="font-bold w-8/12 mx-auto text-center mt-2 text-black"></ion-input>
+  <div class="mt-3 mb-3 mx-auto text-center">
     <ion-button shape="round" color="warning">agregar</ion-button>
-    <ion-button shape="round" color="tertiary" (click)="envioAlHome()" >Cancelar</ion-button>
+    <ion-button shape="round" color="primary" (click)="envioAlHome()" >Cancelar</ion-button>
   </div>
 </form>
 </ion-content>
