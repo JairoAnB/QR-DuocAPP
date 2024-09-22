@@ -36,6 +36,7 @@ password: string ='';
     const passwordL = this.password.trim().toLowerCase().replace(/\s+/g, "");
     if(correoL.includes("@duocuc") && passwordL.length >= 6){
       this.mostrarValidacion();
+      this.router.navigate(['/principal'])
     }else{
       this.mostrarError();
     }
