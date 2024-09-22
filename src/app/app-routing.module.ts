@@ -30,7 +30,23 @@ const routes: Routes = [
   {
     path: 'principal',
     loadChildren: () => import('./principal/principal.module').then( m => m.PrincipalPageModule)
+  },  {
+    path: 'asistencia',
+    loadChildren: () => import('./asistencia/asistencia.module').then( m => m.AsistenciaPageModule)
   },
+  {
+    path: 'soporte',
+    loadChildren: () => import('./soporte/soporte.module').then( m => m.SoportePageModule)
+  },
+  {
+    path: 'perfil',
+    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
+  },
+  {
+    path: 'ajustes',
+    loadChildren: () => import('./ajustes/ajustes.module').then( m => m.AjustesPageModule)
+  },
+
 
 ];
 
