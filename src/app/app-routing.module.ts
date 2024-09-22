@@ -31,7 +31,10 @@ const routes: Routes = [
     path: 'principal',
     loadChildren: () => import('./principal/principal.module').then( m => m.PrincipalPageModule)
   },
-
+  {
+    path: 'soporte',
+    loadChildren: () => import('./soporte/soporte.module').then( m => m.SoportePageModule)
+  },
 ];
 
 @NgModule({
