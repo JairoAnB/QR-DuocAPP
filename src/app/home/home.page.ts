@@ -41,7 +41,10 @@ password: string ='';
       this.mostrarError();
     }
   }
- 
+ btnOlvido(){
+   this.router.navigate(['/recuperar'])
+   console.log('apretado');
+ }
   btnRegistrarse(){
     this.router.navigate(['/registro'])
   }

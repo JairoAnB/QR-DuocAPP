@@ -1,3 +1,4 @@
+import { DevolverInicioService } from './../devolver-inicio.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -8,11 +9,11 @@ import { Router } from '@angular/router';
 })
 export class RegistroPage implements OnInit {
 
-  constructor(private router:Router) { }
+  constructor(private router:Router, private DevolverInicioService:DevolverInicioService) { }
 
   ngOnInit() {
   }
-  envioAlHome(){
-this.router.navigate(['/home'])
+  envioAlHome() {
+    this.DevolverInicioService.devolverInicio();
 }
 }

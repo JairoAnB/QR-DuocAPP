@@ -1,16 +1,17 @@
 <!-- HEADER INICIO -->
 <ion-header [translucent]="true" mode="ios">
-  <ion-toolbar class="flex justify-between items-center">
-    <ion-title >
-      Portal de recuperacion Duoc UC
+  <ion-toolbar>
+    <ion-title class="text-center flex items-center">
+      <ion-icon name="finger-print" class=" align-middle"></ion-icon>
+      Portal de ayuda RegistrAPP
     </ion-title>
   </ion-toolbar>
 </ion-header>
 <!-- HEADER FINAL-->
 <!-- CONTENIDO PRINCIPAL -->
 <ion-content [fullscreen]="true">
-  <div class="absolute ml-6 mr-6 mt-48">
-    <img src="assets/img/DUOC-PNG.png" height="450px" width="450px" alt="duoc">
+  <div class="absolute ml-10 mr-6 mt-56">
+    <img src="assets/img/DUOC-PNG.png" height="400px" width="400px" alt="duoc" (click)="envioAlHome()">
   </div>
   <form class=" bg-slate-300 rounded-3xl ml-5 mr-5 shadow-xl pb-1"> <!-- FONDO BLANCO -->
     <div class="mt-80 pt-10">

@@ -1,3 +1,4 @@
+import { DevolverInicioService } from './../devolver-inicio.service';
 import { Component, OnInit } from '@angular/core';
 import{ Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
@@ -16,15 +17,14 @@ export class RecuperarPage implements OnInit {
  
   constructor( 
     private toastController: ToastController,
-    private router: Router   ) {
-
+    private router: Router, private DevolverInicioService:DevolverInicioService   ) {
    }
 
   ngOnInit() {
   }
 
   envioAlHome(){
-    this.router.navigate(['/home'])
+    this.DevolverInicioService.devolverInicio();
   }
 
  async btnCancelar(){

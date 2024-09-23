@@ -1,3 +1,4 @@
+import { ServiceAlertServiceService } from './../service-alert-service.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SoportePage implements OnInit {
 
-  constructor() { }
+  constructor(private ServiceAlertServiceService: ServiceAlertServiceService) { }
 
   ngOnInit() {
   }
 
+  alertaError() { 
+    this.ServiceAlertServiceService.alerta();
+  }
 }

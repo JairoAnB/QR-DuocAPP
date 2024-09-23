@@ -1,38 +1,42 @@
-
 <!--Header-->
 <ion-header [translucent]="true" mode="ios">
   <ion-toolbar>
-    <ion-title class="text-center">
-      <ion-icon name="qr-code-outline"></ion-icon>
-      Asistencia Duoc UC
+    <ion-title class="text-center flex items-center">
+      <ion-icon name="qr-code-outline" class=" mb-1 align-middle"></ion-icon>
+      RegistrAPP
     </ion-title>
   </ion-toolbar>
 </ion-header>
 <!--Header-->
 <ion-content [fullscreen]="true">
-  <div class="absolute ml-6 mr-6 mt-24">
-    <img src="assets/img/DUOC-PNG.png" height="450px" width="450px" alt="duoc">
+  <div class="absolute ml-10 mr-6 mt-36">
+    <img src="assets/img/DUOC-PNG.png" height="400px" width="400px" alt="duoc">
   </div>
   <form class="bg-slate-300 rounded-3xl ml-6 mr-6 shadow-xl">
-    <div class="mt-56 pt-10">
-    <p class="text-2xl text-center font-semibold w-10/12 mx-auto text-black" >Por favor ingresa con tus credenciales institucionales</p>
-  </div>
- <div>
-<ion-input [(ngModel)]="correo" name="correo" type="email" color="warning" label="Ingresa tu correo" label-placement = "floating" fill="outline" required class="font-bold w-8/12 mx-auto text-center mt-5 text-black"></ion-input>
-<ion-input [(ngModel)]="password" name="password" type="password" color="primary" label="Ingresa tu contraseña"label-placement = "floating" fill="outline" required class="font-bold w-8/12 mx-auto text-center mt-5 text-black"></ion-input>
-</div>
-<div class="container mt-5 text-center">
-  <ion-button shape="round" color="warning" (click)="verificarDatos()">
-    Ingresar 
-  </ion-button>
-  <ion-button shape="round" color="primary" (click)="btnRegistrarse()">
-    Registrarse
-  </ion-button>
-</div>
-<div class="pb-5">
-  <p class="text-center mt-5 text-black font-bold" ><a href="/recuperar">¿Haz olvidado tu contraseña?</a></p>
-</div>
-</form>
+    <div class="mt-60 pt-5">
+      <p class="text-2xl text-center font-semibold w-10/12 mx-auto text-black">Por favor ingresa con tus credenciales
+        institucionales</p>
+    </div>
+    <div>
+      <ion-input [(ngModel)]="correo" name="correo" type="email" color="warning" label="Ingresa tu correo"
+        label-placement="floating" fill="outline" required
+        class="font-bold w-8/12 mx-auto text-center mt-5 text-black"></ion-input>
+      <ion-input [(ngModel)]="password" name="password" type="password" color="primary" label="Ingresa tu contraseña"
+        label-placement="floating" fill="outline" required
+        class="font-bold w-8/12 mx-auto text-center mt-5 text-black"></ion-input>
+    </div>
+    <div class="container mt-5 text-center">
+      <ion-button shape="round" color="warning" (click)="verificarDatos()">
+        Ingresar
+      </ion-button>
+      <ion-button shape="round" color="primary" (click)="btnRegistrarse()">
+        Registrarse
+      </ion-button>
+    </div>
+    <div class="pb-5">
+      <p class="text-center mt-5 text-black font-bold"><a (click)="btnOlvido()">¿Haz olvidado tu contraseña?</a></p>
+    </div>
+  </form>
 
 </ion-content>
 <!--Footer-->
