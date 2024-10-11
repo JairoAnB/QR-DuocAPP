@@ -1,4 +1,4 @@
-import { ServiceAlertServiceService } from './../service-alert-service.service';
+import { ServiceAlertServiceService } from '../Services/service-alert-service.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

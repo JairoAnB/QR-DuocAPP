@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { VariableSaludoService } from '../Services/variable-saludo.service';
 
 @Component({
   selector: 'app-home',
@@ -11,9 +12,14 @@ export class HomePage {
 correo: string ='';
 password: string ='';
 
-  constructor(private toastController: ToastController, private router: Router ) {}
+  constructor(private toastController: ToastController, private router: Router, private services:VariableSaludoService ) {}
 
+  guardarCorreo() {
+    const correo = this.correo.trim();
+    const formateo = correo.split('@')[0];
+    this.services.setCorreo(formateo);
 
+  }  
   async mostrarError(){
     const error= await this.toastController.create({
       message: 'Verifica que tu contraseña sea valida o que tu correo sea de DUOC UC',
@@ -36,6 +42,7 @@ password: string ='';
     const passwordL = this.password.trim().toLowerCase().replace(/\s+/g, "");
     if(correoL.includes("@duocuc") && passwordL.length >= 6){
       this.mostrarValidacion();
+      this.guardarCorreo();
       this.router.navigate(['/principal'])
     }else{
       this.mostrarError();
