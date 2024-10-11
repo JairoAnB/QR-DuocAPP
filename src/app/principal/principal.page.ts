@@ -2,7 +2,7 @@ import { ServiceAlertServiceService } from '../Services/service-alert-service.se
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { VariableSaludoService } from '../Services/variable-saludo.service';
+import { StorageService } from '../Services/storage.service';
 
 @Component({
   selector: 'app-principal',
@@ -11,20 +11,38 @@ import { VariableSaludoService } from '../Services/variable-saludo.service';
 })
 export class PrincipalPage implements OnInit {
   correo: string = "";
-  constructor(private alertController: AlertController, private router: Router, private ServiceAlertServiceService: ServiceAlertServiceService, 
-    private Services: VariableSaludoService ) { }
 
-  ngOnInit() {
-    this.correo = this.Services.getCorreo();
+  constructor(
+    private alertController: AlertController,
+    private router: Router,
+    private serviceAlert: ServiceAlertServiceService, 
+    private storage: StorageService
+  ) {}
+
+  async ngOnInit() {
+    const formattedCorreo = await this.storage.getCorreo();
+
+    if (formattedCorreo) {
+      const userData = await this.storage.get(`user_data_${formattedCorreo}`);
+      
+      if (userData) {
+        this.correo = userData.correo; 
+      } else {
+        console.log('No se encontraron datos de usuario en el almacenamiento.');
+      }
+    } else {
+      console.log('No se encontró un correo formateado en el almacenamiento.');
+    }
   }
 
   alertaError() {
-    this.ServiceAlertServiceService.alerta();
+    this.serviceAlert.alerta();
   }
 
   regresarHome() {
-    this.ServiceAlertServiceService.regresarHome();
+    this.serviceAlert.regresarHome();
   }
+
   funcionNoValida() {
     this.alertaError();
     this.regresarHome();
