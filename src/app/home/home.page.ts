@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { VariableSaludoService } from '../Services/variable-saludo.service';
+import { VariableSaludoService } from '../Services/variable-saludo.service'; 
 import { StorageService } from '../Services/storage.service'; 
 import { UserData } from '../models/user-data/user-data';
 
@@ -25,7 +25,6 @@ export class HomePage implements OnInit {
     await this.storageService.init();
     const formateo = await this.storageService.get('correo_formateado');
     if (formateo) {
-      console.log('Correo recuperado:', formateo);
       this.correo = formateo;
       const data = await this.storageService.get(`user_data_${formateo}`);
       if (data) {
@@ -34,27 +33,29 @@ export class HomePage implements OnInit {
       }
     }
   }
-
   guardarDatos() {
     const userData = new UserData(this.correo, this.password);
     if (this.storageService) {
-      this.storageService?.set(`user_data_${this.correo}`, userData)
+      this.storageService.set(`user_data_${this.correo}`, userData)
         .then(() => {
-          console.log('Datos guardados correctamente');
+          console.log(`Datos guardados para la clave user_data_${this.correo}:`, userData);
+        })
+        .catch(error => {
+          console.error('Error al guardar los datos del usuario:', error);
         });
     }
   }
-
-  guardarCorreo() {
-    const correo = this.correo.trim();
-    const formateo = correo.split('@')[0];
-    this.storageService.set('correo_formateado', formateo)
-      .then(() => {
-        console.log('Correo formateado guardado correctamente:', formateo);
-      })
-      .catch(error => {
-        console.log('Error al guardar el correo:', error);
-      });
+  
+  
+  async guardarUsuarioCompleto() {
+    try {
+      const correoFormateado = this.correo.trim().split('@')[0];
+      const userData = new UserData(this.correo, this.password);
+      await this.storageService.set('correo_formateado', correoFormateado);
+      await this.storageService.set(`user_data_${this.correo}`, userData);
+    } catch (error) {
+      console.log('Error al guardar los datos del usuario:', error);
+    }
   }
 
   async mostrarError() {
@@ -78,10 +79,11 @@ export class HomePage implements OnInit {
   verificarDatos() {
     const correoL = this.correo.trim().toLowerCase().replace(/\s+/g, "");
     const passwordL = this.password.trim().replace(/\s+/g, "");
-    if (correoL.includes(".") && passwordL.length >= 4) {
+
+    if (correoL.includes(".") && passwordL.length >= 4 && correoL.endsWith("@duocuc.cl")) {
       this.mostrarValidacion();
-      this.guardarCorreo();
-      this.guardarDatos(); 
+      this.guardarUsuarioCompleto();
+      this.guardarDatos();
       this.router.navigate(['/principal']);
     } else {
       this.mostrarError();
@@ -90,7 +92,6 @@ export class HomePage implements OnInit {
 
   btnOlvido() {
     this.router.navigate(['/recuperar']);
-    console.log('apretado');
   }
 
   btnRegistrarse() {
