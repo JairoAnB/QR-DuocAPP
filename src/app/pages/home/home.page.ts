@@ -1,9 +1,10 @@
+import { StudentsApiService } from './../../Services/students-api.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { VariableSaludoService } from '../Services/variable-saludo.service'; 
-import { StorageService } from '../Services/storage.service'; 
-import { UserData } from '../models/user-data/user-data';
+import { VariableSaludoService } from '../../Services/variable-saludo.service'; 
+import { StorageService } from '../../Services/storage.service'; 
+import { UserData } from '../../models/user-data';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,8 @@ export class HomePage implements OnInit {
     private toastController: ToastController, 
     private router: Router, 
     private services: VariableSaludoService, 
-    private storageService: StorageService 
+    private storageService: StorageService,
+    private StudentsApiService: StudentsApiService
   ) {}
 
   async ngOnInit() {
@@ -32,27 +34,30 @@ export class HomePage implements OnInit {
         this.password = data.password;
       }
     }
-  }
-  guardarDatos() {
+  }guardarDatos() {
     const userData = new UserData(this.correo, this.password);
     if (this.storageService) {
+      localStorage.setItem('email', this.correo);
+      localStorage.setItem('password', this.password);
       this.storageService.set(`user_data_${this.correo}`, userData)
+      this.storageService.set(`user_data_${this.password}`, userData)
         .then(() => {
           console.log(`Datos guardados para la clave user_data_${this.correo}:`, userData);
+          this.router.navigate(['/principal']);
         })
         .catch(error => {
           console.error('Error al guardar los datos del usuario:', error);
         });
     }
   }
-  
-  
+
   async guardarUsuarioCompleto() {
     try {
       const correoFormateado = this.correo.trim().split('@')[0];
       const userData = new UserData(this.correo, this.password);
       await this.storageService.set('correo_formateado', correoFormateado);
       await this.storageService.set(`user_data_${this.correo}`, userData);
+      await this.storageService.set(`user_data_${this.password}`, userData);
     } catch (error) {
       console.log('Error al guardar los datos del usuario:', error);
     }
@@ -76,15 +81,29 @@ export class HomePage implements OnInit {
     validacion.present();
   }
 
+  validacionCredenciales() {
+    this.StudentsApiService.loginStudent(this.correo, this.password).subscribe(
+      (data) => {
+        if (data.length > 0) {
+          console.log('Usuario encontrado:', data);
+          this.mostrarValidacion();
+          this.guardarUsuarioCompleto();
+          this.guardarDatos();
+          this.router.navigate(['/principal']);
+        } else {
+          console.error('Usuario no encontrado');
+          this.mostrarError();
+        }
+      }
+    )
+  }
+
   verificarDatos() {
     const correoL = this.correo.trim().toLowerCase().replace(/\s+/g, "");
     const passwordL = this.password.trim().replace(/\s+/g, "");
 
-    if (correoL.includes(".") && passwordL.length >= 4 && correoL.endsWith("@duocuc.cl")) {
-      this.mostrarValidacion();
-      this.guardarUsuarioCompleto();
-      this.guardarDatos();
-      this.router.navigate(['/principal']);
+    if (correoL.includes("@") && passwordL.length >= 4 || correoL.endsWith("@duocuc.cl")) {
+      this.validacionCredenciales();
     } else {
       this.mostrarError();
     }

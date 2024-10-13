@@ -1,8 +1,10 @@
-import { ServiceAlertServiceService } from '../Services/service-alert-service.service';
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
-import { StorageService } from '../Services/storage.service';
+import { ServiceAlertServiceService } from 'src/app/Services/service-alert-service.service';
+import { StorageService } from 'src/app/Services/storage.service';
+
 
 @Component({
   selector: 'app-principal',
@@ -22,7 +24,7 @@ export class PrincipalPage implements OnInit {
   async ngOnInit() {
     try {
       console.log('Inicializando almacenamiento...');
-      await this.storage.init(); // Aseguramos que el almacenamiento esté inicializado
+      await this.storage.init(); 
       const formattedCorreo = await this.storage.getCorreo();
 
       if (formattedCorreo) {
@@ -31,7 +33,6 @@ export class PrincipalPage implements OnInit {
         const userData = await this.storage.get(`user_data_${correoCompleto}`);
 
         if (userData) {
-          // Extraer solo la parte antes del @
           this.correo = userData.correo.split('@')[0]; 
           console.log(`Correo del usuario: ${this.correo}`);
         } else {
