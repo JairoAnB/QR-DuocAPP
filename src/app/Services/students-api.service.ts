@@ -19,4 +19,7 @@ export class StudentsApiService {
     return this.http.get<StudentsData[]>(`http://localhost:3000/students?email=${correo}&password=${password}`);
   }
 
+  actualizarStudent(student: StudentsData) { 
+    return this.http.put(`http://localhost:3000/students/${student.id}`, student);
+  }
 }

@@ -30,7 +30,8 @@ const routes: Routes = [
   {
     path: 'soporte',
     loadChildren: () => import('./pages/soporte/soporte.module').then(m => m.SoportePageModule)
-  },  {
+  },
+  {
     path: 'profile',
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
   },
