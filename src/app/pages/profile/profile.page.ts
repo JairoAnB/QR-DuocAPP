@@ -2,7 +2,7 @@ import { Storage } from '@ionic/storage-angular';
 import { StudentsApiService } from './../../Services/students-api.service';
 import { Component, OnInit } from '@angular/core';
 import { StudentsData } from 'src/app/models/students-data';
-import { AlertController } from '@ionic/angular';
+import { AlertController, CheckboxCustomEvent, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -12,8 +12,15 @@ import { AlertController } from '@ionic/angular';
 export class ProfilePage implements OnInit {
   student: StudentsData | null = null;
   editMode = false;
+  canDismiss = false;
+  presentingElement = null;
+  nombre: string = "";
+  apellido: string = "";
+  sede: string = "";
+  username: string = "";
 
-  constructor(private studentsApiService: StudentsApiService, private storage: Storage, private alertController: AlertController) { }
+  constructor(private studentsApiService: StudentsApiService,
+    private storage: Storage, private alertController: AlertController) { }
 
   ngOnInit() {
     const email = localStorage.getItem('email'); 
@@ -35,6 +42,7 @@ export class ProfilePage implements OnInit {
     } else {
       console.log('No hay correo almacenado en localStorage.');
     }
+
   }
 
   async alertaCambios() {
@@ -99,5 +107,6 @@ export class ProfilePage implements OnInit {
   guardarProfile() {
     this.editMode = false;
   }
+
 
 }
