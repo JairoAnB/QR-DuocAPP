@@ -4,56 +4,191 @@
       "id": "1",
       "picture": "https://images-ext-1.discordapp.net/external/7VjOuXpvrYYfDmS0gfGFoAeXrRVZG_fjMbK76_UClA8/https/avatarfiles.alphacoders.com/322/322629.jpg?format=webp&width=671&height=671",
       "name": "Jairo Andres",
+      "username": "jair.gonzalez",
       "lastname": "Gonzalez Bedoya",
       "email": "jair.gonzalez@duocuc.cl",
-      "pasword": "123456",
-      "age": 20,
-      "carrera": "Ingeniería en Desarrollo de Software",
-      "sede": "San joaquin"
+      "password": "123456",
+      "birthdate": "21-03-2004",
+      "gender": "Masculino",
+      "carrera": "Ingeniería en Informática",
+      "sede": "San Joaquín",
+      "identificador": "21599628-k",
+      "telefono": "+569 44075535",
+      "address": "Calle falsisima, 6171",
+      "clases": [
+        {
+          "nombre": "Matemáticas",
+          "horario": "8:00 AM",
+          "seccion": "A",
+          "yaPaso": false,
+          "horarios": [
+            "8:00 AM",
+            "9:00 AM"
+          ]
+        },
+        {
+          "nombre": "Física",
+          "horario": "10:00 AM",
+          "seccion": "B",
+          "yaPaso": true,
+          "horarios": [
+            "10:00 AM",
+            "11:00 AM"
+          ]
+        }
+      ]
     },
     {
       "id": "2",
       "picture": "https://elcomercio.pe/resizer/LXFnvL0lfcc3a2kMGbi-DIOWTMQ=/1200x1200/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/KTOTLGWUCZG6REHQS6R2URY5FA.jpg",
       "name": "Leonardo",
+      "username": "Leo.venegas",
       "lastname": "Venegas",
       "email": "leo.venegas@duocuc.cl",
-      "pasword": "1234",
-      "age": 26,
+      "password": "1234",
+      "birthdate": "12-05-1998",
+      "gender": "Masculino",
       "carrera": "Ingeniería en Desarrollo de Software",
-      "sede": "San joaquin"
+      "sede": "San Joaquín",
+      "identificador": "21458973-2",
+      "telefono": "+569 98765432",
+      "address": "Calle Verdad, 123",
+      "clases": [
+        {
+          "nombre": "Programación",
+          "horario": "10:00 AM",
+          "seccion": "B",
+          "yaPaso": false,
+          "horarios": [
+            "10:00 AM",
+            "11:00 AM"
+          ]
+        },
+        {
+          "nombre": "Bases de Datos",
+          "horario": "1:00 PM",
+          "seccion": "C",
+          "yaPaso": true,
+          "horarios": [
+            "1:00 PM",
+            "2:00 PM"
+          ]
+        }
+      ]
     },
     {
       "id": "3",
-      "picture": "https://cdn.discordapp.com/attachments/803069581001621548/1294873809978916924/image0.jpg?ex=670c98b5&is=670b4735&hm=d1f04dde25d769f6b60dc6cbc6a91ae2659a8f21a0e090570799029636fce626&",
+      "picture": "https://cdn.discordapp.com/attachments/803069581001621548/1295957341551988777/22b6463788b6799f2cd65fd85fb174cd.png?ex=671089d3&is=670f3853&hm=780dcd6eeeb32f516a8a21a88f14094b22614f23e3fb202b7609c2c724dddfe4&",
       "name": "María José",
+      "username": "Maria.perez",
       "lastname": "Pérez Rodríguez",
       "email": "maria.perez@duocuc.cl",
-      "pasword": "12345",
-      "age": 22,
+      "password": "12345",
+      "birthdate": "15-09-2002",
+      "gender": "Femenino",
       "carrera": "Ingeniería en Desarrollo de Software",
-      "sede": "Plaza Vespucio"
+      "sede": "Plaza Vespucio",
+      "identificador": "21399856-4",
+      "telefono": "+569 12345678",
+      "address": "Avenida Siempre Viva, 742",
+      "clases": [
+        {
+          "nombre": "Inglés",
+          "horario": "12:00 PM",
+          "seccion": "C",
+          "yaPaso": false,
+          "horarios": [
+            "12:00 PM",
+            "1:00 PM"
+          ]
+        },
+        {
+          "nombre": "Cálculo",
+          "horario": "2:00 PM",
+          "seccion": "D",
+          "yaPaso": true,
+          "horarios": [
+            "2:00 PM",
+            "3:00 PM"
+          ]
+        }
+      ]
     },
     {
       "id": "4",
       "picture": "https://cdn.discordapp.com/attachments/803069581001621548/1294871735945920523/image0.jpg?ex=670c96c7&is=670b4547&hm=7a94df92bc6247dc77adf0ec9871e916a2c1d2bd90d747e087730c587a31270a&",
       "name": "Fernando",
+      "username": "Fer.lopez",
       "lastname": "López Martínez",
       "email": "fernando.lopez@duocuc.cl",
-      "pasword": "12345678",
-      "age": 21,
+      "password": "12345678",
+      "birthdate": "02-07-2003",
+      "gender": "Masculino",
       "carrera": "Ingeniería en Desarrollo de Software",
-      "sede": "Plaza Vespucio"
+      "sede": "Plaza Vespucio",
+      "identificador": "21678945-7",
+      "telefono": "+569 76543210",
+      "address": "Calle Real, 456",
+      "clases": [
+        {
+          "nombre": "Bases de Datos",
+          "horario": "2:00 PM",
+          "seccion": "D",
+          "yaPaso": true,
+          "horarios": [
+            "2:00 PM",
+            "3:00 PM"
+          ]
+        },
+        {
+          "nombre": "Redes",
+          "horario": "4:00 PM",
+          "seccion": "E",
+          "yaPaso": false,
+          "horarios": [
+            "4:00 PM",
+            "5:00 PM"
+          ]
+        }
+      ]
     },
     {
       "id": "5",
       "picture": "https://cdn.discordapp.com/attachments/803069581001621548/1294871875775889449/image0.jpg?ex=670c96e8&is=670b4568&hm=d9c50a92eb8648b7bdcea639b1c07595d0cc4a3287de0f2e24c1ad14c366b59c&",
       "name": "Ana Paula",
+      "username": "Ana.torres",
       "lastname": "Torres Silva",
       "email": "ana.torres@duocuc.cl",
-      "pasword": "123456789",
-      "age": 19,
+      "password": "123456789",
+      "birthdate": "10-11-2004",
+      "gender": "Femenino",
       "carrera": "Ingeniería en Desarrollo de Software",
-      "sede": "Plaza Vespucio"
+      "sede": "Plaza Vespucio",
+      "identificador": "21745678-9",
+      "telefono": "+569 87654321",
+      "address": "Camino Falso, 789",
+      "clases": [
+        {
+          "nombre": "Análisis de Sistemas",
+          "horario": "4:00 PM",
+          "seccion": "E",
+          "yaPaso": false,
+          "horarios": [
+            "4:00 PM",
+            "5:00 PM"
+          ]
+        },
+        {
+          "nombre": "Programación Web",
+          "horario": "6:00 PM",
+          "seccion": "F",
+          "yaPaso": true,
+          "horarios": [
+            "6:00 PM",
+            "7:00 PM"
+          ]
+        }
+      ]
     }
   ]
 }
