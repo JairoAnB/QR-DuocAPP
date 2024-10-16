@@ -40,7 +40,6 @@
 
   <!-- Contenido principal -->
   <ion-router-outlet id="main-content"></ion-router-outlet>
-
   <ion-header [translucent]="true" mode="ios">
     <ion-toolbar>
       <ion-buttons slot="start">
@@ -83,6 +82,10 @@
                 <span class="font-medium text-white">{{student?.identificador}}</span>
               </p>
               <p class="text-lg text-gray-400 flex justify-between mt-2">
+                <span class="font-semibold">Genero:</span>
+                <span class="font-medium text-white">{{student?.gender}}</span>
+              </p>
+              <p class="text-lg text-gray-400 flex justify-between mt-2">
                 <span class="font-semibold">Teléfono celular:</span>
                 <span class="font-medium text-white">{{student?.telefono}}</span>
               </p>
@@ -105,7 +108,7 @@
       <div class="bg-gray-800 rounded-lg p-6 max-w-md w-full">
         <div class="flex flex-col items-center">
           <!-- Imagen de perfil -->
-          <div class="relative group w-36 h-36">
+          <div class="relative group w-36 h-36" (click)="takePicture()">
             <div class="absolute inset-0 rounded-full border-4 border-blue-500 overflow-hidden">
               <ion-img [src]="student?.picture" alt="Foto de perfil"
                 class="w-full h-full object-cover transition duration-200 ease-in-out group-hover:opacity-35"></ion-img>
@@ -117,16 +120,19 @@
           <!-- Imagen de perfil -->
           <div class="mt-4 w-full">
               <ion-label class="text-white mt-1">Ingresa tu nuevo nombre de usuario: </ion-label>
-              <ion-input [(ngModel)]="student!.username" type="text" required placeholder="Ingresa tu nuevo nombre de usuario"
+              <ion-input [(ngModel)]="student!.username" type="text" 
                 class="mb-3 w-full rounded-md shadow-md bg-gray-700 text-white placeholder-gray-400 transition duration-300 ease-in-out focus:bg-gray-600 focus:ring-2 focus:ring-blue-500"></ion-input>
               <ion-label class="text-white mt-1">Ingresa tu numero de telefono:</ion-label>
-              <ion-input [(ngModel)]="student!.telefono" type="text" required placeholder="Ingresa tu nuevo numero de telefono"
+              <ion-input [(ngModel)]="student!.telefono" type="text" 
                 class="mb-3 w-full rounded-md shadow-md bg-gray-700 text-white placeholder-gray-400 transition duration-300 ease-in-out focus:bg-gray-600 focus:ring-2 focus:ring-blue-500"></ion-input>
               <ion-label class="text-white mt-1">Ingresa tu direccion de domicilio: </ion-label>
-              <ion-input [(ngModel)]="student!.address" type="text" required placeholder="Ingresa tu nuevo numero de telefono"
+              <ion-input [(ngModel)]="student!.address" type="text" 
                 class="mb-3 w-full rounded-md shadow-md bg-gray-700 text-white placeholder-gray-400 transition duration-300 ease-in-out focus:bg-gray-600 focus:ring-2 focus:ring-blue-500"></ion-input>
-            </div>
-          
+              <ion-label class="text-white mt-1">Ingresa tu genero</ion-label>
+              <ion-input [(ngModel)]="student!.gender" type="text" 
+                class="mb-3 w-full rounded-md shadow-md bg-gray-700 text-white placeholder-gray-400 transition duration-300 ease-in-out focus:bg-gray-600 focus:ring-2 focus:ring-blue-500"></ion-input>
+              </div>
+          <!--Boton-->
           <ion-button
             class="mt-4 mb-52 inline-flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105"
             expand="block" fill="outline" shape="round" (click)="alertaCambios()">

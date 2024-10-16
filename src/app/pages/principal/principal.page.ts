@@ -22,7 +22,6 @@ export class PrincipalPage implements OnInit {
   ) {}
 
   async ngOnInit() {
-    try {
       console.log('Inicializando almacenamiento...');
       await this.storage.init(); 
       const formattedCorreo = await this.storage.getCorreo();
@@ -41,13 +40,7 @@ export class PrincipalPage implements OnInit {
       } else {
         console.log('No se encontró un correo formateado en el almacenamiento.');
       }
-    } catch (error) {
-      console.error('Error al cargar los datos de usuario:', error);
-    }
   }
-  
-  
-
   alertaError() {
     this.serviceAlert.alerta();
   }
