@@ -65,7 +65,7 @@ export class HomePage implements OnInit {
 
   async mostrarError() {
     const error = await this.toastController.create({
-      message: 'Verifica que tu contraseña sea válida o que tu correo sea de DUOC UC',
+      message: 'Correo o contraseña inválidos, intente nuevamente o contactate con soporte técnico.',
       duration: 3000,
       color: 'danger'
     });
@@ -74,7 +74,7 @@ export class HomePage implements OnInit {
 
   async mostrarValidacion() {
     const validacion = await this.toastController.create({
-      message: 'Correo y contraseña válidos, siga con su camino, ¡bienvenid@!',
+      message: 'Bienvenido/a  a registro de asistencia DuocUC',
       duration: 3000,
       color: 'success'
     });
