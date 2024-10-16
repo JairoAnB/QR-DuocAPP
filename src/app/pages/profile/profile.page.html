@@ -4,7 +4,7 @@
     <ion-header>
       <ion-toolbar color="#012C56">
         <div class="menu-header-background ml-5">
-          <img src="assets/img/logo_duoc_white.png" height="250px" width="250px" alt="duoc">
+          <img src="assets/img/logo_duoc_white.png" class="h-320 w-320 md:h-400 md:w-400" alt="duoc">
         </div>
       </ion-toolbar>
     </ion-header>
@@ -28,7 +28,7 @@
         </ion-item>
         <ion-item routerLink="/home" routerDirection="root">
           <ion-icon slot="start" name="person-circle-outline"></ion-icon>
-          <ion-label>Cerrar Sesion</ion-label>
+          <ion-label>Cerrar Sesión</ion-label>
         </ion-item>
       </ion-list>
     </ion-content>
@@ -36,24 +36,25 @@
 
   <!-- Contenido principal -->
   <ion-router-outlet id="main-content"></ion-router-outlet>
+  
   <ion-header [translucent]="true" mode="ios">
     <ion-toolbar>
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
       <ion-title class="text-center flex items-center">
-        <ion-icon name="person" class=" mb-1 align-middle"></ion-icon>
+        <ion-icon name="person" class="mb-1 align-middle"></ion-icon>
         Perfil Estudiantil
       </ion-title>
     </ion-toolbar>
   </ion-header>
+  
   <ion-content [scrollY]="false" class="bg-gray-800 p-4">
     <div *ngIf="!editMode">
       <div class="bg-gray-800 h-screen flex items-center justify-center">
-        <div class="bg-gray-800 rounded-lg p-6 max-w-md mx-auto">
+        <div class="bg-gray-800 rounded-lg p-6 max-w-md w-full mx-auto">
           <div class="flex flex-col items-center">
-            <img src="{{student?.picture}}" alt="Foto de perfil"
-              class="w-36 h-36 rounded-full mb-6 border-4 border-blue-500">
+            <img src="{{student?.picture}}" alt="Foto de perfil" class="w-36 h-36 rounded-full mb-6 border-4 border-blue-500">
             <h2 class="text-3xl font-bold text-white mb-2 text-center">{{student?.name}} {{student?.lastname}}</h2>
             <div class="mt-4 w-full">
               <p class="text-lg text-gray-400 flex justify-between">
@@ -78,7 +79,7 @@
                 <span class="font-medium text-white">{{student?.identificador}}</span>
               </p>
               <p class="text-lg text-gray-400 flex justify-between mt-2">
-                <span class="font-semibold">Genero:</span>
+                <span class="font-semibold">Género:</span>
                 <span class="font-medium text-white">{{student?.gender}}</span>
               </p>
               <p class="text-lg text-gray-400 flex justify-between mt-2">
@@ -90,8 +91,8 @@
                 <span class="font-medium text-white">{{student?.address}}</span>
               </p>
             </div>
-            <ion-button class="mt-6 mb-48 inline-flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105"
-              expand="block" fill="outline" shape="round" (click)="cambiarEditMode()">
+            <ion-button class="mt-6 mb-24 inline-flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105 w-full"
+              expand="full" fill="outline" shape="round" (click)="cambiarEditMode()">
               <ion-icon slot="start" name="create" class="mb-1"></ion-icon>
               <span>Editar perfil</span>
             </ion-button>
@@ -99,7 +100,8 @@
         </div>
       </div>
     </div>
-    <!--Modo edicion encendido-->
+
+    <!-- Modo edición encendido -->
     <div *ngIf="editMode" class="min-h-screen flex items-center justify-center bg-gray-800 overflow-hidden">
       <div class="bg-gray-800 rounded-lg p-6 max-w-md w-full">
         <div class="flex flex-col items-center">
@@ -115,33 +117,38 @@
           </div>
           <!-- Imagen de perfil -->
           <div class="mt-4 w-full">
-              <ion-label class="text-white mt-1">Ingresa tu nuevo nombre de usuario: </ion-label>
-              <ion-input [(ngModel)]="student!.username" type="text" 
-                class="mb-3 w-full rounded-md shadow-md bg-gray-700 text-white placeholder-gray-400 transition duration-300 ease-in-out focus:bg-gray-600 focus:ring-2 focus:ring-blue-500"></ion-input>
-              <ion-label class="text-white mt-1">Ingresa tu numero de telefono:</ion-label>
-              <ion-input [(ngModel)]="student!.telefono" type="text" 
-                class="mb-3 w-full rounded-md shadow-md bg-gray-700 text-white placeholder-gray-400 transition duration-300 ease-in-out focus:bg-gray-600 focus:ring-2 focus:ring-blue-500"></ion-input>
-              <ion-label class="text-white mt-1">Ingresa tu direccion de domicilio: </ion-label>
-              <ion-input [(ngModel)]="student!.address" type="text" 
-                class="mb-3 w-full rounded-md shadow-md bg-gray-700 text-white placeholder-gray-400 transition duration-300 ease-in-out focus:bg-gray-600 focus:ring-2 focus:ring-blue-500"></ion-input>
-              <ion-label class="text-white mt-1">Ingresa tu genero</ion-label>
-              <ion-input [(ngModel)]="student!.gender" type="text" 
-                class="mb-3 w-full rounded-md shadow-md bg-gray-700 text-white placeholder-gray-400 transition duration-300 ease-in-out focus:bg-gray-600 focus:ring-2 focus:ring-blue-500"></ion-input>
-              </div>
-          <!--Boton-->
+            <ion-label class="text-white mt-1">Ingresa tu nombre de usuario:</ion-label>
+            <ion-input [(ngModel)]="student!.username" type="text" 
+              class="mb-3 w-full rounded-md shadow-md bg-gray-700 text-white placeholder-gray-400 transition duration-300 ease-in-out focus:bg-gray-600 focus:ring-2 focus:ring-blue-500"></ion-input>
+            <ion-label class="text-white mt-1">Ingresa tu número de teléfono:</ion-label>
+            <ion-input [(ngModel)]="student!.telefono" type="text" 
+              class="mb-3 w-full rounded-md shadow-md bg-gray-700 text-white placeholder-gray-400 transition duration-300 ease-in-out focus:bg-gray-600 focus:ring-2 focus:ring-blue-500"></ion-input>
+            <ion-label class="text-white mt-1">Ingresa tu dirección:</ion-label>
+            <ion-input [(ngModel)]="student!.address" type="text" 
+              class="mb-3 w-full rounded-md shadow-md bg-gray-700 text-white placeholder-gray-400 transition duration-300 ease-in-out focus:bg-gray-600 focus:ring-2 focus:ring-blue-500"></ion-input>
+            <ion-label class="text-white mt-1">Ingresa tu género:</ion-label>
+            <ion-input [(ngModel)]="student!.gender" type="text" 
+              class="mb-3 w-full rounded-md shadow-md bg-gray-700 text-white placeholder-gray-400 transition duration-300 ease-in-out focus:bg-gray-600 focus:ring-2 focus:ring-blue-500"></ion-input>
+          </div>
+          <!-- Botón Guardar Cambios -->
           <ion-button
-            class="mt-4 mb-52 inline-flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105"
-            expand="block" fill="outline" shape="round" (click)="alertaCambios()">
+            class="mt-4 mb-2 inline-flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105 w-full"
+            expand="full" fill="outline" shape="round" (click)="alertaCambios()">
             <ion-icon slot="start" name="create" class="mb-1"></ion-icon>
             <span>Guardar Cambios</span>
+          </ion-button>
+          <!-- Botón Cancelar -->
+          <ion-button class="mt-4 mb-28 inline-flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105 w-full"
+            expand="full" fill="outline" shape="round" color="danger" (click)="cambiarEditMode()">
+            <ion-icon slot="start" name="close" ></ion-icon>
+            <span>Cancelar</span>
           </ion-button>
         </div>
       </div>
     </div>
     
-
-    
   </ion-content>
+
   <!-- Footer -->
   <ion-footer [translucent]="true" mode="ios">
     <ion-toolbar>

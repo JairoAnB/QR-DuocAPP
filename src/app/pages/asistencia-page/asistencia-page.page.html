@@ -51,7 +51,7 @@
   </ion-header>
 
   <!-- Saludo de Bienvenida -->
-  <ion-content class="text-center">
+  <ion-content class="text-center" [scrollY]="false">
     <!-- Imagen en el menú principal -->
     <div class="menu-content block max-w-[95%] h-auto my-5 mx-auto">
       <ion-img src="assets/img/asistencia.jpg"></ion-img>
@@ -93,9 +93,9 @@
       </div>
 
       <div class="container" *ngIf="hayHorarioDisponible">
-        <ion-button class="mt-3" expand="fill" fill="outline" shape="round">
+        <ion-button class="mt-3" expand="fill" fill="outline" shape="round" (click)="scan()">
           <ion-icon class="mr-1" name="camera"></ion-icon>
-          <ion-label>Abrir camara</ion-label>
+          <ion-label>Abrir camara y escanear</ion-label>
         </ion-button>
       </div>
     </div>

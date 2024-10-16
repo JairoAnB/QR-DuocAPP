@@ -4,6 +4,7 @@ import { StudentsApiService } from 'src/app/Services/students-api.service';
 import { StudentsData, ClassData } from 'src/app/models/students-data';
 import { AlertController } from '@ionic/angular';
 import { StorageService } from 'src/app/Services/storage.service';
+import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
 
 @Component({
   selector: 'app-asistencia-page',
@@ -20,6 +21,8 @@ export class AsistenciaPagePage implements OnInit {
   hayHorariosDisponibles: boolean = true;
   hayHorarioDisponible: boolean = false;
   desabilitarSelectClases: boolean = false;
+  isSupported = false;
+  barcodes: Barcode[] = [];
   constructor(
     private studentsApiService: StudentsApiService,
     private storage: Storage,
@@ -28,6 +31,11 @@ export class AsistenciaPagePage implements OnInit {
   ) { }
 
  async  ngOnInit() {
+      //scanner QR
+      BarcodeScanner.isSupported().then((result)=>{
+        this.isSupported = result.supported;
+      })
+
       //recupero correo formateado del storage
       await this.Storage.init();
       const formattedCorreo = await this.Storage.getCorreo();
@@ -91,7 +99,7 @@ export class AsistenciaPagePage implements OnInit {
       } else {
         this.hayHorariosDisponibles = false; 
         this.horarioSeleccionado = null; 
-        this.desabilitarSelectClases = true; 
+        this.desabilitarSelectClases = false; 
       }
     } else {
       this.hayHorariosDisponibles = false; 
@@ -105,5 +113,31 @@ export class AsistenciaPagePage implements OnInit {
     this.hayHorarioDisponible = !!this.horarioSeleccionado;
   }
   
-  //modulo para sacar la asistencia
+  //modulo para leer qr
+
+  async scan(): Promise<void>{
+    const granted = await this.requestPermission();
+    if(!granted){
+      this.presentAlert();
+      return;
+    }
+    const {barcodes} = await BarcodeScanner.scan();
+    this.barcodes.push(...barcodes);
+    console.log('scaneando....')
+  }
+  async requestPermission(): Promise<boolean>{
+    const {camera} = await BarcodeScanner.requestPermissions();
+    return camera === 'granted' || camera === 'limited';
+  }
+  async presentAlert(): Promise<void>{
+    const alert = await this.alertController.create({
+      header: 'Permisos denegados',
+      message: 'Por favor acepta los permisos de la camara para usar el escaner QR',
+      buttons: ['Aceptar']
+    });
+    await alert.present();
+  }
+
+
+
 }

@@ -4,7 +4,7 @@
       "id": "1",
       "picture": "https://images-ext-1.discordapp.net/external/7VjOuXpvrYYfDmS0gfGFoAeXrRVZG_fjMbK76_UClA8/https/avatarfiles.alphacoders.com/322/322629.jpg?format=webp&width=671&height=671",
       "name": "Jairo Andres",
-      "username": "Jair.gonzalez",
+      "username": "jair.gonzalez",
       "lastname": "Gonzalez Bedoya",
       "email": "jair.gonzalez@duocuc.cl",
       "password": "123456",
@@ -13,22 +13,28 @@
       "carrera": "Ingeniería en Informática",
       "sede": "San Joaquín",
       "identificador": "21599628-k",
-      "telefono": "+569 44075536",
-      "address": "Calle falsa, 6171",
+      "telefono": "+569 44075535",
+      "address": "Calle falsisima, 6171",
       "clases": [
         {
           "nombre": "Matemáticas",
           "horario": "8:00 AM",
           "seccion": "A",
           "yaPaso": false,
-          "horarios": ["8:00 AM", "9:00 AM"]
+          "horarios": [
+            "8:00 AM",
+            "9:00 AM"
+          ]
         },
         {
           "nombre": "Física",
           "horario": "10:00 AM",
           "seccion": "B",
           "yaPaso": true,
-          "horarios": ["10:00 AM", "11:00 AM"]
+          "horarios": [
+            "10:00 AM",
+            "11:00 AM"
+          ]
         }
       ]
     },
@@ -53,14 +59,20 @@
           "horario": "10:00 AM",
           "seccion": "B",
           "yaPaso": false,
-          "horarios": ["10:00 AM", "11:00 AM"]
+          "horarios": [
+            "10:00 AM",
+            "11:00 AM"
+          ]
         },
         {
           "nombre": "Bases de Datos",
           "horario": "1:00 PM",
           "seccion": "C",
           "yaPaso": true,
-          "horarios": ["1:00 PM", "2:00 PM"]
+          "horarios": [
+            "1:00 PM",
+            "2:00 PM"
+          ]
         }
       ]
     },
@@ -85,14 +97,20 @@
           "horario": "12:00 PM",
           "seccion": "C",
           "yaPaso": false,
-          "horarios": ["12:00 PM", "1:00 PM"]
+          "horarios": [
+            "12:00 PM",
+            "1:00 PM"
+          ]
         },
         {
           "nombre": "Cálculo",
           "horario": "2:00 PM",
           "seccion": "D",
           "yaPaso": true,
-          "horarios": ["2:00 PM", "3:00 PM"]
+          "horarios": [
+            "2:00 PM",
+            "3:00 PM"
+          ]
         }
       ]
     },
@@ -117,14 +135,20 @@
           "horario": "2:00 PM",
           "seccion": "D",
           "yaPaso": true,
-          "horarios": ["2:00 PM", "3:00 PM"]
+          "horarios": [
+            "2:00 PM",
+            "3:00 PM"
+          ]
         },
         {
           "nombre": "Redes",
           "horario": "4:00 PM",
           "seccion": "E",
           "yaPaso": false,
-          "horarios": ["4:00 PM", "5:00 PM"]
+          "horarios": [
+            "4:00 PM",
+            "5:00 PM"
+          ]
         }
       ]
     },
@@ -149,14 +173,20 @@
           "horario": "4:00 PM",
           "seccion": "E",
           "yaPaso": false,
-          "horarios": ["4:00 PM", "5:00 PM"]
+          "horarios": [
+            "4:00 PM",
+            "5:00 PM"
+          ]
         },
         {
           "nombre": "Programación Web",
           "horario": "6:00 PM",
           "seccion": "F",
           "yaPaso": true,
-          "horarios": ["6:00 PM", "7:00 PM"]
+          "horarios": [
+            "6:00 PM",
+            "7:00 PM"
+          ]
         }
       ]
     }

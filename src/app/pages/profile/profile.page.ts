@@ -18,7 +18,6 @@ export class ProfilePage implements OnInit {
   nombre: string = "";
   apellido: string = "";
   sede: string = "";
-  username: string = "";
 
   constructor(private studentsApiService: StudentsApiService,
     private storage: Storage, private alertController: AlertController) { }
@@ -130,6 +129,7 @@ export class ProfilePage implements OnInit {
   
   cambiarEditMode() {
     this.editMode = !this.editMode;
+    
   }
   guardarProfile() {
     this.editMode = false;
