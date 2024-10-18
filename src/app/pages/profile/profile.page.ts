@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { StudentsData } from 'src/app/models/students-data';
 import { AlertController, CheckboxCustomEvent, ModalController } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -15,12 +16,13 @@ export class ProfilePage implements OnInit {
   editMode = false;
   canDismiss = false;
   presentingElement = null;
-  nombre: string = "";
-  apellido: string = "";
-  sede: string = "";
+  username: string = "";
+  telefono: string = "";
+  address: string = "";
+  gender: string = "";
 
   constructor(private studentsApiService: StudentsApiService,
-    private storage: Storage, private alertController: AlertController) { }
+    private storage: Storage, private alertController: AlertController, private router: Router) { }
 
   ngOnInit() {
     const email = localStorage.getItem('email'); 
@@ -118,6 +120,8 @@ export class ProfilePage implements OnInit {
           console.log('Estudiante actualizado:', studentData);
           this.alertaCambiosRealizados();
           this.cambiarEditMode();
+    
+
         },
         (error) => {
           console.error('Error al actualizar el estudiante:', error);
@@ -129,7 +133,7 @@ export class ProfilePage implements OnInit {
   
   cambiarEditMode() {
     this.editMode = !this.editMode;
-    
+    this.router.navigate(['/profile']);
   }
   guardarProfile() {
     this.editMode = false;

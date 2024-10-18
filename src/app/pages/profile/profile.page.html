@@ -51,12 +51,13 @@
   
   <ion-content [scrollY]="false" class="bg-gray-800 p-4">
     <div *ngIf="!editMode">
-      <div class="bg-gray-800 h-screen flex items-center justify-center">
-        <div class="bg-gray-800 rounded-lg p-6 max-w-md w-full mx-auto">
+      <div class="h-screen flex items-center justify-center">
+        <div class="bg-gray-800 rounded-2xl mr-4 ml-4 mb-20 p-6 max-w-md w-full mx-auto">
           <div class="flex flex-col items-center">
-            <img src="{{student?.picture}}" alt="Foto de perfil" class="w-36 h-36 rounded-full mb-6 border-4 border-blue-500">
+            <img src="{{student?.picture}}" alt="Foto de perfil" class="w-36 h-36 rounded-full border-4 border-blue-500">
             <h2 class="text-3xl font-bold text-white mb-2 text-center">{{student?.name}} {{student?.lastname}}</h2>
             <div class="mt-4 w-full">
+              <h3 class="text-xl mb-2 font-semibold text-white">Datos Institucionales</h3>
               <p class="text-lg text-gray-400 flex justify-between">
                 <span class="font-semibold">Correo Electrónico:</span>
                 <span class="font-medium text-white">{{student?.email}}</span>
@@ -91,7 +92,7 @@
                 <span class="font-medium text-white">{{student?.address}}</span>
               </p>
             </div>
-            <ion-button class="mt-6 mb-24 inline-flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105 w-full"
+            <ion-button class="mt-6 inline-flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105 w-full"
               expand="full" fill="outline" shape="round" (click)="cambiarEditMode()">
               <ion-icon slot="start" name="create" class="mb-1"></ion-icon>
               <span>Editar perfil</span>
@@ -102,8 +103,8 @@
     </div>
 
     <!-- Modo edición encendido -->
-    <div *ngIf="editMode" class="min-h-screen flex items-center justify-center bg-gray-800 overflow-hidden">
-      <div class="bg-gray-800 rounded-lg p-6 max-w-md w-full">
+    <div *ngIf="editMode" class="min-h-screen flex items-center mr-4 ml-4 justify-center overflow-hidden">
+      <div class="bg-gray-800 rounded-xl mb-20 p-6 max-w-md w-full">
         <div class="flex flex-col items-center">
           <!-- Imagen de perfil -->
           <div class="relative group w-36 h-36" (click)="takePicture()">
@@ -138,7 +139,7 @@
             <span>Guardar Cambios</span>
           </ion-button>
           <!-- Botón Cancelar -->
-          <ion-button class="mt-4 mb-28 inline-flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105 w-full"
+          <ion-button class="mt-4  inline-flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105 w-full"
             expand="full" fill="outline" shape="round" color="danger" (click)="cambiarEditMode()">
             <ion-icon slot="start" name="close" ></ion-icon>
             <span>Cancelar</span>
@@ -151,8 +152,8 @@
 
   <!-- Footer -->
   <ion-footer [translucent]="true" mode="ios">
-    <ion-toolbar>
-      <ion-title class="text-center">
+    <ion-toolbar class="bg-gradient-to-r from-blue-900 to-blue-700">
+      <ion-title class="text-center text-xl">
         © Duoc UC 2024
       </ion-title>
     </ion-toolbar>
