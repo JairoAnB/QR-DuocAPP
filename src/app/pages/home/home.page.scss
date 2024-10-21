@@ -29,3 +29,10 @@ ion-content {
 #container a {
   text-decoration: none;
 }
+.Cursor a:hover{ 
+  cursor: pointer;
+  text-decoration: underline;
+  color: #607ee4;
+  transition: color 0,3 ease;
+
+}
