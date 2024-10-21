@@ -20,6 +20,9 @@ export class CambioContrasenaPage implements OnInit {
     this.router.navigate(['/home'])
 
   }
+  Envio_Home(){
+    this.home();
+  }
   btnCancelar(){
     this.home();
   }
