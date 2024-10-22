@@ -6,9 +6,9 @@ import { Router } from '@angular/router';
 })
 export class DevolverInicioService {
 
-  constructor(private router: Router) { }
+  constructor(private routesr: Router) { }
 
   devolverInicio() {
-    this.router.navigate(['/home']);
+    this.routesr.navigate(['/home']);
   }
 }
