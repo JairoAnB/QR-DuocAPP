@@ -57,16 +57,18 @@
   <!-- Saludo de Bienvenida -->
   <ion-content class="text-center">
     <!-- Imagen en el menú principal -->
+    <p class="mt-1 mb-4 text-xl transition-all duration-1000 ease-in-out 
+    transform translate-y-4 opacity-0"
+    [ngClass]="correo ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'">
+   ¡Bienvenido <strong>{{correo}}</strong>!
+ </p>
+ 
     <div class="menu-content">
       <img src="assets/img/asistencia.png" alt="25%" class="menu-image">
     </div>
-    <p class="mt-1 mb-4 text-xl transition-all duration-1000 ease-in-out 
-   transform translate-y-4 opacity-0"
-   [ngClass]="correo ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'">
-  ¡Bienvenido <strong>{{correo}}</strong>!
-</p>
-
-
+  <!--Inicio de la Api Clima-->
+    <ion-label>ACA VA IR LA API CLIMA</ion-label>
+    <!--Aca termina la Api Clima -->
     <div class="container">
       <ion-button class="mt-3" expand="fill" fill="outline" shape="round" routerLink="/asistencia-page" routerDirection="root" >
         <ion-icon class="mr-1" name="qr-code-outline"></ion-icon>
