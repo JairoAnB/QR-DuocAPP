@@ -1,0 +1,131 @@
+<ion-app>
+  <!-- Menú lateral -->
+  <ion-menu contentId="main-content" side="start">
+    <ion-header>
+      <ion-toolbar color="#012C56">
+        <div class="menu-header-background">
+          <img src="assets/img/logo_duoc_white.png" height="250px" width="250px" alt="duoc">
+        </div>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item routerLink="/principal" routerDirection="root">
+          <ion-icon slot="start" name="home-outline"></ion-icon>
+          <ion-label>Inicio</ion-label>
+        </ion-item>
+        <ion-item routerLink="/asistencia" routerDirection="root">
+          <ion-icon slot="start" name="qr-code-outline"></ion-icon>
+          <ion-label>Asistencia</ion-label>
+        </ion-item>
+        <ion-item routerLink="/perfil" routerDirection="root">
+          <ion-icon slot="start" name="person-outline"></ion-icon>
+          <ion-label>Perfil</ion-label>
+        </ion-item>
+        <ion-item routerLink="/ajustes" routerDirection="root">
+          <ion-icon slot="start" name="settings-outline"></ion-icon>
+          <ion-label>Ajustes</ion-label>
+        </ion-item>
+        <ion-item routerLink="/soporte" routerDirection="root">
+          <ion-icon slot="start" name="hammer-outline"></ion-icon>
+          <ion-label>Soporte</ion-label>
+        </ion-item>
+        <ion-item routerLink="/home" routerDirection="root">
+          <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+          <ion-label>Cerrar Sesión</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <!-- Contenido principal -->
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+
+  <!-- Header del contenido principal -->
+  <ion-header [translucent]="true" mode="ios">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        <ion-icon name="hammer-outline"></ion-icon>
+        Soporte
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Tarjeta de Soporte -->
+  <ion-content class="ion-padding" style="overflow-y: auto;">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Informaciones</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-card-subtitle>Admisión</ion-card-subtitle>
+        <ion-label>(+56) 227 120 640</ion-label>
+        <ion-list>
+          <ion-item>
+            <ion-label>- Diplomado</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>- Cursos</ion-label>
+          </ion-item>
+        </ion-list>
+        
+        <ion-card-subtitle>Mesa de Servicios</ion-card-subtitle>
+        <ion-label>(+56) 44220 1098</ion-label>
+        <ion-card-subtitle>Mesa de Servicios Duoc Online</ion-card-subtitle>
+        <ion-label>(+56) 2 2585 6990</ion-label>
+        
+        <ion-list>
+          <ion-item>
+            <ion-label>- Servicios Académicos</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>- Servicios de Financiamiento</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>- Servicios de Vida Estudiantil</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>- Servicios Tecnológicos</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>- Otros Servicios</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Formulario de Google Forms integrado -->
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Formulario de Soporte</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdv0LU88MThe7LolXxGOYowmgyE_4eU_RGXHlCIbPvqGDsNiQ/viewform" width="100%" height="700px" frameborder="0" marginheight="0" marginwidth="0">
+          Cargando…
+        </iframe>
+      </ion-card-content>
+    </ion-card>
+  </ion-content>
+
+  <!-- Footer -->
+  <ion-footer [translucent]="true" mode="ios">
+    <ion-toolbar>
+      <ion-title class="text-center">
+        © Duoc UC 2024
+      </ion-title>
+    </ion-toolbar>
+  </ion-footer>
+</ion-app>
+
+<style>
+  /* Fondo blanco para la tarjeta de soporte */
+  .menu-image {
+    display: block;
+    max-width: 70%;
+    height: auto;
+    margin: 20px auto;
+  }
+</style>

@@ -13,12 +13,12 @@ export class AuthenticatorGuardGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  ): boolean {
     const email = localStorage.getItem('email');
     if (email) {
-      return true;
+      return true; // Permite acceso si el usuario está autenticado
     } else {
-      this.navCtrl.navigateRoot('home');
+      this.navCtrl.navigateRoot('home'); // Redirige al login si no está autenticado
       return false;
     }
   }

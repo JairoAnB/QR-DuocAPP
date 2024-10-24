@@ -13,13 +13,13 @@ export class noAuthenticatorGuardGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+  ): boolean {
     const email = localStorage.getItem('email');
     if (email) {
-      this.navCtrl.navigateRoot('principal'); 
-      return false;
-    } else {
-      return true; 
+      this.navCtrl.navigateRoot('principal'); // Redirige si el usuario está autenticado
+      return false; // No permite acceso a login si ya está autenticado
     }
+    return true; // Permite acceso a login si no está autenticado
   }
 }
+

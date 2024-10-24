@@ -53,7 +53,7 @@ const routes: Routes = [
     path: '**',
     loadChildren: () => import('./pages/error-404/error-404.module').then( m => m.Error404PageModule),
     canActivate: [noAuthenticatorGuardGuard]
-  },
+  }
 
 
 ];
