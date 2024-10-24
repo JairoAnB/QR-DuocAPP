@@ -1,34 +1,34 @@
 <ion-app>
   <!-- Menú lateral -->
-  <ion-menu contentId="main-content" side="start">
-    <ion-header>
-      <ion-toolbar color="#012C56">
-        <div class="menu-header-background ml-5">
-          <img src="assets/img/logo_duoc_white.png" class="h-320 w-320 md:h-400 md:w-400" alt="duoc">
+  <ion-menu contentId="main-content" side="start" class=" bg-opacity-80 backdrop-filter backdrop-blur-lg">
+    <ion-header class="ion-no-border">
+      <ion-toolbar class="bg-transparent">
+        <div class="flex justify-center items-center p-4">
+          <img src="assets/img/logo_duoc_white.png" class="w-32 h-auto" alt="duoc" />
         </div>
       </ion-toolbar>
     </ion-header>
-    <ion-content>
-      <ion-list>
-        <ion-item routerLink="/principal" routerDirection="root">
-          <ion-icon slot="start" name="home-outline"></ion-icon>
-          <ion-label>Inicio</ion-label>
+    <ion-content class="bg-transparent">
+      <ion-list lines="none" class="px-4 py-6 bg-transparent">
+        <ion-item routerLink="/principal" routerDirection="root" detail={false} class="mb-4 bg-transparent">
+          <ion-icon slot="start" name="home-outline" color="primary" class="text-xl"></ion-icon>
+          <ion-label class="font-medium">Inicio</ion-label>
         </ion-item>
-        <ion-item routerLink="/asistencia-page" routerDirection="root">
-          <ion-icon slot="start" name="qr-code-outline"></ion-icon>
-          <ion-label>Leer QR</ion-label>
+        <ion-item routerLink="/asistencia-page" routerDirection="root" detail={false} class="mb-4 bg-transparent">
+          <ion-icon slot="start" name="qr-code-outline" color="primary" class="text-xl"></ion-icon>
+          <ion-label class="font-medium">Leer QR</ion-label>
         </ion-item>
-        <ion-item routerLink="/perfil" routerDirection="root">
-          <ion-icon slot="start" name="person-outline"></ion-icon>
-          <ion-label>Perfil Estudiantil</ion-label>
+        <ion-item routerLink="/profile" routerDirection="root" detail={false} class="mb-4 bg-transparent">
+          <ion-icon slot="start" name="person-outline" color="primary" class="text-xl"></ion-icon>
+          <ion-label class="font-medium">Perfil Estudiantil</ion-label>
         </ion-item>
-        <ion-item routerLink="/soporte" routerDirection="root">
-          <ion-icon slot="start" name="hammer-outline"></ion-icon>
-          <ion-label>Soporte</ion-label>
+        <ion-item routerLink="/soporte" routerDirection="root" detail={false} class="mb-4 bg-transparent">
+          <ion-icon slot="start" name="hammer-outline" color="primary" class="text-xl"></ion-icon>
+          <ion-label class="font-medium">Soporte</ion-label>
         </ion-item>
-        <ion-item routerLink="/home" routerDirection="root">
-          <ion-icon slot="start" name="person-circle-outline"></ion-icon>
-          <ion-label>Cerrar Sesión</ion-label>
+        <ion-item routerLink="/home" routerDirection="root" detail={false} class="mb-4 bg-transparent">
+          <ion-icon slot="start" name="log-out-outline" color="primary" class="text-xl"></ion-icon>
+          <ion-label class="font-medium">Cerrar Sesión</ion-label>
         </ion-item>
       </ion-list>
     </ion-content>
@@ -38,12 +38,12 @@
   <ion-router-outlet id="main-content"></ion-router-outlet>
   
   <ion-header [translucent]="true" mode="ios">
-    <ion-toolbar>
+    <ion-toolbar class="bg-gradient-to-r from-blue-900 to-blue-700">
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title class="text-center flex items-center">
-        <ion-icon name="person" class="mb-1 align-middle"></ion-icon>
+      <ion-title class="text-center flex items-center text-xl">
+        <ion-icon name="person" class="text-xl mb-1 align-middle"></ion-icon>
         Perfil Estudiantil
       </ion-title>
     </ion-toolbar>
@@ -51,12 +51,13 @@
   
   <ion-content [scrollY]="false" class="bg-gray-800 p-4">
     <div *ngIf="!editMode">
-      <div class="bg-gray-800 h-screen flex items-center justify-center">
-        <div class="bg-gray-800 rounded-lg p-6 max-w-md w-full mx-auto">
+      <div class="h-screen flex items-center justify-center">
+        <div class="bg-gray-800 rounded-2xl mr-4 ml-4 mb-20 p-6 max-w-md w-full mx-auto">
           <div class="flex flex-col items-center">
-            <img src="{{student?.picture}}" alt="Foto de perfil" class="w-36 h-36 rounded-full mb-6 border-4 border-blue-500">
+            <img src="{{student?.picture}}" alt="Foto de perfil" class="w-36 h-36 rounded-full border-4 border-blue-500">
             <h2 class="text-3xl font-bold text-white mb-2 text-center">{{student?.name}} {{student?.lastname}}</h2>
             <div class="mt-4 w-full">
+              <h3 class="text-xl mb-2 font-semibold text-white">Datos Institucionales</h3>
               <p class="text-lg text-gray-400 flex justify-between">
                 <span class="font-semibold">Correo Electrónico:</span>
                 <span class="font-medium text-white">{{student?.email}}</span>
@@ -91,7 +92,7 @@
                 <span class="font-medium text-white">{{student?.address}}</span>
               </p>
             </div>
-            <ion-button class="mt-6 mb-24 inline-flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105 w-full"
+            <ion-button class="mt-6 inline-flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105 w-full"
               expand="full" fill="outline" shape="round" (click)="cambiarEditMode()">
               <ion-icon slot="start" name="create" class="mb-1"></ion-icon>
               <span>Editar perfil</span>
@@ -102,8 +103,8 @@
     </div>
 
     <!-- Modo edición encendido -->
-    <div *ngIf="editMode" class="min-h-screen flex items-center justify-center bg-gray-800 overflow-hidden">
-      <div class="bg-gray-800 rounded-lg p-6 max-w-md w-full">
+    <div *ngIf="editMode" class="min-h-screen flex items-center mr-4 ml-4 justify-center overflow-hidden">
+      <div class="bg-gray-800 rounded-xl mb-20 p-6 max-w-md w-full">
         <div class="flex flex-col items-center">
           <!-- Imagen de perfil -->
           <div class="relative group w-36 h-36" (click)="takePicture()">
@@ -138,7 +139,7 @@
             <span>Guardar Cambios</span>
           </ion-button>
           <!-- Botón Cancelar -->
-          <ion-button class="mt-4 mb-28 inline-flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105 w-full"
+          <ion-button class="mt-4  inline-flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105 w-full"
             expand="full" fill="outline" shape="round" color="danger" (click)="cambiarEditMode()">
             <ion-icon slot="start" name="close" ></ion-icon>
             <span>Cancelar</span>
@@ -151,8 +152,8 @@
 
   <!-- Footer -->
   <ion-footer [translucent]="true" mode="ios">
-    <ion-toolbar>
-      <ion-title class="text-center">
+    <ion-toolbar class="bg-gradient-to-r from-blue-900 to-blue-700">
+      <ion-title class="text-center text-xl">
         © Duoc UC 2024
       </ion-title>
     </ion-toolbar>

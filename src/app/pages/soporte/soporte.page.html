@@ -1,34 +1,34 @@
 <ion-app>
   <!-- Menú lateral -->
-  <ion-menu contentId="main-content" side="start">
-    <ion-header>
-      <ion-toolbar color="#012C56">
-        <div class="menu-header-background ml-5">
-          <img src="assets/img/logo_duoc_white.png" height="250px" width="250px" alt="duoc">
+  <ion-menu contentId="main-content" side="start" class=" bg-opacity-80 backdrop-filter backdrop-blur-lg">
+    <ion-header class="ion-no-border">
+      <ion-toolbar class="bg-transparent">
+        <div class="flex justify-center items-center p-4">
+          <img src="assets/img/logo_duoc_white.png" class="w-32 h-auto" alt="duoc" />
         </div>
       </ion-toolbar>
     </ion-header>
-    <ion-content>
-      <ion-list>
-        <ion-item routerLink="/principal" routerDirection="root">
-          <ion-icon slot="start" name="home-outline"></ion-icon>
-          <ion-label>Inicio</ion-label>
+    <ion-content class="bg-transparent">
+      <ion-list lines="none" class="px-4 py-6 bg-transparent">
+        <ion-item routerLink="/principal" routerDirection="root" detail={false} class="mb-4 bg-transparent">
+          <ion-icon slot="start" name="home-outline" color="primary" class="text-xl"></ion-icon>
+          <ion-label class="font-medium">Inicio</ion-label>
         </ion-item>
-        <ion-item routerLink="/asistencia-page" routerDirection="root" (click)="alertaError()">
-          <ion-icon slot="start" name="qr-code-outline"></ion-icon>
-          <ion-label>Leer QR</ion-label>
+        <ion-item routerLink="/asistencia-page" routerDirection="root" detail={false} class="mb-4 bg-transparent">
+          <ion-icon slot="start" name="qr-code-outline" color="primary" class="text-xl"></ion-icon>
+          <ion-label class="font-medium">Leer QR</ion-label>
         </ion-item>
-        <ion-item routerLink="/profile" routerDirection="root">
-          <ion-icon slot="start" name="person-outline"></ion-icon>
-          <ion-label>Perfil Estudiantil</ion-label>
+        <ion-item routerLink="/profile" routerDirection="root" detail={false} class="mb-4 bg-transparent">
+          <ion-icon slot="start" name="person-outline" color="primary" class="text-xl"></ion-icon>
+          <ion-label class="font-medium">Perfil Estudiantil</ion-label>
         </ion-item>
-        <ion-item routerLink="/soporte" routerDirection="root">
-          <ion-icon slot="start" name="hammer-outline"></ion-icon>
-          <ion-label>Soporte</ion-label>
+        <ion-item routerLink="/soporte" routerDirection="root" detail={false} class="mb-4 bg-transparent">
+          <ion-icon slot="start" name="hammer-outline" color="primary" class="text-xl"></ion-icon>
+          <ion-label class="font-medium">Soporte</ion-label>
         </ion-item>
-        <ion-item routerLink="/home" routerDirection="root">
-          <ion-icon slot="start" name="person-circle-outline"></ion-icon>
-          <ion-label>Cerrar Sesión</ion-label>
+        <ion-item routerLink="/home" routerDirection="root" detail={false} class="mb-4 bg-transparent">
+          <ion-icon slot="start" name="log-out-outline" color="primary" class="text-xl"></ion-icon>
+          <ion-label class="font-medium">Cerrar Sesión</ion-label>
         </ion-item>
       </ion-list>
     </ion-content>
@@ -37,19 +37,19 @@
   <ion-router-outlet id="main-content"></ion-router-outlet>
   <!-- Header del contenido principal -->
   <ion-header [translucent]="true" mode="ios">
-    <ion-toolbar>
+    <ion-toolbar class="bg-gradient-to-r from-blue-900 to-blue-700">
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
       <ion-title class="text-center flex items-center">
-        <ion-icon name="hammer-outline" class=" mb-1 align-middle"></ion-icon>
+        <ion-icon name="hammer-outline" class=" text-xl mb-1 align-middle"></ion-icon>
         Soporte 
       </ion-title>
     </ion-toolbar>
   </ion-header>
   <!-- Tarjeta de Soporte -->
   <ion-content class="ion-padding" style="overflow-y: auto;">
-    <ion-card>
+    <ion-card class="bg-gray-800">
       <ion-card-header>
         <ion-card-title>Números de Soporte</ion-card-title>
       </ion-card-header>
@@ -66,7 +66,7 @@
       </ion-card-content>
     </ion-card>
     <!-- Formulario de Google Forms integrado -->
-    <ion-card>
+    <ion-card class="bg-gray-800">
       <ion-card-header>
         <ion-card-title>Formulario de contacto</ion-card-title>
       </ion-card-header>
@@ -79,8 +79,8 @@
   </ion-content>
   <!-- Footer -->
   <ion-footer [translucent]="true" mode="ios">
-    <ion-toolbar>
-      <ion-title class="text-center">
+    <ion-toolbar class="bg-gradient-to-r from-blue-900 to-blue-700">
+      <ion-title class="text-center text-xl">
         © Duoc UC 2024
       </ion-title>
     </ion-toolbar>
