@@ -70,6 +70,16 @@
         <ion-label class="text-lg">Escanear QR</ion-label>
       </ion-button>
     </div>
+    <!-- Inicio de la Api -->
+    <div class= "text-center" *ngIf="weatherData">
+      <h2>Clima en {{ weatherData.name }}</h2>
+      <p>Temperatura: {{ weatherData.main.temp }}°C</p>
+      <p>Descripción: {{ weatherData.weather[0].description }}</p>
+    </div>
+    <div *ngIf="!weatherData">
+      <p>Cargando datos del clima...</p>
+    </div>
+     <!-- Termino de la Api -->
   </ion-content>
 
   <!--Footer-->

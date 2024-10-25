@@ -1,11 +1,12 @@
-
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { Observable } from 'rxjs';
 import { ServiceAlertServiceService } from 'src/app/Services/service-alert-service.service';
 import { StorageService } from 'src/app/Services/storage.service';
+import { WeatherService } from 'src/app/Services/weather.service';
 
-
+ 
 @Component({
   selector: 'app-principal',
   templateUrl: './principal.page.html',
@@ -13,14 +14,16 @@ import { StorageService } from 'src/app/Services/storage.service';
 })
 export class PrincipalPage implements OnInit {
   correo: string = "";
-
+  weatherData: any;
+  
   constructor(
+    private weatherservice : WeatherService,
     private alertController: AlertController,
     private router: Router,
     private serviceAlert: ServiceAlertServiceService, 
     private storage: StorageService
   ) {}
-
+          
   async ngOnInit() {
       console.log('Inicializando almacenamiento...');
       await this.storage.init(); 
@@ -40,7 +43,21 @@ export class PrincipalPage implements OnInit {
       } else {
         console.log('No se encontró un correo formateado en el almacenamiento.');
       }
+      this.getWeather('Santiago', 'cl');
   }
+
+  getWeather(cityName: string, countryCode: string){
+    this.weatherservice.getWeather(cityName , countryCode).subscribe( data => {
+      this.weatherData = data;
+      console.log(this.weatherData)
+    },
+    error => {console.error('Error al obtener los datos del clima', error);
+
+    }
+  );
+  }
+  
+  
   alertaError() {
     this.serviceAlert.alerta();
   }
