@@ -74,15 +74,18 @@
     <form class="custom-bg rounded-3xl mx-6 shadow-xl p-6">
     <div class="weather-container text-yellow-400 text-center" *ngIf="weatherData">
       <h2 class="weathertitle">Clima en {{ weatherData.name}}</h2> 
-      <div class="Weather-Info" style="display: flex; justify-content: center; margin-top: 10px;">
+      <div class="Weather-Info" style=" display: flex; justify-content: center; align-items: center; margin-top: 10px;">
       <img [src]="'http://openweathermap.org/img/wn/' + weatherIcon + '@2x.png'" 
         alt="Icono del clima" class="weather-icon"/>
         <p class="Temp">Temperatura {{ weatherData.main.temp }}°C</p>
       </div>
-      
-      <p>Descripción: {{ weatherData.weather[0].description }}</p>
-  
-   
+      <p> {{ traductor(weatherData.weather[0].description) }}</p>
+      <ion-button (click)= "toggleDetails()" class="btn-mostrar">Ver mas</ion-button>
+      <div *ngIf="showDetails" class="ver-mas">
+        <p>Sensación térmica: {{ weatherData.main.feels_like }}°C</p>
+        <p>Humedad: {{ weatherData.main.humidity }}%</p>
+        <p>Velocidad del viento: {{ weatherData.wind.speed }} m/s</p>
+      </div>
     </div>
     <div *ngIf="!weatherData">
       <p>Cargando datos del clima...</p>

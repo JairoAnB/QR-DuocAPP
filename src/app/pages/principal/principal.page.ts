@@ -3,22 +3,26 @@ import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { WeatherService } from 'src/app/Services/weather.service';
 import { StorageService } from 'src/app/Services/storage.service';
+import { ServiceAlertServiceService } from 'src/app/Services/service-alert-service.service';
 
 @Component({
   selector: 'app-principal',
   templateUrl: './principal.page.html',
   styleUrls: ['./principal.page.scss'],
 })
+
 export class PrincipalPage implements OnInit {
   correo: string = "";
   weatherData: any;
   weatherIcon: string = "";
+  showDetails: boolean = false;
 
   constructor(
     private weatherservice: WeatherService,
     private alertController: AlertController,
     private router: Router,
-    private storage: StorageService
+    private storage: StorageService,
+    private serviceAlert: ServiceAlertServiceService
   ) {}
 
   async ngOnInit() {
@@ -38,7 +42,7 @@ export class PrincipalPage implements OnInit {
     } else {
       console.log('No se encontró un correo formateado en el almacenamiento.');
     }
-    this.getLocation(); // Asegúrate de llamar a la función correctamente
+    this.getLocation(); 
   }
 
   getLocation() {
@@ -64,5 +68,36 @@ export class PrincipalPage implements OnInit {
         console.error('Error al obtener los datos del clima', error);
       }
     );
+  }
+
+  toggleDetails() { 
+    this.showDetails = !this.showDetails;
+  }
+  traductor(description: string):string{
+    const translations: { [key: string]: string} ={
+        "clear sky": "Cielo despejado",
+        "few clouds": "Pocas nubes",
+        "scattered clouds": "Nubes dispersas",
+        "broken clouds": "Nubes rotas",
+        "shower rain": "Chubascos",
+        "rain": "lluvia",
+        "thunderstorm": "Tormenta",
+        "snow": "Nieve",
+        "mist": "Neblina"
+    };
+    return translations[description] || description; 
+  }
+
+  alertaError() {
+    this.serviceAlert.alerta();
+  }
+
+  regresarHome() {
+    this.serviceAlert.regresarHome();
+  }
+
+  funcionNoValida() {
+    this.alertaError();
+    this.regresarHome();
   }
 }
