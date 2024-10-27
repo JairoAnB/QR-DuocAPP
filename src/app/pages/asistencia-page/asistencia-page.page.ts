@@ -5,6 +5,7 @@ import { StudentsData, ClassData } from 'src/app/models/students-data';
 import { AlertController } from '@ionic/angular';
 import { StorageService } from 'src/app/Services/storage.service';
 import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-asistencia-page',
@@ -27,7 +28,7 @@ export class AsistenciaPagePage implements OnInit {
     private studentsApiService: StudentsApiService,
     private storage: Storage,
     private alertController: AlertController,
-    private Storage: StorageService
+    private Storage: StorageService, private router: Router
   ) { }
 
  async  ngOnInit() {
@@ -85,8 +86,15 @@ export class AsistenciaPagePage implements OnInit {
     console.log('Clase seleccionada:', this.claseSeleccionada);
     const alert = await this.alertController.create({
       header: 'Asistencia registrada',
-      message: `Has registrado asistencia para la clase: ${this.claseSeleccionada?.nombre}`,
-      buttons: ['OK']
+      message: `Has registrado asistencia para la clase ${this.claseSeleccionada?.nombre}`,
+      buttons: [
+        {
+          text: 'Aceptar',
+          handler: () => {
+            this.router.navigate(['/principal'])
+          }
+        }
+      ]
     });
     await alert.present();
   }
@@ -124,11 +132,14 @@ export class AsistenciaPagePage implements OnInit {
     const {barcodes} = await BarcodeScanner.scan();
     this.barcodes.push(...barcodes);
     console.log('scaneando....')
+    return this.registrarAsistencia();
   }
+
   async requestPermission(): Promise<boolean>{
     const {camera} = await BarcodeScanner.requestPermissions();
     return camera === 'granted' || camera === 'limited';
   }
+
   async presentAlert(): Promise<void>{
     const alert = await this.alertController.create({
       header: 'Permisos denegados',

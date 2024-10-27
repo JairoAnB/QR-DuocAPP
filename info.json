@@ -1,4 +1,66 @@
 {
+  "classes": [
+    {
+      "id": "1",
+      "classId": "PGY4121",
+      "nombre": "Matemáticas",
+      "horario": "8:00 AM - 9:30 AM"
+    },
+    {
+      "id": "2",
+      "classId": "PGY4122",
+      "nombre": "Física",
+      "horario": "10:00 AM - 11:30 AM"
+    },
+    {
+      "id": "3",
+      "classId": "PGY4123",
+      "nombre": "Programación",
+      "horario": "12:00 PM - 1:30 PM"
+    },
+    {
+      "id": "4",
+      "classId": "PGY4124",
+      "nombre": "Bases de Datos",
+      "horario": "2:00 PM - 3:30 PM"
+    },
+    {
+      "id": "5",
+      "classId": "PGY4125",
+      "nombre": "Inglés",
+      "horario": "4:00 PM - 5:30 PM"
+    },
+    {
+      "id": "6",
+      "classId": "PGY4126",
+      "nombre": "Cálculo",
+      "horario": "6:00 PM - 7:30 PM"
+    },
+    {
+      "id": "7",
+      "classId": "PGY4127",
+      "nombre": "Bases de Datos",
+      "horario": "8:00 AM - 9:30 AM"
+    },
+    {
+      "id": "8",
+      "classId": "PGY4128",
+      "nombre": "Redes",
+      "horario": "10:00 AM - 11:30 AM"
+    },
+    {
+      "id": "9",
+      "classId": "PGY4129",
+      "nombre": "Análisis de Sistemas",
+      "horario": "1:00 PM - 2:30 PM"
+    },
+    {
+      "id": "10",
+      "classId": "PGY4130",
+      "nombre": "Programación Web",
+      "horario": "3:00 PM - 4:30 PM"
+    }
+  ],
   "students": [
     {
       "id": "1",
@@ -17,23 +79,23 @@
       "address": "Calle falsisima, 6171",
       "clases": [
         {
+          "classId": "PGY4121",
           "nombre": "Matemáticas",
-          "horario": "8:00 AM",
-          "seccion": "A",
+          "horario": "8:00 AM - 9:30 AM",
           "yaPaso": false,
+          "asistio": false,
           "horarios": [
-            "8:00 AM",
-            "9:00 AM"
+            "8:00 AM - 9:30 AM"
           ]
         },
         {
+          "classId": "PGY4122",
           "nombre": "Física",
-          "horario": "10:00 AM",
-          "seccion": "B",
+          "horario": "10:00 AM - 11:30 AM",
           "yaPaso": true,
+          "asistio": true,
           "horarios": [
-            "10:00 AM",
-            "11:00 AM"
+            "10:00 AM - 11:30 AM"
           ]
         }
       ]
@@ -55,23 +117,25 @@
       "address": "Calle Verdad, 123",
       "clases": [
         {
+          "classId": "PGY4123",
           "nombre": "Programación",
-          "horario": "10:00 AM",
-          "seccion": "B",
+          "horario": "12:00 PM - 1:30 PM",
           "yaPaso": false,
+          "asistio": false,
           "horarios": [
-            "10:00 AM",
-            "11:00 AM"
+            "12:00 PM",
+            "1:30 PM"
           ]
         },
         {
+          "classId": "PGY4124",
           "nombre": "Bases de Datos",
-          "horario": "1:00 PM",
-          "seccion": "C",
+          "horario": "2:00 PM - 3:30 PM",
           "yaPaso": true,
+          "asistio": true,
           "horarios": [
-            "1:00 PM",
-            "2:00 PM"
+            "2:00 PM",
+            "3:30 PM"
           ]
         }
       ]
@@ -93,23 +157,25 @@
       "address": "Avenida Siempre Viva, 742",
       "clases": [
         {
+          "classId": "PGY4125",
           "nombre": "Inglés",
-          "horario": "12:00 PM",
-          "seccion": "C",
+          "horario": "4:00 PM - 5:30 PM",
           "yaPaso": false,
+          "asistio": false,
           "horarios": [
-            "12:00 PM",
-            "1:00 PM"
+            "4:00 PM",
+            "5:30 PM"
           ]
         },
         {
+          "classId": "PGY4126",
           "nombre": "Cálculo",
-          "horario": "2:00 PM",
-          "seccion": "D",
+          "horario": "6:00 PM - 7:30 PM",
           "yaPaso": true,
+          "asistio": true,
           "horarios": [
-            "2:00 PM",
-            "3:00 PM"
+            "6:00 PM",
+            "7:30 PM"
           ]
         }
       ]
@@ -131,61 +197,65 @@
       "address": "Calle Real, 456",
       "clases": [
         {
+          "classId": "PGY4127",
           "nombre": "Bases de Datos",
-          "horario": "2:00 PM",
-          "seccion": "D",
+          "horario": "8:00 AM - 9:30 AM",
           "yaPaso": true,
+          "asistio": true,
           "horarios": [
-            "2:00 PM",
-            "3:00 PM"
+            "8:00 AM",
+            "9:30 AM"
           ]
         },
         {
+          "classId": "PGY4128",
           "nombre": "Redes",
-          "horario": "4:00 PM",
-          "seccion": "E",
+          "horario": "10:00 AM - 11:30 AM",
           "yaPaso": false,
+          "asistio": false,
           "horarios": [
-            "4:00 PM",
-            "5:00 PM"
+            "10:00 AM",
+            "11:30 AM"
           ]
         }
       ]
     },
     {
       "id": "5",
-      "picture": "https://cdn.discordapp.com/attachments/803069581001621548/1294871875775889449/image0.jpg?ex=670c96e8&is=670b4568&hm=d9c50a92eb8648b7bdcea639b1c07595d0cc4a3287de0f2e24c1ad14c366b59c&",
-      "name": "Ana Paula",
-      "username": "Ana.torres",
-      "lastname": "Torres Silva",
-      "email": "ana.torres@duocuc.cl",
-      "password": "123456789",
-      "birthdate": "10-11-2004",
-      "gender": "Femenino",
-      "carrera": "Ingeniería en Desarrollo de Software",
-      "sede": "Plaza Vespucio",
-      "identificador": "21745678-9",
-      "telefono": "+569 87654321",
-      "address": "Camino Falso, 789",
+      "picture": "https://cdn.discordapp.com/attachments/803069581001621548/1295987740687035392/image0.jpg?ex=670c979b&is=670b386b&hm=1d65d5b4b86fdb87cc585da028db3a287c206d6c80fd632916fdd98ab2dcd41b&",
+      "name": "Lucas",
+      "username": "Lucas.martinez",
+      "lastname": "Martínez",
+      "email": "lucas.martinez@duocuc.cl",
+      "password": "87654321",
+      "birthdate": "20-08-2001",
+      "gender": "Masculino",
+      "carrera": "Ingeniería en Informática",
+      "sede": "San Joaquín",
+      "identificador": "21647890-5",
+      "telefono": "+569 12345679",
+      "address": "Calle Verde, 789",
       "clases": [
         {
+          "classId": "PGY4129",
           "nombre": "Análisis de Sistemas",
-          "horario": "4:00 PM",
-          "seccion": "E",
+          "horario": "1:00 PM - 2:30 PM",
           "yaPaso": false,
+          "asistio": false,
           "horarios": [
-            "4:00 PM",
-            "5:00 PM"
+            "1:00 PM",
+            "2:30 PM"
           ]
         },
         {
+          "classId": "PGY4130",
           "nombre": "Programación Web",
-          "horario": "6:00 PM",
-          "seccion": "F",
+          "horario": "3:00 PM - 4:30 PM",
           "yaPaso": true,
+          "asistio": true,
           "horarios": [
-            "6:00 PM",
-            "7:00 PM"
+            "3:00 PM",
+            "4:30 PM"
           ]
         }
       ]

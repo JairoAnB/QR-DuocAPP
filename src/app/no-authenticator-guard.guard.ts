@@ -16,10 +16,10 @@ export class noAuthenticatorGuardGuard implements CanActivate {
   ): boolean {
     const email = localStorage.getItem('email');
     if (email) {
-      this.navCtrl.navigateRoot('principal'); // Redirige si el usuario está autenticado
-      return false; // No permite acceso a login si ya está autenticado
+      this.navCtrl.navigateRoot('principal'); 
+      return false; 
     }
-    return true; // Permite acceso a login si no está autenticado
+    return true; 
   }
 }
 

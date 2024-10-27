@@ -1,4 +1,4 @@
-<ion-app class="bg-transparent" >
+<ion-app class="bg-transparent">
   <!-- Menú lateral -->
   <ion-menu contentId="main-content" side="start" class=" bg-opacity-80 backdrop-filter backdrop-blur-lg">
     <ion-header class="ion-no-border" [translucent]="true" mode="ios">
@@ -56,43 +56,45 @@
     <div class="flex justify-center items-center mb-6">
       <img src="assets/img/asistencia.png" alt="Asistencia" class="rounded-lg max-w-[350px]">
     </div>
-    
+
     <!-- Saludo de Bienvenida -->
     <p class="mt-4 mb-6 text-2xl font-bold text-yellow-400 text-center transition-all duration-1000 ease-in-out 
-       transform translate-y-4 opacity-0"
-       [ngClass]="correo ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'">
+       transform translate-y-4 opacity-0" [ngClass]="correo ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'">
       ¡Bienvenido <strong class="text-blue-700">{{correo}}</strong>!
     </p>
-
-    <div class="flex justify-center">
-      <ion-button class="mt-6 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105" expand="block" routerLink="/asistencia-page" routerDirection="root">
-        <ion-icon class="mr-2 text-xl" name="qr-code-outline"></ion-icon>
-        <ion-label class="text-lg">Escanear QR</ion-label>
-      </ion-button>
-    </div>
     <!-- Inicio de la Api -->
     <form class="custom-bg rounded-3xl mx-6 shadow-xl p-6">
-    <div class="weather-container text-yellow-400 text-center" *ngIf="weatherData">
-      <h2 class="weathertitle">Clima en {{ weatherData.name}}</h2> 
-      <div class="Weather-Info" style=" display: flex; justify-content: center; align-items: center; margin-top: 10px;">
-      <img [src]="'http://openweathermap.org/img/wn/' + weatherIcon + '@2x.png'" 
-        alt="Icono del clima" class="weather-icon"/>
-        <p class="Temp">Temperatura {{ weatherData.main.temp }}°C</p>
+      <div class="weather-container text-yellow-400 text-center" *ngIf="weatherData">
+        <h2 class="weathertitle">Clima en {{ weatherData.name}}</h2>
+        <div class="Weather-Info"
+          style=" display: flex; justify-content: center; align-items: center; margin-top: 10px;">
+          <img [src]="'http://openweathermap.org/img/wn/' + weatherIcon + '@2x.png'" alt="Icono del clima"
+            class="weather-icon" />
+          <p class="Temp">Temperatura {{ weatherData.main.temp }}°C</p>
+        </div>
+        <p> {{ traductor(weatherData.weather[0].description) }}</p>
+        <ion-button (click)="toggleDetails()" class="btn-mostrar text-white">Ver mas</ion-button>
+        <div *ngIf="showDetails" class="ver-mas">
+          <p>Sensación térmica: {{ weatherData.main.feels_like }}°C</p>
+          <p>Humedad: {{ weatherData.main.humidity }}%</p>
+          <p>Velocidad del viento: {{ weatherData.wind.speed }} m/s</p>
+        </div>
       </div>
-      <p> {{ traductor(weatherData.weather[0].description) }}</p>
-      <ion-button (click)= "toggleDetails()" class="btn-mostrar">Ver mas</ion-button>
-      <div *ngIf="showDetails" class="ver-mas">
-        <p>Sensación térmica: {{ weatherData.main.feels_like }}°C</p>
-        <p>Humedad: {{ weatherData.main.humidity }}%</p>
-        <p>Velocidad del viento: {{ weatherData.wind.speed }} m/s</p>
+      <div *ngIf="!weatherData">
+        <p>Cargando datos del clima...</p>
       </div>
+    </form>
+    <div class="flex justify-center">
+      <ion-button
+        class="mt-6 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
+        expand="block" routerLink="/asistencia-page" routerDirection="root">
+        <ion-icon class="mr-2 text-xl" name="qr-code-outline"></ion-icon>
+        <ion-label class="text-lg">Registrar Asistencia</ion-label>
+      </ion-button>
     </div>
-    <div *ngIf="!weatherData">
-      <p>Cargando datos del clima...</p>
-    </div>
-  </form>
-     <!-- Termino de la Api -->
-</ion-content>
+    <!-- Termino de la Api -->
+
+  </ion-content>
 
   <!--Footer-->
   <ion-footer [translucent]="true" mode="ios" class="ion-no-border">
