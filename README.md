@@ -25,5 +25,5 @@ Ahora la aplicación cuenta con autenticación a través de JSON-SERVER. A conti
 | leo.venegas@duocuc.cl           | 1234            |
 | maria.perez@duocuc.cl           | 12345           |
 | fernando.lopez@duocuc.cl        | 12345678        |
-| ana.torres@duocuc.cl            | 123456789       |
+| lucas.martinez@duocuc.cl        | 123456789       |
 
