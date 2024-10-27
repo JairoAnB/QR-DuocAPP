@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { StudentsApiService } from 'src/app/Services/students-api.service';
 import { StudentsData, ClassData } from 'src/app/models/students-data';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController } from '@ionic/angular';
 import { StorageService } from 'src/app/Services/storage.service';
 import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
 import { Router } from '@angular/router';
@@ -24,42 +24,45 @@ export class AsistenciaPagePage implements OnInit {
   desabilitarSelectClases: boolean = false;
   isSupported = false;
   barcodes: Barcode[] = [];
+
   constructor(
     private studentsApiService: StudentsApiService,
     private storage: Storage,
     private alertController: AlertController,
-    private Storage: StorageService, private router: Router
+    private Storage: StorageService, private router: Router,
+    private navCtrl: NavController // Inyectar NavController
   ) { }
 
- async  ngOnInit() {
-      //scanner QR
-      BarcodeScanner.isSupported().then((result)=>{
-        this.isSupported = result.supported;
-      })
+  async ngOnInit() {
+    // Scanner QR
+    BarcodeScanner.isSupported().then((result) => {
+      this.isSupported = result.supported;
+    });
 
-      //recupero correo formateado del storage
-      await this.Storage.init();
-      const formattedCorreo = await this.Storage.getCorreo();
-      if (formattedCorreo) {
-        const correoCompleto = `${formattedCorreo}@duocuc.cl`;
-        console.log(`Correo formateado recuperado: ${formattedCorreo}`);
-        const userData = await this.storage.get(`user_data_${correoCompleto}`);
-        if (userData) {
-          this.correo = userData.correo.split('@')[0]; 
-          console.log(`Correo del usuario: ${this.correo}`);
-        } else {
-          console.log('No se encontraron datos de usuario en el almacenamiento.');
-        }
+    // Recupero correo formateado del storage
+    await this.Storage.init();
+    const formattedCorreo = await this.Storage.getCorreo();
+    if (formattedCorreo) {
+      const correoCompleto = `${formattedCorreo}@duocuc.cl`;
+      console.log(`Correo formateado recuperado: ${formattedCorreo}`);
+      const userData = await this.storage.get(`user_data_${correoCompleto}`);
+      if (userData) {
+        this.correo = userData.correo.split('@')[0];
+        console.log(`Correo del usuario: ${this.correo}`);
       } else {
-        console.log('No se encontró un correo formateado en el almacenamiento.');
+        console.log('No se encontraron datos de usuario en el almacenamiento.');
       }
-      //recupero el correo del storage 
-    const email = localStorage.getItem('email'); 
+    } else {
+      console.log('No se encontró un correo formateado en el almacenamiento.');
+    }
+
+    // Recupero el correo del storage
+    const email = localStorage.getItem('email');
     console.log('Correo almacenado en localStorage:', email);
     if (email) {
       this.studentsApiService.getStudent(email).subscribe(
         (studentData) => {
-          if (studentData.length > 0) { 
+          if (studentData.length > 0) {
             this.student = studentData[0];
             console.log('Estudiante encontrado:', this.student);
             this.cargarClases();
@@ -77,8 +80,8 @@ export class AsistenciaPagePage implements OnInit {
   cargarClases() {
     if (this.student && this.student.clases) {
       this.clases = this.student.clases.map(clase => clase.nombre);
-      const horarios = this.student.clases.map(clase => clase.horarios);
     } else {
+      console.log('No hay clases disponibles.');
     }
   }
 
@@ -102,53 +105,53 @@ export class AsistenciaPagePage implements OnInit {
   cambiarSelectedMode() {
     if (this.claseSeleccionada) {
       if (!this.claseSeleccionada.yaPaso) {
-        this.hayHorariosDisponibles = true; 
-        this.desabilitarSelectClases = true; 
+        this.hayHorariosDisponibles = true;
+        this.desabilitarSelectClases = true;
       } else {
-        this.hayHorariosDisponibles = false; 
-        this.horarioSeleccionado = null; 
-        this.desabilitarSelectClases = false; 
+        this.hayHorariosDisponibles = false;
+        this.horarioSeleccionado = null;
+        this.desabilitarSelectClases = false;
       }
     } else {
-      this.hayHorariosDisponibles = false; 
-      this.desabilitarSelectClases = false; 
+      this.hayHorariosDisponibles = false;
+      this.desabilitarSelectClases = false;
     }
-  
-    this.hayHorario(); 
+
+    this.hayHorario();
   }
-  
+
   hayHorario() {
     this.hayHorarioDisponible = !!this.horarioSeleccionado;
   }
-  
-  //modulo para leer qr
 
-  async scan(): Promise<void>{
+  // Módulo para leer QR
+  async scan(): Promise<void> {
     const granted = await this.requestPermission();
-    if(!granted){
+    if (!granted) {
       this.presentAlert();
       return;
     }
-    const {barcodes} = await BarcodeScanner.scan();
+    const { barcodes } = await BarcodeScanner.scan();
     this.barcodes.push(...barcodes);
-    console.log('scaneando....')
-    return this.registrarAsistencia();
+    console.log('Scaneando....');
   }
 
-  async requestPermission(): Promise<boolean>{
-    const {camera} = await BarcodeScanner.requestPermissions();
+  async requestPermission(): Promise<boolean> {
+    const { camera } = await BarcodeScanner.requestPermissions();
     return camera === 'granted' || camera === 'limited';
   }
 
-  async presentAlert(): Promise<void>{
+  async presentAlert(): Promise<void> {
     const alert = await this.alertController.create({
       header: 'Permisos denegados',
-      message: 'Por favor acepta los permisos de la camara para usar el escaner QR',
+      message: 'Por favor acepta los permisos de la cámara para usar el escáner QR',
       buttons: ['Aceptar']
     });
     await alert.present();
   }
 
-
-
+  logout() {
+    localStorage.removeItem('email');
+    this.navCtrl.navigateRoot('home');
+  }
 }

@@ -26,10 +26,11 @@
           <ion-icon slot="start" name="hammer-outline" color="primary" class="text-xl"></ion-icon>
           <ion-label class="font-medium">Soporte</ion-label>
         </ion-item>
-        <ion-item routerLink="/home" routerDirection="root" detail={false} class="mb-4 bg-transparent">
+        <ion-item (click)="logout()" detail="false" class="mb-4 bg-transparent">
           <ion-icon slot="start" name="log-out-outline" color="primary" class="text-xl"></ion-icon>
           <ion-label class="font-medium">Cerrar Sesión</ion-label>
         </ion-item>
+
       </ion-list>
     </ion-content>
   </ion-menu>

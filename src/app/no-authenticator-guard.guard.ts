@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +15,9 @@ export class noAuthenticatorGuardGuard implements CanActivate {
   ): boolean {
     const email = localStorage.getItem('email');
     if (email) {
-      this.navCtrl.navigateRoot('principal'); 
-      return false; 
+      this.navCtrl.navigateRoot('principal');
+      return false;
     }
-    return true; 
+    return true;
   }
 }
-
