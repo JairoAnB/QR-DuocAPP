@@ -4,13 +4,13 @@ import { AlertController } from '@ionic/angular';
 import { WeatherService } from 'src/app/Services/weather.service';
 import { StorageService } from 'src/app/Services/storage.service';
 import { ServiceAlertServiceService } from 'src/app/Services/service-alert-service.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-principal',
   templateUrl: './principal.page.html',
   styleUrls: ['./principal.page.scss'],
 })
-
 export class PrincipalPage implements OnInit {
   correo: string = "";
   weatherData: any;
@@ -22,7 +22,8 @@ export class PrincipalPage implements OnInit {
     private alertController: AlertController,
     private router: Router,
     private storage: StorageService,
-    private serviceAlert: ServiceAlertServiceService
+    private serviceAlert: ServiceAlertServiceService,
+    private navCtrl: NavController // Inyecta NavController
   ) {}
 
   async ngOnInit() {
@@ -73,17 +74,18 @@ export class PrincipalPage implements OnInit {
   toggleDetails() { 
     this.showDetails = !this.showDetails;
   }
-  traductor(description: string):string{
-    const translations: { [key: string]: string} ={
-        "clear sky": "Cielo despejado",
-        "few clouds": "Pocas nubes",
-        "scattered clouds": "Nubes dispersas",
-        "broken clouds": "Nubes rotas",
-        "shower rain": "Chubascos",
-        "rain": "lluvia",
-        "thunderstorm": "Tormenta",
-        "snow": "Nieve",
-        "mist": "Neblina"
+
+  traductor(description: string): string {
+    const translations: { [key: string]: string } = {
+      "clear sky": "Cielo despejado",
+      "few clouds": "Pocas nubes",
+      "scattered clouds": "Nubes dispersas",
+      "broken clouds": "Nubes rotas",
+      "shower rain": "Chubascos",
+      "rain": "lluvia",
+      "thunderstorm": "Tormenta",
+      "snow": "Nieve",
+      "mist": "Neblina"
     };
     return translations[description] || description; 
   }
@@ -99,5 +101,10 @@ export class PrincipalPage implements OnInit {
   funcionNoValida() {
     this.alertaError();
     this.regresarHome();
+  }
+
+  logout() {
+    localStorage.removeItem('email');
+    this.navCtrl.navigateRoot('home'); 
   }
 }

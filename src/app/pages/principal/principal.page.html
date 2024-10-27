@@ -1,6 +1,5 @@
-<ion-app class="bg-transparent" >
-  <!-- Menú lateral -->
-  <ion-menu contentId="main-content" side="start" class=" bg-opacity-80 backdrop-filter backdrop-blur-lg">
+<ion-app class="bg-transparent">
+  <ion-menu contentId="main-content" side="start" class="bg-opacity-80 backdrop-filter backdrop-blur-lg">
     <ion-header class="ion-no-border" [translucent]="true" mode="ios">
       <ion-toolbar class="bg-transparent">
         <div class="flex justify-center items-center p-4">
@@ -10,23 +9,25 @@
     </ion-header>
     <ion-content class="bg-transparent">
       <ion-list lines="none" class="px-4 py-6 bg-transparent">
-        <ion-item routerLink="/principal" routerDirection="root" detail={false} class="mb-4 bg-transparent">
+        <ion-item routerLink="/principal" routerDirection="root" detail="false" class="mb-4 bg-transparent">
           <ion-icon slot="start" name="home-outline" color="primary" class="text-xl"></ion-icon>
           <ion-label class="font-medium">Inicio</ion-label>
         </ion-item>
-        <ion-item routerLink="/asistencia-page" routerDirection="root" detail={false} class="mb-4 bg-transparent">
+        <ion-item routerLink="/asistencia-page" routerDirection="root" detail="false" class="mb-4 bg-transparent">
           <ion-icon slot="start" name="qr-code-outline" color="primary" class="text-xl"></ion-icon>
           <ion-label class="font-medium">Leer QR</ion-label>
         </ion-item>
-        <ion-item routerLink="/profile" routerDirection="root" detail={false} class="mb-4 bg-transparent">
+        <ion-item routerLink="/profile" routerDirection="root" detail="false" class="mb-4 bg-transparent">
           <ion-icon slot="start" name="person-outline" color="primary" class="text-xl"></ion-icon>
           <ion-label class="font-medium">Perfil Estudiantil</ion-label>
         </ion-item>
-        <ion-item routerLink="/soporte" routerDirection="root" detail={false} class="mb-4 bg-transparent">
+        <ion-item routerLink="/soporte" routerDirection="root" detail="false" class="mb-4 bg-transparent">
           <ion-icon slot="start" name="hammer-outline" color="primary" class="text-xl"></ion-icon>
           <ion-label class="font-medium">Soporte</ion-label>
         </ion-item>
-        <ion-item routerLink="/home" routerDirection="root" detail={false} class="mb-4 bg-transparent">
+
+        <!-- Cerrar sesión -->
+        <ion-item (click)="logout()" detail="false" class="mb-4 bg-transparent">
           <ion-icon slot="start" name="log-out-outline" color="primary" class="text-xl"></ion-icon>
           <ion-label class="font-medium">Cerrar Sesión</ion-label>
         </ion-item>
@@ -34,10 +35,8 @@
     </ion-content>
   </ion-menu>
 
-  <!-- Contenido principal -->
   <ion-router-outlet id="main-content"></ion-router-outlet>
 
-  <!-- Header del contenido principal -->
   <ion-header [translucent]="true" mode="ios" class="ion-no-border">
     <ion-toolbar class="bg-gradient-to-r from-blue-900 to-blue-700">
       <ion-buttons slot="start">
@@ -45,56 +44,32 @@
       </ion-buttons>
       <ion-title class="text-center text-xl flex items-center">
         <ion-icon name="qr-code-outline" class="text-xl mb-1 align-middle"></ion-icon>
-        Pagina Principal
+        Página Principal
       </ion-title>
     </ion-toolbar>
   </ion-header>
 
   <!-- Contenido principal -->
-  <ion-content class="ion-padding bg-gray-800 ">
-    <!-- Imagen en el menú principal -->
+  <ion-content class="ion-padding bg-gray-800">
     <div class="flex justify-center items-center mb-6">
       <img src="assets/img/asistencia.png" alt="Asistencia" class="rounded-lg max-w-[350px]">
     </div>
-    
-    <!-- Saludo de Bienvenida -->
-    <p class="mt-4 mb-6 text-2xl font-bold text-yellow-400 text-center transition-all duration-1000 ease-in-out 
-       transform translate-y-4 opacity-0"
-       [ngClass]="correo ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'">
+
+    <p class="mt-4 mb-6 text-2xl font-bold text-yellow-400 text-center">
       ¡Bienvenido <strong class="text-blue-700">{{correo}}</strong>!
     </p>
 
     <div class="flex justify-center">
-      <ion-button class="mt-6 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105" expand="block" routerLink="/asistencia-page" routerDirection="root">
+      <ion-button class="mt-6" expand="block" routerLink="/asistencia-page" routerDirection="root">
         <ion-icon class="mr-2 text-xl" name="qr-code-outline"></ion-icon>
         <ion-label class="text-lg">Escanear QR</ion-label>
       </ion-button>
     </div>
-    <!-- Inicio de la Api -->
-    <form class="custom-bg rounded-3xl mx-6 shadow-xl p-6">
-    <div class="weather-container text-yellow-400 text-center" *ngIf="weatherData">
-      <h2 class="weathertitle">Clima en {{ weatherData.name}}</h2> 
-      <div class="Weather-Info" style=" display: flex; justify-content: center; align-items: center; margin-top: 10px;">
-      <img [src]="'http://openweathermap.org/img/wn/' + weatherIcon + '@2x.png'" 
-        alt="Icono del clima" class="weather-icon"/>
-        <p class="Temp">Temperatura {{ weatherData.main.temp }}°C</p>
-      </div>
-      <p> {{ traductor(weatherData.weather[0].description) }}</p>
-      <ion-button (click)= "toggleDetails()" class="btn-mostrar">Ver mas</ion-button>
-      <div *ngIf="showDetails" class="ver-mas">
-        <p>Sensación térmica: {{ weatherData.main.feels_like }}°C</p>
-        <p>Humedad: {{ weatherData.main.humidity }}%</p>
-        <p>Velocidad del viento: {{ weatherData.wind.speed }} m/s</p>
-      </div>
-    </div>
-    <div *ngIf="!weatherData">
-      <p>Cargando datos del clima...</p>
-    </div>
-  </form>
-     <!-- Termino de la Api -->
-</ion-content>
 
-  <!--Footer-->
+    <!-- Código adicional aquí -->
+  </ion-content>
+
+  <!-- Footer -->
   <ion-footer [translucent]="true" mode="ios" class="ion-no-border">
     <ion-toolbar class="bg-gradient-to-r from-blue-900 to-blue-700">
       <ion-title class="text-center text-white text-xl">

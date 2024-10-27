@@ -1,5 +1,6 @@
-import { ServiceAlertServiceService } from './../../Services/service-alert-service.service';
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
+import { ServiceAlertServiceService } from './../../Services/service-alert-service.service';
 
 @Component({
   selector: 'app-soporte',
@@ -8,12 +9,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SoportePage implements OnInit {
 
-  constructor(private ServiceAlertServiceService: ServiceAlertServiceService) { }
+  constructor(
+    private navCtrl: NavController, // Añadido NavController
+    private serviceAlert: ServiceAlertServiceService // Usar un nombre más corto
+  ) { }
 
   ngOnInit() {
   }
 
   alertaError() { 
-    this.ServiceAlertServiceService.alerta();
+    this.serviceAlert.alerta();
+  }
+
+  regresarHome() {
+    this.serviceAlert.regresarHome();
+  }
+
+  funcionNoValida() {
+    this.alertaError();
+    this.regresarHome();
+  }
+
+  logout() {
+    localStorage.removeItem('email');
+    this.navCtrl.navigateRoot('home'); 
   }
 }
