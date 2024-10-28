@@ -110,7 +110,7 @@
       "password": "1234",
       "birthdate": "12-05-1998",
       "gender": "Masculino",
-      "carrera": "Ingeniería en Desarrollo de Software",
+      "carrera": "Ingeniería en Informática",
       "sede": "San Joaquín",
       "identificador": "21458973-2",
       "telefono": "+569 98765432",
@@ -123,8 +123,7 @@
           "yaPaso": false,
           "asistio": false,
           "horarios": [
-            "12:00 PM",
-            "1:30 PM"
+            "12:00 PM - 1:30 PM"
           ]
         },
         {
@@ -134,15 +133,14 @@
           "yaPaso": true,
           "asistio": true,
           "horarios": [
-            "2:00 PM",
-            "3:30 PM"
+            "2:00 PM - 3:30 PM"
           ]
         }
       ]
     },
     {
       "id": "3",
-      "picture": "https://cdn.discordapp.com/attachments/803069581001621548/1295957341551988777/22b6463788b6799f2cd65fd85fb174cd.png?ex=671089d3&is=670f3853&hm=780dcd6eeeb32f516a8a21a88f14094b22614f23e3fb202b7609c2c724dddfe4&",
+      "picture": "https://cdn.discordapp.com/attachments/803069581001621548/1295957341551988777/22b6463788b6799f2cd65fd85fb174cd.png?ex=671fb313&is=671e6193&hm=b195c94622482d47f600644d9eb31ebd7f4eac8cd4e41cb28f9f76d7e0e7502b&",
       "name": "María José",
       "username": "Maria.perez",
       "lastname": "Pérez Rodríguez",
@@ -150,7 +148,7 @@
       "password": "12345",
       "birthdate": "15-09-2002",
       "gender": "Femenino",
-      "carrera": "Ingeniería en Desarrollo de Software",
+      "carrera": "Ingeniería en Informática",
       "sede": "Plaza Vespucio",
       "identificador": "21399856-4",
       "telefono": "+569 12345678",
@@ -163,8 +161,7 @@
           "yaPaso": false,
           "asistio": false,
           "horarios": [
-            "4:00 PM",
-            "5:30 PM"
+            "4:00 PM - 5:30 PM"
           ]
         },
         {
@@ -174,15 +171,14 @@
           "yaPaso": true,
           "asistio": true,
           "horarios": [
-            "6:00 PM",
-            "7:30 PM"
+            "6:00 PM - 7:30 PM"
           ]
         }
       ]
     },
     {
       "id": "4",
-      "picture": "https://cdn.discordapp.com/attachments/803069581001621548/1294871735945920523/image0.jpg?ex=670c96c7&is=670b4547&hm=7a94df92bc6247dc77adf0ec9871e916a2c1d2bd90d747e087730c587a31270a&",
+      "picture": "https://media.discordapp.net/attachments/803069581001621548/1294873809978916924/image0.jpg?ex=671fb675&is=671e64f5&hm=53f9853baf5264947b51c797d164421c4f377878a9a4a7276b401563cde9df8a&=&format=webp",
       "name": "Fernando",
       "username": "Fer.lopez",
       "lastname": "López Martínez",
@@ -190,7 +186,7 @@
       "password": "12345678",
       "birthdate": "02-07-2003",
       "gender": "Masculino",
-      "carrera": "Ingeniería en Desarrollo de Software",
+      "carrera": "Ingeniería en Informática",
       "sede": "Plaza Vespucio",
       "identificador": "21678945-7",
       "telefono": "+569 76543210",
@@ -203,8 +199,7 @@
           "yaPaso": true,
           "asistio": true,
           "horarios": [
-            "8:00 AM",
-            "9:30 AM"
+            "8:00 AM - 9:30 AM"
           ]
         },
         {
@@ -214,20 +209,19 @@
           "yaPaso": false,
           "asistio": false,
           "horarios": [
-            "10:00 AM",
-            "11:30 AM"
+            "10:00 AM - 11:30 AM"
           ]
         }
       ]
     },
     {
       "id": "5",
-      "picture": "https://cdn.discordapp.com/attachments/803069581001621548/1295987740687035392/image0.jpg?ex=670c979b&is=670b386b&hm=1d65d5b4b86fdb87cc585da028db3a287c206d6c80fd632916fdd98ab2dcd41b&",
+      "picture": "https://media.discordapp.net/attachments/803069581001621548/1294871735945920523/image0.jpg?ex=671fb487&is=671e6307&hm=2729b96464f0d36216e307c138baaf956ecfddd6a751f6b7a18a7ea064550170&=&format=webp",
       "name": "Lucas",
       "username": "Lucas.martinez",
       "lastname": "Martínez",
       "email": "lucas.martinez@duocuc.cl",
-      "password": "87654321",
+      "password": "123456789",
       "birthdate": "20-08-2001",
       "gender": "Masculino",
       "carrera": "Ingeniería en Informática",
@@ -243,19 +237,17 @@
           "yaPaso": false,
           "asistio": false,
           "horarios": [
-            "1:00 PM",
-            "2:30 PM"
+            "1:00 PM - 2:30 PM"
           ]
         },
         {
           "classId": "PGY4130",
-          "nombre": "Programación Web",
+          "nombre": "Ingeniería en Informática",
           "horario": "3:00 PM - 4:30 PM",
           "yaPaso": true,
           "asistio": true,
           "horarios": [
-            "3:00 PM",
-            "4:30 PM"
+            "3:00 PM - 4:30 PM"
           ]
         }
       ]

@@ -11,10 +11,10 @@
 
 <!-- CONTENIDO PRINCIPAL -->
 <ion-content [fullscreen]="true">
-  <div class="absolute ml-10 mr-6 mt-48">
-    <img src="assets/img/DUOC-PNG.png" height="400px" width="400px" alt="duoc" (click)="Envio_Home()">
+  <div class="absolute ml-2 mb-2 mt-40">
+    <img src="assets/img/DUOC-PNG.png" height="400px" width="400px" alt="duoc" (click)="home()">
   </div>
-  <form class="shadow-xl rounded-3xl bg-slate-300 ml-6 mr-3 mt-72 py-2 pt-6">
+  <form class="shadow-xl rounded-3xl bg-slate-300 ml-6 mr-3 mt-64 py-2 pt-6">
     <div class="">
       <p class=" text-center font-semibold text-2xl w-10/12 mx-auto text-black">Ingrese su nueva contraseña</p>
     </div>
@@ -22,11 +22,12 @@
       <ion-input [(ngModel)]="contra1" name="password1" type="password" color="warning" label="Nueva contraseña"
         labelPlacement="floating" fill="outline" required
         class="font-bold w-8/12 mx-auto text-center mt-2 text-black"></ion-input>
-      <ion-input name="password2" type="password" color="warning" label="Repita su contraseña" labelPlacement="floating"
-        fill="outline" required class="font-bold w-8/12 mx-auto text-center mt-2 text-black"></ion-input>
+      <ion-input [(ngModel)]="contra2" name=" password2" type="password" color="warning" label="Repita su contraseña"
+        labelPlacement="floating" fill="outline" required
+        class="font-bold w-8/12 mx-auto text-center mt-2 text-black"></ion-input>
     </div>
     <div class="text-center mt-2 mb-2">
-      <ion-button shape="round" color="primary" (clikc)="btnCambiar()">Cambiar</ion-button>
+      <ion-button shape="round" color="primary" (click)="btnCambiar()">Cambiar</ion-button>
       <ion-button shape="round" color="warning" (click)="btnCancelar()">Cancelar</ion-button>
     </div>
   </form>

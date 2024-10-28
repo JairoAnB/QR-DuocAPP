@@ -1,7 +1,9 @@
-import { DevolverInicioService } from '../../Services/devolver-inicio.service';
+import { DevolverInicioService } from './../../Services/devolver-inicio.service';
 import { Component, OnInit } from '@angular/core';
 import{ Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
+import { StorageService } from 'src/app/Services/storage.service';
+import { StudentsApiService } from 'src/app/Services/students-api.service';
 
 
 @Component({
@@ -15,10 +17,7 @@ export class RecuperarPage implements OnInit {
  recuperacionCorreo: string = '';
 
  
-  constructor( 
-    private toastController: ToastController,
-    private router: Router, private DevolverInicioService:DevolverInicioService   ) {
-   }
+ constructor(private router: Router, private toastController: ToastController, private storage: StorageService, private students:StudentsApiService, private DevolverInicioService:DevolverInicioService ) {}
 
   ngOnInit() {
   }
@@ -29,7 +28,7 @@ export class RecuperarPage implements OnInit {
 
  async btnCancelar(){
    const vueltaAlHome = await this.toastController.create({
-     message:'Devuelta al Home!!',
+     message:'Regresando al inicio!',
      duration:3000,
      color: 'success'
      

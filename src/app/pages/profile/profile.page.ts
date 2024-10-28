@@ -5,7 +5,7 @@ import { StudentsData } from 'src/app/models/students-data';
 import { AlertController } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular'; // Asegúrate de que esta importación sea correcta
+import { NavController } from '@ionic/angular'; 
 
 @Component({
   selector: 'app-profile',
@@ -21,7 +21,7 @@ export class ProfilePage implements OnInit {
     private storage: Storage,
     private alertController: AlertController,
     private router: Router,
-    private navCtrl: NavController // Corrige la inyección aquí
+    private navCtrl: NavController 
   ) {}
 
   ngOnInit() {
@@ -135,7 +135,6 @@ export class ProfilePage implements OnInit {
   guardarProfile() {
     this.editMode = false;
   }
-
 
   logout() {
     localStorage.removeItem('email');
