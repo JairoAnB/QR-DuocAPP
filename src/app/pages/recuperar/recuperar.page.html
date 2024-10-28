@@ -2,32 +2,54 @@
 <ion-header [translucent]="true" mode="ios">
   <ion-toolbar>
     <ion-title class="text-center flex items-center">
-      <ion-icon name="finger-print" class=" align-middle"></ion-icon>
+      <ion-icon name="finger-print" class="align-middle"></ion-icon>
       Portal de ayuda RegistrAPP
     </ion-title>
   </ion-toolbar>
 </ion-header>
-<!-- HEADER FINAL-->
+<!-- HEADER FINAL -->
+
 <!-- CONTENIDO PRINCIPAL -->
 <ion-content [fullscreen]="true">
-  <div class="absolute ml-10 mr-6 mt-56">
+  <div class="absolute ml-10 mr-6 mt-40">
     <img src="assets/img/DUOC-PNG.png" height="400px" width="400px" alt="duoc" (click)="envioAlHome()">
   </div>
-  <form class=" bg-slate-300 rounded-3xl ml-5 mr-5 shadow-xl pb-1"> <!-- FONDO BLANCO -->
-    <div class="mt-80 pt-10">
-      <p class="text-2xl text-center font-bold w-10/12 mx-auto text-black ">Recupera tu contraseña</p>
+
+  <!-- Primer formulario -->
+  <form *ngIf="!passwordChangeEnabled" class="bg-slate-300 rounded-3xl ml-5 mr-5 shadow-xl pb-1 mt-5"> 
+    <div class="mt-64 pt-10">
+      <p class="text-2xl text-center font-bold w-10/12 mx-auto text-black">Recupera tu contraseña</p>
     </div>
     <div class="mb-5 mt-4">
       <ion-input [(ngModel)]="recuperacionCorreo" name="correo" type="email" color="warning" label="Ingresa tu correo"
-        fill="outline" required label-placement = "floating" class="font-bold w-9/12 mx-auto  mt-2 text-black"></ion-input>
+        fill="outline" required label-placement="floating" class="font-bold w-9/12 mx-auto mt-2 text-black"></ion-input>
     </div>
     <div class="text-center mt-3 mb-10">
-      <ion-button shape="round" color="warning" (click)="btnBuscar()">Buscar</ion-button>
+      <ion-button shape="round" color="warning" (click)="validacionCredenciales()">Buscar</ion-button>
       <ion-button shape="round" color="primary" (click)="btnCancelar()">Cancelar</ion-button>
+    </div>
+  </form>
+
+  <!-- Formulario de cambio de contraseña -->
+  <form *ngIf="passwordChangeEnabled" class="bg-slate-300 rounded-3xl ml-5 mr-5 shadow-xl pb-1 mt-5"> 
+    <div class="mt-64 pt-10">
+      <p class="text-2xl text-center font-bold w-10/12 mx-auto text-black">Cambiar Contraseña</p>
+    </div>
+    <div class="mb-4 mt-4">
+      <ion-input [(ngModel)]="contra1" name="password1" type="password" label="Nueva Contraseña" fill="outline" required
+        label-placement="floating" class="font-bold w-9/12 mx-auto text-black"></ion-input>
+    </div>
+    <div class="mb-5">
+      <ion-input [(ngModel)]="contra2" name="password2" type="password" label="Confirmar Contraseña" fill="outline" required
+        label-placement="floating" class="font-bold w-9/12 mx-auto text-black"></ion-input>
+    </div>
+    <div class="text-center mb-10">
+      <ion-button shape="round" color="warning" (click)="cambiarContrasena()">Cambiar Contraseña</ion-button>
     </div>
   </form>
 </ion-content>
 <!-- FIN DEL CONTENIDO PRINCIPAL -->
+
 <!-- FOOTER INICIO -->
 <ion-footer [translucent]="true" mode="ios">
   <ion-toolbar>
@@ -36,4 +58,4 @@
     </ion-title>
   </ion-toolbar>
 </ion-footer>
-<!-- FOOTER FIN  -->
+<!-- FOOTER FIN -->

@@ -68,7 +68,7 @@
           <ion-select label="Clases Inscritas" [(ngModel)]="claseSeleccionada" [disabled]="desabilitarSelectClases"
             (ionChange)="cambiarSelectedMode()" placeholder="Escoge una clase" class=" rounded-md">
             <ion-select-option *ngFor="let clase of student?.clases" [value]="clase"  >
-              {{clase.nombre}}
+              {{clase.nombre}} - {{clase.classId}}
             </ion-select-option>
           </ion-select>
         </ion-item>

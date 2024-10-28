@@ -1,13 +1,14 @@
 <ion-header>
   <ion-toolbar color="danger">
-    <ion-title>Error 404</ion-title>
+    <ion-title class="text-center font-bold text-2xl">Error 404</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding error-page-content">
-  <div class="error-container">
-    <ion-icon name="alert-circle-outline" class="error-icon"></ion-icon>
-    <h1>Oops! Página no encontrada</h1>
-    <p>Lo sentimos, pero la página que estás buscando no existe o fue removida.</p>
+<ion-content class="ion-padding error-page-content bg-gray-800 flex justify-center items-center">
+  <div class="error-container text-center mt-10 p-5 bg-gray-800 rounded-lg shadow-lg w-full max-w-md">
+    <ion-icon name="alert-circle-outline" class="error-icon text-danger text-6xl mb-4"></ion-icon>
+    <h1 class="text-3xl font-bold text-white mb-2">Oops! Página no encontrada</h1>
+    <p class="text-gray-100 text-lg mb-4">Lo sentimos, pero la página que estás buscando no existe o fue removida</p>
+    <ion-button expand="block" color="primary" href="/home">Volver a Inicio</ion-button>
   </div>
 </ion-content>

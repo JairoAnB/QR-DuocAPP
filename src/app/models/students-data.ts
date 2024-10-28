@@ -20,4 +20,6 @@ export interface ClassData {
     horarios?: string[];
     seccion: string;
     yaPaso: boolean;
+    classId: string;
+    asistio: false,
 }

@@ -34,7 +34,8 @@ export class HomePage implements OnInit {
         this.password = data.password;
       }
     }
-  }guardarDatos() {
+  }
+  guardarDatos() {
     const userData = new UserData(this.correo, this.password);
     if (this.storageService) {
       localStorage.setItem('email', this.correo);
