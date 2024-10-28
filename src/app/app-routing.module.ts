@@ -25,11 +25,6 @@ const routes: Routes = [
     canActivate: [noAuthenticatorGuardGuard]
   },
   {
-    path: 'cambio-contrasena',
-    loadChildren: () => import('./pages/cambio-contrasena/cambio-contrasena.module').then(m => m.CambioContrasenaPageModule),
-    canActivate: [noAuthenticatorGuardGuard]
-  },
-  {
     path: 'principal',
     loadChildren: () => import('./pages/principal/principal.module').then(m => m.PrincipalPageModule),
     canActivate: [AuthenticatorGuardGuard]

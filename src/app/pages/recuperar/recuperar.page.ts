@@ -1,10 +1,9 @@
-import { DevolverInicioService } from './../../Services/devolver-inicio.service';
 import { Component, OnInit } from '@angular/core';
-import{ Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { AlertController, ToastController } from '@ionic/angular';
 import { StorageService } from 'src/app/Services/storage.service';
 import { StudentsApiService } from 'src/app/Services/students-api.service';
-
+import { StudentsData } from 'src/app/models/students-data';
 
 @Component({
   selector: 'app-recuperar',
@@ -12,69 +11,114 @@ import { StudentsApiService } from 'src/app/Services/students-api.service';
   styleUrls: ['./recuperar.page.scss'],
 })
 export class RecuperarPage implements OnInit {
-  [x: string]: any;
-  
- recuperacionCorreo: string = '';
+  recuperacionCorreo: string = '';
+  contra1: string = '';
+  contra2: string = '';
+  estudiante: StudentsData | null = null; 
+  passwordChangeEnabled: boolean = false; 
 
- 
- constructor(private router: Router, private toastController: ToastController, private storage: StorageService, private students:StudentsApiService, private DevolverInicioService:DevolverInicioService ) {}
+  constructor(
+    private toastController: ToastController, 
+    private router: Router,  
+    private storageService: StorageService,
+    private StudentsApiService: StudentsApiService,
+    private alercontroller: AlertController
+  ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.storageService.init();
   }
 
-  envioAlHome(){
-    this.DevolverInicioService.devolverInicio();
-  }
-
- async btnCancelar(){
-   const vueltaAlHome = await this.toastController.create({
-     message:'Regresando al inicio!',
-     duration:3000,
-     color: 'success'
-     
-    });
-    vueltaAlHome.present();
-    this.envioAlHome()
-}
-
-async btnBuscar(){
-  const correo = this.recuperacionCorreo. trim().toLowerCase().replace(/\s+/g,"");
-  if(correo.includes('@duocuc.cl')){
-    const correo = await this.toastController.create({
-
-      message: 'Su correo es valido',
-      duration: 3000,
-      color: 'success',
-      buttons: [
-        {
-          text: 'aceptar',
-          handler: () => {
-            console.log('Aceptar fue presionado');
-          }
+  validacionCredenciales() {
+    if (this.recuperacionCorreo === '') {
+      this.denegarVacio();
+      return;
+    }
+    this.StudentsApiService.getStudent(this.recuperacionCorreo).subscribe(
+      (data) => {
+        if (data.length > 0) {
+          this.estudiante = data[0]; 
+          this.passwordChangeEnabled = true; 
+          this.validar();
+        } else {
+          this.denegar();
         }
-      ]
-    });
-    correo.present();
-    this.envioCambioContrasena()
-  }else {
-    const correo =  await this.toastController.create({
-
-  })
-  const error= await this.toastController.create({
-    message: 'Verifica que tu correo sea de DUOC UC',
-    duration: 3000,
-    color: 'danger'
-  });
-  error.present();
+      },
+      (error) => console.error('Error al buscar el estudiante:', error)
+    );
   }
- }
 
- envioCambioContrasena(){
-  this.router.navigate(['/cambio-contrasena'])
- }
- 
+  async validar() {
+    const mensaje = await this.alercontroller.create({
+      header: 'ATENCIÓN',
+      message: 'El correo ingresado fue correctamente validado',
+      buttons: [{ text: 'Aceptar' }]
+    });
+    await mensaje.present();
+  }
+
+  async denegar() {
+    const mensaje = await this.alercontroller.create({
+      header: 'ATENCIÓN',
+      message: 'El correo ingresado no se encuentra registrado, ingresa un correo válido, o habla con el soporte',
+      buttons: [{ text: 'Aceptar' }]
+    });
+    await mensaje.present();
+  }
+  async denegarVacio() {
+    const mensaje = await this.alercontroller.create({
+      header: 'ATENCIÓN',
+      message: 'No puedes dejar el campo vacío. Ingresa un correo válido.',
+      buttons: [{ text: 'Aceptar' }]
+    });
+    await mensaje.present();
+  }
+
+  cambiarContrasena() {
+    if (this.contra1 === this.contra2 && this.estudiante) {
+      this.estudiante.password = this.contra1;
+      this.StudentsApiService.actualizarStudent(this.estudiante).subscribe(
+        async () => {
+          const mensaje = await this.toastController.create({
+            message: 'Contraseña actualizada correctamente.',
+            duration: 2000,
+            color: 'success'
+          });
+          mensaje.present();
+          this.router.navigate(['/home']); 
+        },
+        async (error) => {
+          const mensaje = await this.toastController.create({
+            message: 'Error al actualizar la contraseña.',
+            duration: 2000,
+            color: 'danger'
+          });
+          mensaje.present();
+          console.error('Error en la actualización:', error);
+        }
+      );
+    } else {
+      this.mostrarErrorContrasenas();
+    }
+  }
+
+  async mostrarErrorContrasenas() {
+    const mensaje = await this.alercontroller.create({
+      header: 'Error',
+      message: 'Las contraseñas no coinciden. Inténtalo de nuevo.',
+      buttons: [{ text: 'Aceptar' }]
+    });
+    await mensaje.present();
+  }
+  async btnCancelar() {
+    const vueltaAlHome = await this.alercontroller.create({
+      message: 'Regresando al inicio',
+    });
+    await vueltaAlHome.present();
+    this.envioAlHome();
+  }
+
+  envioAlHome() {
+    this.router.navigate(['/home']);
 }
-
-  
-
-
+}
