@@ -6,6 +6,7 @@ import { AlertController } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular'; 
+import { Capacitor } from '@capacitor/core';
 
 @Component({
   selector: 'app-profile',
@@ -76,22 +77,41 @@ export class ProfilePage implements OnInit {
     }
   }
 
-  async takePicture() {
-    await this.permission();
-    const image = await Camera.getPhoto({
-      quality: 90,
-      allowEditing: true,
-      resultType: CameraResultType.Uri,
-      source: CameraSource.Photos,
-    });
-
-    if (image) {
-      console.log('Imagen obtenida: ' + image);
-      if (this.student) {
-        this.student!.picture = image.webPath!;
+  async selectProfilePicture() {
+    try {
+      if (Capacitor.isNativePlatform()) {
+        const image = await Camera.getPhoto({
+          quality: 90,
+          allowEditing: true,
+          resultType: CameraResultType.Uri,
+          source: CameraSource.Photos, 
+        });
+  
+        if (image && image.webPath) {
+          if (this.student) {
+            this.student.picture = image.webPath!;
+          }
+        }
+      } else {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';  
+        input.onchange = async (event: any) => {
+          const file = event.target.files[0]; 
+          if (file) {
+            const imageUrl = URL.createObjectURL(file); 
+            if (this.student) {
+              this.student.picture = imageUrl;
+            }
+          }
+        };
+        input.click();  
       }
+    } catch (error) {
+      console.error('Error', error);
     }
   }
+  
 
   async alertaCambiosRealizados() {
     const alertCambios = await this.alertController.create({
