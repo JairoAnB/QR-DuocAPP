@@ -4,7 +4,7 @@ import { StudentsApiService } from 'src/app/Services/students-api.service';
 import { StudentsData, ClassData } from 'src/app/models/students-data';
 import { AlertController, NavController } from '@ionic/angular';
 import { StorageService } from 'src/app/Services/storage.service';
-import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
+import { CapacitorBarcodeScanner, CapacitorBarcodeScannerTypeHint, CapacitorBarcodeScannerTypeHintALLOption } from '@capacitor/barcode-scanner';
 import { Router } from '@angular/router';
 
 @Component({
@@ -23,7 +23,7 @@ export class AsistenciaPagePage implements OnInit {
   hayHorarioDisponible: boolean = false;
   desabilitarSelectClases: boolean = false;
   isSupported = false;
-  barcodes: Barcode[] = [];
+  result = '';
 
   constructor(
     private studentsApiService: StudentsApiService,
@@ -34,10 +34,6 @@ export class AsistenciaPagePage implements OnInit {
   ) { }
 
   async ngOnInit() {
-    // Scanner QR
-    BarcodeScanner.isSupported().then((result) => {
-      this.isSupported = result.supported;
-    });
 
     // Recupero correo formateado del storage
     await this.Storage.init();
@@ -126,19 +122,10 @@ export class AsistenciaPagePage implements OnInit {
 
   // Módulo para leer QR
   async scan(): Promise<void> {
-    const granted = await this.requestPermission();
-    if (!granted) {
-      this.presentAlert();
-      return;
-    }
-    const { barcodes } = await BarcodeScanner.scan();
-    this.barcodes.push(...barcodes);
-    console.log('Scaneando....');
-  }
-
-  async requestPermission(): Promise<boolean> {
-    const { camera } = await BarcodeScanner.requestPermissions();
-    return camera === 'granted' || camera === 'limited';
+    const result = await CapacitorBarcodeScanner.scanBarcode({
+      hint: CapacitorBarcodeScannerTypeHint.ALL
+    });
+    this.result = result.ScanResult;
   }
 
   async presentAlert(): Promise<void> {
