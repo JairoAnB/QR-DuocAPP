@@ -21,5 +21,5 @@ export interface ClassData {
     seccion: string;
     yaPaso: boolean;
     classId: string;
-    asistio: false,
+    asistio?: boolean;
 }

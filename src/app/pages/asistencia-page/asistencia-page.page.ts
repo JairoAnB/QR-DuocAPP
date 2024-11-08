@@ -4,7 +4,7 @@ import { StudentsApiService } from 'src/app/Services/students-api.service';
 import { StudentsData, ClassData } from 'src/app/models/students-data';
 import { AlertController, NavController } from '@ionic/angular';
 import { StorageService } from 'src/app/Services/storage.service';
-import { Barcode, BarcodeScanner } from '@capacitor-mlkit/barcode-scanning';
+import { CapacitorBarcodeScanner, CapacitorBarcodeScannerTypeHint, CapacitorBarcodeScannerTypeHintALLOption } from '@capacitor/barcode-scanner';
 import { Router } from '@angular/router';
 
 @Component({
@@ -23,21 +23,19 @@ export class AsistenciaPagePage implements OnInit {
   hayHorarioDisponible: boolean = false;
   desabilitarSelectClases: boolean = false;
   isSupported = false;
-  barcodes: Barcode[] = [];
+  result = '';
+  NoDisponible: boolean = false;
 
   constructor(
     private studentsApiService: StudentsApiService,
     private storage: Storage,
     private alertController: AlertController,
-    private Storage: StorageService, private router: Router,
-    private navCtrl: NavController // Inyectar NavController
+    private Storage: StorageService,
+    private router: Router,
+    private navCtrl: NavController 
   ) { }
-
+  
   async ngOnInit() {
-    // Scanner QR
-    BarcodeScanner.isSupported().then((result) => {
-      this.isSupported = result.supported;
-    });
 
     // Recupero correo formateado del storage
     await this.Storage.init();
@@ -75,7 +73,27 @@ export class AsistenciaPagePage implements OnInit {
         }
       );
     }
+    
   }
+
+  ionViewWillEnter(){
+    this.clasesTerminadas();
+  }
+  reloadPage() {
+    this.router.navigateByUrl('/asistencia-page', { skipLocationChange: true }).then(() => {
+      this.router.navigate([this.router.url]);
+    });}
+
+  clasesTerminadas(){
+    let clasesTerminadas = this.student?.clases?.every(clase => clase.asistio) || false;
+    if(clasesTerminadas){
+      this.NoDisponible = true;
+      this.reloadPage();
+    }else{
+      this.NoDisponible = false;
+    }
+  }
+
 
   cargarClases() {
     if (this.student && this.student.clases) {
@@ -86,7 +104,6 @@ export class AsistenciaPagePage implements OnInit {
   }
 
   async registrarAsistencia() {
-    console.log('Clase seleccionada:', this.claseSeleccionada);
     const alert = await this.alertController.create({
       header: 'Asistencia registrada',
       message: `Has registrado asistencia para la clase ${this.claseSeleccionada?.nombre}`,
@@ -101,9 +118,20 @@ export class AsistenciaPagePage implements OnInit {
     });
     await alert.present();
   }
+  async DenegarAsistencia() {
+    const alert = await this.alertController.create({
+      header: 'Error al registrar la asistencia',
+      message: `Ha ocurrido un error al intentar registrar la asistencia.`,
+      buttons: ['Aceptar']
+    });
+    await alert.present();
+  }
 
   cambiarSelectedMode() {
     if (this.claseSeleccionada) {
+      if(!this.claseSeleccionada.asistio){
+        this.desabilitarSelectClases = true;
+      }
       if (!this.claseSeleccionada.yaPaso) {
         this.hayHorariosDisponibles = true;
         this.desabilitarSelectClases = true;
@@ -126,20 +154,49 @@ export class AsistenciaPagePage implements OnInit {
 
   // Módulo para leer QR
   async scan(): Promise<void> {
-    const granted = await this.requestPermission();
-    if (!granted) {
-      this.presentAlert();
-      return;
-    }
-    const { barcodes } = await BarcodeScanner.scan();
-    this.barcodes.push(...barcodes);
-    console.log('Scaneando....');
-  }
+    const result = await CapacitorBarcodeScanner.scanBarcode({
+        hint: CapacitorBarcodeScannerTypeHint.ALL
+    });
+    this.result = result.ScanResult;
 
-  async requestPermission(): Promise<boolean> {
-    const { camera } = await BarcodeScanner.requestPermissions();
-    return camera === 'granted' || camera === 'limited';
-  }
+    // Evaluar los datos del JSON entregado por el QR
+    let data;
+    try {
+        data = JSON.parse(this.result);
+    } catch (e) {
+        console.error("Error al parsear el JSON del QR:", e);
+        return;
+    }
+
+    // Evaluar si el QR corresponde a la clase seleccionada
+    if (data.id === this.student?.id &&
+        data.nombre === this.claseSeleccionada?.nombre &&
+        data.horario === this.horarioSeleccionado &&
+        data.classId === this.claseSeleccionada?.classId) {
+
+        try {
+            if (this.student && this.student.clases) {
+                const claseEncontrada = this.student.clases.find(clase => clase.classId === data.classId);
+                
+                if (claseEncontrada) {
+                    claseEncontrada.asistio = true; 
+                    const response = await this.studentsApiService.actualizarStudent(this.student!).toPromise();
+
+                    if (this.claseSeleccionada) {
+                        this.claseSeleccionada.asistio = true;
+                        this.registrarAsistencia();
+                        this.clasesTerminadas();
+                    }
+                }
+            }
+        } catch (error) {
+            this.DenegarAsistencia();
+        }
+    } else {
+        this.DenegarAsistencia();
+    }
+}
+
 
   async presentAlert(): Promise<void> {
     const alert = await this.alertController.create({
@@ -154,4 +211,6 @@ export class AsistenciaPagePage implements OnInit {
     localStorage.removeItem('email');
     this.navCtrl.navigateRoot('home');
   }
+
+  
 }
