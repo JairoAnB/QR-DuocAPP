@@ -24,15 +24,17 @@ export class AsistenciaPagePage implements OnInit {
   desabilitarSelectClases: boolean = false;
   isSupported = false;
   result = '';
+  NoDisponible: boolean = false;
 
   constructor(
     private studentsApiService: StudentsApiService,
     private storage: Storage,
     private alertController: AlertController,
-    private Storage: StorageService, private router: Router,
+    private Storage: StorageService,
+    private router: Router,
     private navCtrl: NavController 
   ) { }
-
+  
   async ngOnInit() {
 
     // Recupero correo formateado del storage
@@ -71,7 +73,27 @@ export class AsistenciaPagePage implements OnInit {
         }
       );
     }
+    
   }
+
+  ionViewWillEnter(){
+    this.clasesTerminadas();
+  }
+  reloadPage() {
+    this.router.navigateByUrl('/asistencia-page', { skipLocationChange: true }).then(() => {
+      this.router.navigate([this.router.url]);
+    });}
+
+  clasesTerminadas(){
+    let clasesTerminadas = this.student?.clases?.every(clase => clase.asistio) || false;
+    if(clasesTerminadas){
+      this.NoDisponible = true;
+      this.reloadPage();
+    }else{
+      this.NoDisponible = false;
+    }
+  }
+
 
   cargarClases() {
     if (this.student && this.student.clases) {
@@ -107,6 +129,9 @@ export class AsistenciaPagePage implements OnInit {
 
   cambiarSelectedMode() {
     if (this.claseSeleccionada) {
+      if(!this.claseSeleccionada.asistio){
+        this.desabilitarSelectClases = true;
+      }
       if (!this.claseSeleccionada.yaPaso) {
         this.hayHorariosDisponibles = true;
         this.desabilitarSelectClases = true;
@@ -129,7 +154,6 @@ export class AsistenciaPagePage implements OnInit {
 
   // Módulo para leer QR
   async scan(): Promise<void> {
-    // Escanea el código QR
     const result = await CapacitorBarcodeScanner.scanBarcode({
         hint: CapacitorBarcodeScannerTypeHint.ALL
     });
@@ -157,25 +181,20 @@ export class AsistenciaPagePage implements OnInit {
                 if (claseEncontrada) {
                     claseEncontrada.asistio = true; 
                     const response = await this.studentsApiService.actualizarStudent(this.student!).toPromise();
-                    console.log('Estudiante actualizado:', response);
 
                     if (this.claseSeleccionada) {
                         this.claseSeleccionada.asistio = true;
                         this.registrarAsistencia();
+                        this.clasesTerminadas();
                     }
-                } else {
-                    console.error('Clase no encontrada en el listado de clases del estudiante');
                 }
             }
         } catch (error) {
-            console.error('Error al actualizar estudiante:', error);
             this.DenegarAsistencia();
         }
     } else {
         this.DenegarAsistencia();
     }
-
-    console.log("Resultado del escaneo:", this.result);
 }
 
 
