@@ -7,6 +7,7 @@ import { StorageService } from 'src/app/Services/storage.service';
 import { CapacitorBarcodeScanner, CapacitorBarcodeScannerTypeHint, CapacitorBarcodeScannerTypeHintALLOption } from '@capacitor/barcode-scanner';
 import { Geolocation } from '@capacitor/geolocation';
 import { Router } from '@angular/router';
+import { getDistance } from 'geolib';
 
 @Component({
   selector: 'app-asistencia-page',
@@ -29,7 +30,6 @@ export class AsistenciaPagePage implements OnInit {
   universidadLatitud: number = -33.4999912338583;
   universidadLongitud: number = -70.6160540863554;
   radio: number = 100;
-  estaEnSede: boolean = false;
 
   constructor(
     private studentsApiService: StudentsApiService,
@@ -79,7 +79,6 @@ export class AsistenciaPagePage implements OnInit {
         }
       );
     }
-    this.obtenerUbicacion();
   }
 
 
@@ -133,6 +132,14 @@ export class AsistenciaPagePage implements OnInit {
     });
     await alert.present();
   }
+  async noEnSede() {
+    const alert = await this.alertController.create({
+      header: 'Error al registrar la asistencia',
+      message: `No puedes registrar la asitencia si no estas dentro de la sede. Por favor acercate a la sede.`,
+      buttons: ['Aceptar']
+    });
+    await alert.present();
+  }
 
   cambiarSelectedMode() {
     if (this.claseSeleccionada) {
@@ -159,80 +166,100 @@ export class AsistenciaPagePage implements OnInit {
     this.hayHorarioDisponible = !!this.horarioSeleccionado;
   }
 
-  async obtenerUbicacion() {
-
-    try {
-      if (isPlatform('hybrid')) {
-        await Geolocation.requestPermissions();
-
-        //Obtengo la posicion actual
-        const position = await Geolocation.getCurrentPosition();
-        const latitud = position.coords.latitude;
-        const longitud = position.coords.longitude;
-  
-        console.log('Ubicación actual:', latitud, longitud);
-      } else {
-        navigator.geolocation.getCurrentPosition((position => {
-          const latitud = position.coords.latitude;
-          const longitud = position.coords.longitude;
-          console.log('Ubicación actual:', latitud, longitud);
-        }))
-      }
-    } catch (error) {
-      console.error('Error obteniendo la ubicación', error);
-    }
-  }
-
-
-
-
   // Módulo para leer QR
   async scan(): Promise<void> {
     const result = await CapacitorBarcodeScanner.scanBarcode({
-        hint: CapacitorBarcodeScannerTypeHint.ALL
+      hint: CapacitorBarcodeScannerTypeHint.ALL,
     });
     this.result = result.ScanResult;
-
-    // Evaluar los datos del JSON entregado por el QR
+  
+    // Trasformo los datos del qr provenientes de un json a strings para comprarlos.
     let data;
     try {
-        data = JSON.parse(this.result);
+      data = JSON.parse(this.result);
     } catch (e) {
-        console.error("Error al parsear el JSON del QR:", e);
-        return;
+      console.error('Error al parsear el JSON del QR:', e);
+      await this.DenegarAsistencia();
+      return;
     }
-
-    // Evaluar si el alumno se encuentra en la sede
-    
-    // Evaluar si el QR corresponde a la clase seleccionada
-    if (data.id === this.student?.id &&
-        data.nombre === this.claseSeleccionada?.nombre &&
-        data.horario === this.horarioSeleccionado &&
-        data.classId === this.claseSeleccionada?.classId) {
-
-        try {
-            if (this.student && this.student.clases) {
-                const claseEncontrada = this.student.clases.find(clase => clase.classId === data.classId);
-                
-                if (claseEncontrada) {
-                    claseEncontrada.asistio = true; 
-                    const response = await this.studentsApiService.actualizarStudent(this.student!).toPromise();
-
-                    if (this.claseSeleccionada) {
-                        this.claseSeleccionada.asistio = true;
-                        this.registrarAsistencia();
-                        this.clasesTerminadas();
-                    }
-                }
+    //Obtengo globalmente las coordenadas del usuario.
+    let latitud: number | null = null;
+    let longitud: number | null = null;
+  
+    // primero verifico si si esta en movil o en pc para obtener la ubicacion
+    try {
+      if (isPlatform('hybrid')) {
+        const position = await Geolocation.getCurrentPosition();
+        latitud = position.coords.latitude;
+        longitud = position.coords.longitude;
+      } else {
+        await new Promise<void>((resolve, reject) => {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              latitud = position.coords.latitude;
+              longitud = position.coords.longitude;
+              resolve();
+            },
+            (error) => {
+              console.error('Error obteniendo la ubicación en el navegador:', error);
+              reject(error);
             }
-        } catch (error) {
-            this.DenegarAsistencia();
-        }
-    } else {
-        this.DenegarAsistencia();
+          );
+        });
+      }
+    } catch (error) {
+      console.error('Error obteniendo la ubicación:', error);
+      await this.DenegarAsistencia();
+      return;
     }
-}
-
+  
+    //Calculo la distancia con la libreria geolib
+    const distancia = getDistance(
+      { latitude: latitud!, longitude: longitud! },
+      { latitude: this.universidadLatitud, longitude: this.universidadLongitud }
+    );
+    // Verifico si el estudiante se encuentra dentro del radio permitido
+    if (distancia > this.radio) {
+      console.log('Fuera del área permitida');
+      await this.noEnSede();
+      return;
+    }
+  
+    // Evaluar si el QR corresponde a la clase seleccionada
+    if (
+      data.id === this.student?.id &&
+      data.nombre === this.claseSeleccionada?.nombre &&
+      data.horario === this.horarioSeleccionado &&
+      data.classId === this.claseSeleccionada?.classId
+    ) {
+      try {
+        if (this.student && this.student.clases) {
+          const claseEncontrada = this.student.clases.find(
+            (clase) => clase.classId === data.classId
+          );
+  
+          if (claseEncontrada) {
+            claseEncontrada.asistio = true;
+            const response = await this.studentsApiService
+              .actualizarStudent(this.student!)
+              .toPromise();
+  
+            if (this.claseSeleccionada) {
+              this.claseSeleccionada.asistio = true;
+              await this.registrarAsistencia();
+              this.clasesTerminadas();
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error al registrar la asistencia:', error);
+        await this.DenegarAsistencia();
+      }
+    } else {
+      await this.DenegarAsistencia();
+    }
+  }
+  
 
   async presentAlert(): Promise<void> {
     const alert = await this.alertController.create({

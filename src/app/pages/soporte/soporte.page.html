@@ -1,6 +1,6 @@
 <ion-app>
   <!-- Menú lateral -->
-  <ion-menu contentId="main-content" side="start" class=" bg-opacity-80 backdrop-filter backdrop-blur-lg">
+  <ion-menu contentId="main-content" side="start" class="bg-opacity-80 backdrop-filter backdrop-blur-lg">
     <ion-header class="ion-no-border">
       <ion-toolbar class="bg-transparent">
         <div class="flex justify-center items-center p-4">
@@ -33,54 +33,61 @@
       </ion-list>
     </ion-content>
   </ion-menu>
+
   <!-- Contenido principal -->
   <ion-router-outlet id="main-content"></ion-router-outlet>
+
   <!-- Header del contenido principal -->
   <ion-header [translucent]="true" mode="ios">
-    <ion-toolbar class="bg-gradient-to-r from-blue-900 to-blue-700">
+    <ion-toolbar class="bg-gradient-to-r from-[#197278] to-[#C44536]">
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title class="text-center flex items-center">
-        <ion-icon name="hammer-outline" class=" text-xl mb-1 align-middle"></ion-icon>
+      <ion-title class="text-center flex items-center text-[#EDDDD4]">
+        <ion-icon name="hammer-outline" class="text-xl mb-1 align-middle"></ion-icon>
         Soporte 
       </ion-title>
     </ion-toolbar>
   </ion-header>
+
   <!-- Tarjeta de Soporte -->
-  <ion-content class="ion-padding" style="overflow-y: auto;">
-    <ion-card class="bg-gray-800">
+  <ion-content class="ion-padding bg-[#EDDDD4]" style="overflow-y: auto;">
+    <!-- Números de Soporte -->
+    <ion-card class="bg-[#283D3B] text-[#EDDDD4]">
       <ion-card-header>
-        <ion-card-title>Números de Soporte</ion-card-title>
+        <ion-card-title class="text-[#EDDDD4]">Números de Soporte</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <ion-card-subtitle>Admisión</ion-card-subtitle>
+        <ion-card-subtitle class="text-[#C44536] font-bold">Admisión</ion-card-subtitle>
         <ion-label>(+56) 227 120 640</ion-label>
         <br>
-        <ion-card-subtitle>Mesa de Servicios</ion-card-subtitle>
+        <ion-card-subtitle class="text-[#C44536] font-bold mt-3">Mesa de Servicios</ion-card-subtitle>
         <ion-label>(+56) 44220 1098</ion-label>
         <br>
-        <ion-card-subtitle>Mesa de Servicios Duoc Online</ion-card-subtitle>
+        <ion-card-subtitle class="text-[#C44536] font-bold mt-3">Mesa de Servicios Duoc Online</ion-card-subtitle>
         <ion-label>(+56) 2 2585 6990</ion-label>
-        
       </ion-card-content>
     </ion-card>
-    <!-- Formulario de Google Forms integrado -->
-    <ion-card class="bg-gray-800">
+
+    <!-- Formulario de Google Forms -->
+    <ion-card class="bg-[#283D3B] text-[#EDDDD4] mt-4">
       <ion-card-header>
-        <ion-card-title>Formulario de contacto</ion-card-title>
+        <ion-card-title class="text-[#EDDDD4]">Formulario de contacto</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdv0LU88MThe7LolXxGOYowmgyE_4eU_RGXHlCIbPvqGDsNiQ/viewform" width="100%" height="700px" frameborder="0" marginheight="0" marginwidth="0">
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdv0LU88MThe7LolXxGOYowmgyE_4eU_RGXHlCIbPvqGDsNiQ/viewform" 
+          width="100%" height="700px" frameborder="0" marginheight="0" marginwidth="0" 
+          class="border-[#772E25] border-4 rounded-lg">
           Cargando…
         </iframe>
       </ion-card-content>
     </ion-card>
   </ion-content>
+
   <!-- Footer -->
   <ion-footer [translucent]="true" mode="ios">
-    <ion-toolbar class="bg-gradient-to-r from-blue-900 to-blue-700">
-      <ion-title class="text-center text-xl">
+    <ion-toolbar class="bg-gradient-to-r from-[#197278] to-[#C44536]">
+      <ion-title class="text-center text-[#EDDDD4] text-xl">
         © Duoc UC 2024
       </ion-title>
     </ion-toolbar>

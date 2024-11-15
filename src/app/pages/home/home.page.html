@@ -15,13 +15,11 @@
   </div>
 
   <form class="bg-slate-300 rounded-3xl mx-6 shadow-xl p-6">
-    <div class="mt-6">
-      <p class="text-2xl text-center font-semibold text-black">Por favor ingresa con tus credenciales institucionales
-      </p>
-    </div>
+    <p class="text-center"><strong class="text-3xl text-[#772E25]">¡Bienvenido/a!</strong></p>
+    
 
     <div class="mt-6">
-      <ion-input [(ngModel)]="correo" name="correo" type="email" color="warning" label="Ingresa tu usuario"
+      <ion-input [(ngModel)]="correo" name="correo" type="email" color="primary" label="Ingresa tu correo"
         label-placement="floating" fill="outline" required
         class="font-bold w-full max-w-xs mx-auto text-center mt-5 text-black"></ion-input>
       <ion-input [(ngModel)]="password" name="password" type="password" color="primary" label="Ingresa tu contraseña"
@@ -30,10 +28,15 @@
     </div>
 
     <div class="container mt-5 text-center">
-      <ion-button shape="round" color="warning" (click)="verificarDatos()" expand="full">
+      <ion-button 
+        shape="round" 
+        class="custom-button text-white" 
+        (click)="verificarDatos()" 
+        expand="full">
         Ingresar
       </ion-button>
     </div>
+    
 
     <div class="pb-5">
       <p class="text-center mt-5 text-black font-bold Cursor">

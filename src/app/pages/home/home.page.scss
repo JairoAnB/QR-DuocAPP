@@ -36,3 +36,14 @@ ion-content {
   transition: color 0,3 ease; 
 
 }
+ion-button.custom-button {
+  --background: #197278;   
+  --color: #EDDDD4;         
+  --border-radius: 20px;    
+  --min-height: 50px;       
+  --box-shadow: none;       
+}
+
+ion-button.custom-button:hover {
+  --background: #C44536;    
+}
