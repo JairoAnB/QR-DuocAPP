@@ -83,7 +83,7 @@
           "nombre": "Matemáticas",
           "horario": "8:00 AM - 9:30 AM",
           "yaPaso": false,
-          "asistio": false,
+          "asistio": true,
           "horarios": [
             "8:00 AM - 9:30 AM"
           ]

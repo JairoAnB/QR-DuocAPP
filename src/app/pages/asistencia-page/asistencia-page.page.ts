@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
 import { StudentsApiService } from 'src/app/Services/students-api.service';
 import { StudentsData, ClassData } from 'src/app/models/students-data';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, isPlatform, NavController } from '@ionic/angular';
 import { StorageService } from 'src/app/Services/storage.service';
 import { CapacitorBarcodeScanner, CapacitorBarcodeScannerTypeHint, CapacitorBarcodeScannerTypeHintALLOption } from '@capacitor/barcode-scanner';
+import { Geolocation } from '@capacitor/geolocation';
 import { Router } from '@angular/router';
 
 @Component({
@@ -25,6 +26,10 @@ export class AsistenciaPagePage implements OnInit {
   isSupported = false;
   result = '';
   NoDisponible: boolean = false;
+  universidadLatitud: number = -33.4999912338583;
+  universidadLongitud: number = -70.6160540863554;
+  radio: number = 100;
+  estaEnSede: boolean = false;
 
   constructor(
     private studentsApiService: StudentsApiService,
@@ -32,7 +37,8 @@ export class AsistenciaPagePage implements OnInit {
     private alertController: AlertController,
     private Storage: StorageService,
     private router: Router,
-    private navCtrl: NavController 
+    private navCtrl: NavController,
+    private geolocation: Geolocation
   ) { }
   
   async ngOnInit() {
@@ -73,8 +79,9 @@ export class AsistenciaPagePage implements OnInit {
         }
       );
     }
-    
+    this.obtenerUbicacion();
   }
+
 
   ionViewWillEnter(){
     this.clasesTerminadas();
@@ -152,6 +159,33 @@ export class AsistenciaPagePage implements OnInit {
     this.hayHorarioDisponible = !!this.horarioSeleccionado;
   }
 
+  async obtenerUbicacion() {
+
+    try {
+      if (isPlatform('hybrid')) {
+        await Geolocation.requestPermissions();
+
+        //Obtengo la posicion actual
+        const position = await Geolocation.getCurrentPosition();
+        const latitud = position.coords.latitude;
+        const longitud = position.coords.longitude;
+  
+        console.log('Ubicación actual:', latitud, longitud);
+      } else {
+        navigator.geolocation.getCurrentPosition((position => {
+          const latitud = position.coords.latitude;
+          const longitud = position.coords.longitude;
+          console.log('Ubicación actual:', latitud, longitud);
+        }))
+      }
+    } catch (error) {
+      console.error('Error obteniendo la ubicación', error);
+    }
+  }
+
+
+
+
   // Módulo para leer QR
   async scan(): Promise<void> {
     const result = await CapacitorBarcodeScanner.scanBarcode({
@@ -168,6 +202,8 @@ export class AsistenciaPagePage implements OnInit {
         return;
     }
 
+    // Evaluar si el alumno se encuentra en la sede
+    
     // Evaluar si el QR corresponde a la clase seleccionada
     if (data.id === this.student?.id &&
         data.nombre === this.claseSeleccionada?.nombre &&
@@ -211,6 +247,8 @@ export class AsistenciaPagePage implements OnInit {
     localStorage.removeItem('email');
     this.navCtrl.navigateRoot('home');
   }
+
+
 
   
 }
