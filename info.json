@@ -83,7 +83,7 @@
           "nombre": "Matemáticas",
           "horario": "8:00 AM - 9:30 AM",
           "yaPaso": false,
-          "asistio": true,
+          "asistio": false,
           "horarios": [
             "8:00 AM - 9:30 AM"
           ]
@@ -108,11 +108,11 @@
       "lastname": "Venegas",
       "email": "leo.venegas@duocuc.cl",
       "password": "1234",
-      "birthdate": "12-05-1998",
+      "birthdate": "26-09-1998",
       "gender": "Masculino",
       "carrera": "Ingeniería en Informática",
       "sede": "San Joaquín",
-      "identificador": "21458973-2",
+      "identificador": "198465313-3",
       "telefono": "+569 98765432",
       "address": "Calle Verdad, 123",
       "clases": [
@@ -252,5 +252,153 @@
         }
       ]
     }
+  ],
+
+   "teacher":[
+   {
+      "id": "1",
+      "picture": "https://cdn.discordapp.com/attachments/803069581001621548/1295957341551988777/22b6463788b6799f2cd65fd85fb174cd.png?ex=671fb313&is=671e6193&hm=b195c94622482d47f600644d9eb31ebd7f4eac8cd4e41cb28f9f76d7e0e7502b&",
+      "name": "Pedro Juan",
+      "lastname": "Urdemales Herrera",
+      "userName": "Pedro Urdemales",
+      "email": "Pedro.Urdemales@profesor.duoc.cl",
+      "password": "123",
+      "birthdate":"22-06-1911",
+      "gender": "Masculino",
+      "carreras": [ 
+        {
+          "carreraId": "1",
+          "nombre": "Ingeniería en Informática"
+          },
+        {
+          "carreraId": "2",
+          "nombre": "Análisis de Sistemas"
+        }],
+     "sedes": "San Joaquín",
+    "identificador": "11111111-1",
+    "telefono": "+569 11111111",
+    "address": "Calle Avenida Siempreviva 742",
+    "clases": [
+      {
+      "id": "7",
+      "classId": "PGY4127",
+      "nombre": "Bases de Datos",
+      "horario": "8:00 AM - 9:30 AM"
+      },
+      {
+        "id": "3",
+        "classId": "PGY4123",
+        "nombre": "Programación",
+        "horario": "12:00 PM - 1:30 PM"
+      },
+      {
+        "id": "2",
+        "classId": "PGY4122",
+        "nombre": "Física",
+        "horario": "10:00 AM - 11:30 AM"
+      },
+      {
+        "id": "4",
+        "classId": "PGY4124",
+        "nombre": "Bases de Datos",
+        "horario": "2:00 PM - 3:30 PM"
+      }
+    ]
+
+ },
+  {
+  
+    "id": "2",
+    "picture": "https://media.discordapp.net/attachments/803069581001621548/1294873809978916924/image0.jpg?ex=671fb675&is=671e64f5&hm=53f9853baf5264947b51c797d164421c4f377878a9a4a7276b401563cde9df8a&=&format=webp",
+    "name": "San Nicolas",
+    "lastname": "Jojojo Jorquera",
+    "userName": "Santa Clos",
+    "email": "jojojo@profesor.duoc.cl",
+    "password": "jojojo",
+    "birthdate":"25-12-1311",
+    "gender": "Masculino",
+    "carreras": [ 
+      {
+        "carreraId": "1",
+        "nombre": "Ingeniería en Informática"
+        },
+      {
+        "carreraId": "2",
+        "nombre": "Análisis de Sistemas"
+      }],
+    "sedes": "",
+    "identificador": "25122512-5",
+    "telefono": "+569 25252525",
+    "address": "Calle Polo Norte 000",
+    "clases": [
+      {
+        "id": "1",
+        "classId": "PGY4121",
+        "nombre": "Matemáticas",
+        "horario": "8:00 AM - 9:30 AM"
+      },
+      {
+        "id": "6",
+        "classId": "PGY4126",
+        "nombre": "Cálculo",
+        "horario": "6:00 PM - 7:30 PM"
+      },
+      {
+        "id": "8",
+        "classId": "PGY4128",
+        "nombre": "Redes",
+        "horario": "10:00 AM - 11:30 AM"
+      },
+      {
+        "id": "9",
+        "classId": "PGY4129",
+        "nombre": "Análisis de Sistemas",
+        "horario": "1:00 PM - 2:30 PM"
+      },
+      {
+        "id": "10",
+        "classId": "PGY4130",
+        "nombre": "Programación Web",
+        "horario": "3:00 PM - 4:30 PM"
+      }
+    ]
+},
+{
+  "id": "3",
+  "picture": "https://media.discordapp.net/attachments/803069581001621548/1294873809978916924/image0.jpg?ex=671fb675&is=671e64f5&hm=53f9853baf5264947b51c797d164421c4f377878a9a4a7276b401563cde9df8a&=&format=webp",
+  "name": "Elvis Aaron",
+  "lastname": "Presly",
+  "userName": "The King of Rock",
+  "email": "Rockandroll@profesor.duoc.cl",
+  "password": "Elvis",
+  "birthdate":"08-01-1935",
+  "gender": "Masculino",
+  "carreras": [ 
+    {
+      "carreraId": "1",
+      "nombre": "Ingeniería en Informática"
+      },
+    {
+      "carreraId": "2",
+      "nombre": "Análisis de Sistemas"
+    },
+    {
+      "carreraId":"3",
+      "nombre":"Mecanica Automotriz"
+    }
+  ],
+  "sedes": "San Joaquín",
+  "identificador": "15353542-4",
+  "telefono": "+569 45734423",
+  "address": "Calle EL rey del Rock And Roll 123",
+  "clases": [
+    {
+      "id": "5",
+      "classId": "PGY4125",
+      "nombre": "Inglés",
+      "horario": "4:00 PM - 5:30 PM"
+    }
   ]
+}
+]
 }
