@@ -88,7 +88,6 @@ export class HomePage implements OnInit {
   }
 
   validacionCredenciales() {
-    // Verifica si el correo es de profesor
     if (this.correo.endsWith('@profesor.duoc.cl')) {
       this.teachersApiService.loginTeacher(this.correo, this.password).subscribe(
         (data: TeachersData[]) => {
@@ -97,7 +96,7 @@ export class HomePage implements OnInit {
             this.mostrarValidacion();
             this.guardarUsuarioCompleto();
             this.guardarDatos();
-            this.router.navigate(['/principal']);
+            this.router.navigate(['/teacher-principal']);
           } else {
             console.error('Profesor no encontrado');
             this.mostrarError();

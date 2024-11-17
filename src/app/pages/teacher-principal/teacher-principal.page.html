@@ -1,0 +1,56 @@
+<ion-app class="bg-white">
+  <!-- Menú lateral -->
+  <ion-menu contentId="main-content" side="start" class="bg-transparent backdrop-filter backdrop-blur-lg">
+    <ion-header class="ion-no-border" [translucent]="true" mode="ios">
+      <ion-toolbar class="bg-[#283D3B]">
+        <div class="flex justify-center items-center p-4">
+          <img src="assets/img/asistencia-page.png" class="w-32 h-auto" alt="duoc" />
+        </div>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="bg-[#EDDDD4]">
+      <ion-list lines="none" class="px-4 py-6">
+        <ion-item routerLink="/principal" routerDirection="root" detail="false" class="mb-4">
+          <ion-icon slot="start" name="home-outline" color="primary" class="text-[#197278] text-xl"></ion-icon>
+          <ion-label class="font-medium text-[#772E25]">Inicio</ion-label>
+        </ion-item>
+        <ion-item routerLink="/asistencia-page" routerDirection="root" detail="false" class="mb-4">
+          <ion-icon slot="start" name="qr-code-outline" color="primary" class="text-[#197278] text-xl"></ion-icon>
+          <ion-label class="font-medium text-[#772E25]">Leer QR</ion-label>
+        </ion-item>
+        <ion-item routerLink="/profile" routerDirection="root" detail="false" class="mb-4">
+          <ion-icon slot="start" name="person-outline" color="primary" class="text-[#197278] text-xl"></ion-icon>
+          <ion-label class="font-medium text-[#772E25]">Perfil Docente</ion-label>
+        </ion-item>
+        <ion-item routerLink="/soporte" routerDirection="root" detail="false" class="mb-4">
+          <ion-icon slot="start" name="hammer-outline" color="primary" class="text-[#197278] text-xl"></ion-icon>
+          <ion-label class="font-medium text-[#772E25]">Soporte</ion-label>
+        </ion-item>
+
+        <!-- Cerrar sesión -->
+        <ion-item (click)="logout()" detail="false" class="mb-4">
+          <ion-icon slot="start" name="log-out-outline" color="primary" class="text-[#197278] text-xl"></ion-icon>
+          <ion-label class="font-medium text-[#C44536]">Cerrar Sesión</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+
+  <!-- Header -->
+  <ion-header [translucent]="true" mode="ios">
+    <ion-toolbar class="bg-gradient-to-r from-[#197278] to-[#C44536]">
+      <ion-buttons class="text-[#EDDDD4]" slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title class="text-xl text-[#EDDDD4] text-center flex items-center">
+        <ion-icon name="qr-code-outline" class="text-xl text-[#EDDDD4] mb-1 align-middle"></ion-icon>
+        RegistrAPP
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <!-- Contenido principal -->
+  

@@ -30,6 +30,11 @@ const routes: Routes = [
     canActivate: [AuthenticatorGuardGuard]
   },
   {
+    path: 'teacher-principal',
+    loadChildren:()=> import('./pages/teacher-principal/teacher-principal.module').then(m => m.TeacherPrincipalPageModule),
+    canActivate: [AuthenticatorGuardGuard]
+  },
+  {
     path: 'soporte',
     loadChildren: () => import('./pages/soporte/soporte.module').then(m => m.SoportePageModule),
     canActivate: [AuthenticatorGuardGuard]
@@ -49,6 +54,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/error-404/error-404.module').then( m => m.Error404PageModule),
     canActivate: [noAuthenticatorGuardGuard]
   },
+  {
+    path: 'teacher-principal',
+    loadChildren: () => import('./pages/teacher-principal/teacher-principal.module').then( m => m.TeacherPrincipalPageModule)
+  },
+
 
 ];
 
