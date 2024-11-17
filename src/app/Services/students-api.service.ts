@@ -6,6 +6,7 @@ import { StudentsData } from '../models/students-data';
   providedIn: 'root'
 })
 export class StudentsApiService {
+  [x: string]: any;
 
   constructor(
     private http: HttpClient

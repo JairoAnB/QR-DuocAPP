@@ -262,7 +262,7 @@
       "lastname": "Urdemales Herrera",
       "userName": "Pedro Urdemales",
       "email": "Pedro.Urdemales@profesor.duoc.cl",
-      "password": "123",
+      "password": "1234",
       "birthdate":"22-06-1911",
       "gender": "Masculino",
       "carreras": [ 
@@ -370,7 +370,7 @@
   "lastname": "Presly",
   "userName": "The King of Rock",
   "email": "Rockandroll@profesor.duoc.cl",
-  "password": "Elvis",
+  "password": "elvis",
   "birthdate":"08-01-1935",
   "gender": "Masculino",
   "carreras": [ 

@@ -17,13 +17,20 @@ Ahora la aplicación cuenta con autenticación a través de JSON-SERVER. A conti
 
 > **Nota:** Puedes revisar los perfiles en el mismo archivo `info.json`. Si lo haces, evita borrar cualquier información, ya que es crucial mantener su estructura.
 
-### Perfiles de Usuario
+### Perfiles de Estudiantes
 
 | **Correo**                       | **Contraseña** |
-|----------------------------------|-----------------|
+|----------------------------------|----------------|
 | jair.gonzalez@duocuc.cl         | 123456          |
 | leo.venegas@duocuc.cl           | 1234            |
 | maria.perez@duocuc.cl           | 12345           |
 | fernando.lopez@duocuc.cl        | 12345678        |
 | lucas.martinez@duocuc.cl        | 123456789       |
 
+### Perfiles de Profesores
+
+| **Correo**                       | **Contraseña** |
+|----------------------------------|----------------|
+| Pedro.Urdemales@profesor.duoc.cl | 1234           |
+| jojojo@profesor.duoc.cl          | jojojo         |
+| Rockandroll@profesor.duoc.cl     | elvis          |      
