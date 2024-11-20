@@ -52,6 +52,8 @@ export class HomePage implements OnInit {
     }
   }
 
+  
+
   async guardarUsuarioCompleto() {
     try {
       const correoFormateado = this.correo.trim().split('@')[0];
@@ -83,10 +85,10 @@ export class HomePage implements OnInit {
   }
 
   validacionCredenciales() {
-    this.StudentsApiService.loginStudent(this.correo, this.password).subscribe(
-      (data) => {
-        if (data.length > 0) {
-          console.log('Usuario encontrado:', data);
+    this.StudentsApiService.loginStudents(this.correo, this.password).subscribe(
+      (student) => {
+        if (student) {
+          console.log('Usuario encontrado:', student);
           this.mostrarValidacion();
           this.guardarUsuarioCompleto();
           this.guardarDatos();

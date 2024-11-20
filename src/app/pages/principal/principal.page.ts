@@ -1,3 +1,4 @@
+import { StudentsApiService } from './../../Services/students-api.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
@@ -23,7 +24,8 @@ export class PrincipalPage implements OnInit {
     private router: Router,
     private storage: StorageService,
     private serviceAlert: ServiceAlertServiceService,
-    private navCtrl: NavController // Inyecta NavController
+    private navCtrl: NavController,
+    private Students: StudentsApiService
   ) {}
 
   async ngOnInit() {

@@ -29,10 +29,10 @@ export class ProfilePage implements OnInit {
     const email = localStorage.getItem('email');
     console.log('Correo almacenado en localStorage:', email);
     if (email) {
-      this.studentsApiService.getStudent(email).subscribe(
+      this.studentsApiService.getStudents(email).subscribe(
         (studentData) => {
-          if (studentData.length > 0) {
-            this.student = studentData[0];
+          if (studentData) {
+            this.student = studentData;
             console.log('Estudiante encontrado:', this.student);
           } else {
             console.log('No se encontró ningún estudiante con ese correo.');
@@ -133,7 +133,7 @@ export class ProfilePage implements OnInit {
 
   guardarPerfil() {
     if (this.student != null) {
-      this.studentsApiService.actualizarStudent(this.student).subscribe(
+      this.studentsApiService.updateStudent(this.student.id).subscribe(
         (studentData) => {
           console.log('Estudiante actualizado:', studentData);
           this.alertaCambiosRealizados();

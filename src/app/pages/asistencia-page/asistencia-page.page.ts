@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 })
 export class AsistenciaPagePage implements OnInit {
   student: StudentsData | null = null;
-  clases: string[] = [];
+  clases: ClassData[] = [];
   claseSeleccionada: ClassData | null = null;
   correo = '';
   horario: string[] = [];
@@ -64,10 +64,10 @@ export class AsistenciaPagePage implements OnInit {
     const email = localStorage.getItem('email');
     console.log('Correo almacenado en localStorage:', email);
     if (email) {
-      this.studentsApiService.getStudent(email).subscribe(
+      this.studentsApiService.getStudents(email).subscribe(
         (studentData) => {
-          if (studentData.length > 0) {
-            this.student = studentData[0];
+          if (studentData) {
+            this.student = studentData;
             console.log('Estudiante encontrado:', this.student);
             this.cargarClases();
           } else {
@@ -79,7 +79,6 @@ export class AsistenciaPagePage implements OnInit {
         }
       );
     }
-    this.obtenerUbicacion();
   }
 
 
@@ -101,15 +100,22 @@ export class AsistenciaPagePage implements OnInit {
     }
   }
 
-
   cargarClases() {
-    if (this.student && this.student.clases) {
-      this.clases = this.student.clases.map(clase => clase.nombre);
+    if (this.student && this.student.id) {  
+      this.studentsApiService.getClasses(this.student.id).subscribe(
+        (classes) => {
+          this.clases = classes;  
+          console.log('Clases recuperadas:', this.clases);
+        },
+        (error) => {
+          console.error('Error al recuperar las clases:', error);
+        }
+      );
     } else {
-      console.log('No hay clases disponibles.');
+      console.log('No hay clases disponibles o el estudiante no tiene ID.');
     }
   }
-
+  
   async registrarAsistencia() {
     const alert = await this.alertController.create({
       header: 'Asistencia registrada',
