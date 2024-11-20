@@ -62,7 +62,8 @@
           Clases disponibles para <strong class="text-[#C44536]">{{correo}}</strong>
         </h2>
         <h2 *ngIf="NoDisponible" class="text-2xl font-bold mb-5  text-[#C44536] animate-pulse">
-          <span class="text-[#C44536]">¡Ups!</span> No tienes clases disponibles <strong class="text-[#edddd4] ">{{correo}}</strong>
+          <span class="text-[#C44536]">¡Ups!</span> No tienes clases disponibles <strong
+            class="text-[#edddd4] ">{{correo}}</strong>
         </h2>
 
         <div *ngIf="!NoDisponible">
@@ -70,7 +71,7 @@
           <ion-item class="mb-4 border rounded-md ">
             <ion-select label="Clases Inscritas" [(ngModel)]="claseSeleccionada" [disabled]="desabilitarSelectClases"
               (ionChange)="cambiarSelectedMode()" placeholder="Escoge una clase" class="rounded-md">
-              <ion-select-option *ngFor="let clase of student?.clases" [value]="clase">
+              <ion-select-option *ngFor="let clase of clases" [value]="clase">
                 {{clase.nombre}} - {{clase.classId}}
               </ion-select-option>
             </ion-select>
@@ -81,7 +82,8 @@
           <p class="text-lg font-bold text-center text-[#C44536] mb-4">
             Parece que ya has registrado tu asistencia para todas tus clases el dia de hoy intenta mañana.
           </p>
-          <ion-button routerLink="/soporte" routerDirection="root" class="mt-2" expand="block" fill="solid" shape="round">
+          <ion-button routerLink="/soporte" routerDirection="root" class="mt-2" expand="block" fill="solid"
+            shape="round">
             <ion-icon name="hammer-outline" class="text-xl mr-2 align-middle"></ion-icon>
             Contactar soporte
           </ion-button>
@@ -89,7 +91,8 @@
 
         <div *ngIf="!hayHorariosDisponibles">
           <p class="text-red-600 font-bold text-xl">
-            <span class="text-[#C44536]">¡Precaucion!</span> No hay horarios disponibles para la clase seleccionada o la clase ya ha terminado.
+            <span class="text-[#C44536]">¡Precaucion!</span> No hay horarios disponibles para la clase seleccionada o la
+            clase ya ha terminado.
           </p>
         </div>
 
