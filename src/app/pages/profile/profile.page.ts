@@ -33,6 +33,7 @@ export class ProfilePage implements OnInit {
       this.studentsApiService.getStudents(email).subscribe(
         (studentData) => {
           if (studentData) {
+            this.originalStudent = { ...studentData };
             this.student = studentData;
             console.log('Estudiante encontrado:', this.student);
           } else {
@@ -147,12 +148,12 @@ export class ProfilePage implements OnInit {
 
   guardarPerfil() {
     if (this.student != null) {
-      this.studentsApiService.updateStudent(this.student.id).subscribe(
+      this.studentsApiService.updateStudent(this.student).then(
         (studentData) => {
           console.log('Estudiante actualizado:', studentData);
-          this.alertaCambiosRealizados();
-          this.editMode = false;
-        },
+          this.cambiarEditMode();
+        }
+      ).catch(
         (error) => {
           console.error('Error al actualizar el estudiante:', error);
           this.alertaCambiosNoRealizados();
