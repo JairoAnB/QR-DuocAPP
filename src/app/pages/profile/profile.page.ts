@@ -15,6 +15,7 @@ import { Capacitor } from '@capacitor/core';
 })
 export class ProfilePage implements OnInit {
   student: StudentsData | null = null;
+  originalStudent: StudentsData | null = null;
   editMode = false;
 
   constructor(
@@ -47,6 +48,11 @@ export class ProfilePage implements OnInit {
     }
   }
 
+  // Verifica si hay cambios en los datos del perfil
+  hasChanges(): boolean {
+    return JSON.stringify(this.student) !== JSON.stringify(this.originalStudent);
+  }
+
   async alertaCambios() {
     const alert = await this.alertController.create({
       header: 'Precaución',
@@ -77,6 +83,7 @@ export class ProfilePage implements OnInit {
     }
   }
 
+  // Selecciona la imagen de perfil desde el PC o la cámara
   async selectProfilePicture() {
     try {
       if (Capacitor.isNativePlatform()) {
@@ -111,7 +118,6 @@ export class ProfilePage implements OnInit {
       console.error('Error', error);
     }
   }
-  
 
   async alertaCambiosRealizados() {
     const alertCambios = await this.alertController.create({
@@ -125,7 +131,15 @@ export class ProfilePage implements OnInit {
   async alertaCambiosNoRealizados() {
     const alertError = await this.alertController.create({
       header: 'Alerta',
-      message: 'Los cambios no se han realizado con éxito',
+      message: 'Ha ocurrido un problema al actualizar. Inténtalo de nuevo',
+      buttons: ['OK'],
+    });
+    await alertError.present();
+  }
+  async alertaNoCambios() {
+    const alertError = await this.alertController.create({
+      header: 'Alerta',
+      message: 'Necesitas hacer cambios para guardar',
       buttons: ['OK'],
     });
     await alertError.present();
@@ -137,23 +151,27 @@ export class ProfilePage implements OnInit {
         (studentData) => {
           console.log('Estudiante actualizado:', studentData);
           this.alertaCambiosRealizados();
-          this.cambiarEditMode();
+          this.editMode = false;
         },
         (error) => {
           console.error('Error al actualizar el estudiante:', error);
           this.alertaCambiosNoRealizados();
         }
       );
+    } else {
+      this.alertaNoCambios();
+      this.editMode = true;
+
     }
   }
 
   cambiarEditMode() {
-    this.editMode = !this.editMode;
-    this.router.navigate(['/profile']);
-  }
-
-  guardarProfile() {
-    this.editMode = false;
+    if (this.editMode) {
+      this.editMode = false; 
+      this.student = { ...this.originalStudent }; 
+    } else {
+      this.editMode = true;  
+    }
   }
 
   logout() {
