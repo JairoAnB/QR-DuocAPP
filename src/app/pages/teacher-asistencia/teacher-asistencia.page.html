@@ -1,0 +1,111 @@
+<ion-app class="bg-white">
+  <!-- Menú lateral -->
+  <ion-menu contentId="main-content" side="start" class="bg-opacity-90 backdrop-filter backdrop-blur-lg">
+    <ion-header class="ion-no-border">
+      <ion-toolbar class="bg-transparent shadow-lg">
+        <div class="flex justify-center items-center p-4">
+          <img src="assets/img/logo_duoc_white.png" class="w-32 h-auto" alt="duoc" />
+        </div>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="bg-transparent">
+      <ion-list lines="none" class="px-4 py-6 bg-transparent">
+        <ion-item routerLink="/teacher-principal" routerDirection="root" detail="false" class="mb-4">
+          <ion-icon slot="start" name="home-outline" color="primary" class="text-xl"></ion-icon>
+          <ion-label class="font-medium text-[#283D3B]">Inicio</ion-label>
+        </ion-item>
+        <ion-item routerLink="/teacher-asistencia" routerDirection="root" detail="false" class="mb-4">
+          <ion-icon slot="start" name="qr-code-outline" color="primary" class="text-xl"></ion-icon>
+          <ion-label class="font-medium text-[#283D3B]">Generar QR</ion-label>
+        </ion-item>
+        <ion-item routerLink="/teacher-profile" routerDirection="root" detail="false" class="mb-4">
+          <ion-icon slot="start" name="person-outline" color="primary" class="text-xl"></ion-icon>
+          <ion-label class="font-medium text-[#283D3B]">Perfil Docente</ion-label>
+        </ion-item>
+        <ion-item routerLink="/soporte" routerDirection="root" detail="false" class="mb-4">
+          <ion-icon slot="start" name="hammer-outline" color="primary" class="text-xl"></ion-icon>
+          <ion-label class="font-medium text-[#283D3B]">Soporte</ion-label>
+        </ion-item>
+        <ion-item (click)="logout()" detail="false" class="mb-4">
+          <ion-icon slot="start" name="log-out-outline" color="primary" class="text-xl"></ion-icon>
+          <ion-label class="font-medium text-[#283D3B]">Cerrar Sesión</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <!-- Contenido principal -->
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+
+  <!-- Header -->
+  <ion-header [translucent]="true" mode="ios">
+    <ion-toolbar class="bg-gradient-to-r from-[#197278] to-[#C44536]">
+      <ion-buttons slot="start">
+        <ion-menu-button class="text-white"></ion-menu-button>
+      </ion-buttons>
+      <ion-title class="text-xl text-center flex items-center text-white">
+        <ion-icon name="qr-code-outline" class="text-xl mb-1 align-middle"></ion-icon>
+        Generar Asistencia
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Contenido principal -->
+  <ion-content class="text-center bg-[#EDDDD4]" [scrollY]="false">
+    <div class="menu-content block rounded-xl max-w-[350px] h-auto my-5 mx-auto">
+      <ion-img class="backdrop-blur-sm" src="assets/img/asistencia.jpg"></ion-img>
+    </div>
+    <div class="bg-[#283D3B] rounded-2xl mr-3 ml-3">
+      <div class="container mx-auto p-4 mt-4 rounded-lg">
+        <h2 class="text-2xl font-bold mb-5 text-white">
+          Generar QR para asistencia de <strong class="text-[#C44536]">{{ correo }}</strong>
+        </h2>
+
+        <p class="text-[#EDDDD4] mb-2">Seleccione la clase:</p>
+        <ion-item class="mb-4 border rounded-md">
+          <ion-select 
+            label="Clases Impartidas" 
+            [(ngModel)]="claseSeleccionada" 
+            placeholder="Escoge una clase" 
+            (ionChange)="onClaseChange()" 
+            class="rounded-md">
+            <ion-select-option *ngFor="let clase of clases" [value]="clase">
+              {{ clase.nombre }} - {{ clase.classId }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <p class="text-[#EDDDD4] mb-2">Seleccione el horario:</p>
+        <ion-item class="mb-4 border rounded-md">
+          <ion-select 
+            label="Horarios Disponibles" 
+            [(ngModel)]="horarioSeleccionado" 
+            placeholder="Escoge el horario">
+            <ion-select-option *ngFor="let horario of claseSeleccionada?.horarios" [value]="horario">
+              {{ horario }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <div *ngIf="claseSeleccionada && horarioSeleccionado">
+          <ion-button 
+            (click)="generarQR()" 
+            class="mt-6 hover:bg-[#197278] text-white font-bold py-2 px-4 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
+            expand="block">
+            <ion-icon class="mr-2 text-xl" name="qr-code"></ion-icon>
+            <ion-label class="text-lg">Generar QR</ion-label>
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+
+  <!-- Footer -->
+  <ion-footer [translucent]="true" mode="ios">
+    <ion-toolbar class="bg-gradient-to-r from-[#197278] to-[#C44536]">
+      <ion-title class="text-center text-white text-xl">
+        © Duoc UC 2024
+      </ion-title>
+    </ion-toolbar>
+  </ion-footer>
+</ion-app>

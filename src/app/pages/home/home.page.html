@@ -1,0 +1,56 @@
+<!--Header-->
+<ion-header [translucent]="true" mode="ios">
+  <ion-toolbar>
+    <ion-title class="text-center flex items-center">
+      <ion-icon name="qr-code-outline" class="mb-1 align-middle"></ion-icon>
+      RegistrAPP
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!--Content-->
+<ion-content [fullscreen]="true" class="bg-gray-100">
+  <div class="flex justify-center mt-20">
+    <img src="assets/img/DUOC-PNG.png" class="h-400 w-400 md:h-560 md:w-560" alt="duoc">
+  </div>
+
+  <form class="bg-slate-300 rounded-3xl mx-6 shadow-xl p-6">
+    <p class="text-center"><strong class="text-3xl text-[#772E25]">¡Bienvenido/a!</strong></p>
+    
+
+    <div class="mt-6">
+      <ion-input [(ngModel)]="correo" name="correo" type="email" color="primary" label="Ingresa tu correo"
+        label-placement="floating" fill="outline" required
+        class="font-bold w-full max-w-xs mx-auto text-center mt-5 text-black"></ion-input>
+      <ion-input [(ngModel)]="password" name="password" type="password" color="primary" label="Ingresa tu contraseña"
+        label-placement="floating" fill="outline" required
+        class="font-bold w-full max-w-xs mx-auto text-center mt-5 text-black"></ion-input>
+    </div>
+
+    <div class="container mt-5 text-center">
+      <ion-button 
+        shape="round" 
+        class="custom-button text-white" 
+        (click)="verificarDatos()" 
+        expand="full">
+        Ingresar
+      </ion-button>
+    </div>
+    
+
+    <div class="pb-5">
+      <p class="text-center mt-5 text-black font-bold Cursor">
+        <a (click)="btnOlvido()">¿Has olvidado tu contraseña?</a>
+      </p>
+    </div>
+  </form>
+</ion-content>
+
+<!--Footer-->
+<ion-footer [translucent]="true" mode="ios">
+  <ion-toolbar>
+    <ion-title class="text-center">
+      © Duoc UC 2024
+    </ion-title>
+  </ion-toolbar>
+</ion-footer>

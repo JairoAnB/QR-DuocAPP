@@ -1,0 +1,256 @@
+{
+  "classes": [
+    {
+      "id": "1",
+      "classId": "PGY4121",
+      "nombre": "Matemáticas",
+      "horario": "8:00 AM - 9:30 AM"
+    },
+    {
+      "id": "2",
+      "classId": "PGY4122",
+      "nombre": "Física",
+      "horario": "10:00 AM - 11:30 AM"
+    },
+    {
+      "id": "3",
+      "classId": "PGY4123",
+      "nombre": "Programación",
+      "horario": "12:00 PM - 1:30 PM"
+    },
+    {
+      "id": "4",
+      "classId": "PGY4124",
+      "nombre": "Bases de Datos",
+      "horario": "2:00 PM - 3:30 PM"
+    },
+    {
+      "id": "5",
+      "classId": "PGY4125",
+      "nombre": "Inglés",
+      "horario": "4:00 PM - 5:30 PM"
+    },
+    {
+      "id": "6",
+      "classId": "PGY4126",
+      "nombre": "Cálculo",
+      "horario": "6:00 PM - 7:30 PM"
+    },
+    {
+      "id": "7",
+      "classId": "PGY4127",
+      "nombre": "Bases de Datos",
+      "horario": "8:00 AM - 9:30 AM"
+    },
+    {
+      "id": "8",
+      "classId": "PGY4128",
+      "nombre": "Redes",
+      "horario": "10:00 AM - 11:30 AM"
+    },
+    {
+      "id": "9",
+      "classId": "PGY4129",
+      "nombre": "Análisis de Sistemas",
+      "horario": "1:00 PM - 2:30 PM"
+    },
+    {
+      "id": "10",
+      "classId": "PGY4130",
+      "nombre": "Programación Web",
+      "horario": "3:00 PM - 4:30 PM"
+    }
+  ],
+  "students": [
+    {
+      "id": "1",
+      "picture": "https://images-ext-1.discordapp.net/external/7VjOuXpvrYYfDmS0gfGFoAeXrRVZG_fjMbK76_UClA8/https/avatarfiles.alphacoders.com/322/322629.jpg?format=webp&width=936&height=936",
+      "name": "Jairo Andres",
+      "username": "jair.gonzalez",
+      "lastname": "Gonzalez Bedoya",
+      "email": "jair.gonzalez@duocuc.cl",
+      "password": "123456",
+      "birthdate": "21-03-2004",
+      "gender": "Masculino",
+      "carrera": "Ingeniería en Informática",
+      "sede": "San Joaquín",
+      "identificador": "21599628-k",
+      "telefono": "+569 44075535",
+      "address": "Calle falsisima, 6171",
+      "clases": [
+        {
+          "classId": "PGY4121",
+          "nombre": "Matemáticas",
+          "horario": "8:00 AM - 9:30 AM",
+          "yaPaso": false,
+          "asistio": true,
+          "horarios": [
+            "8:00 AM - 9:30 AM"
+          ]
+        },
+        {
+          "classId": "PGY4122",
+          "nombre": "Física",
+          "horario": "10:00 AM - 11:30 AM",
+          "yaPaso": true,
+          "asistio": true,
+          "horarios": [
+            "10:00 AM - 11:30 AM"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "picture": "https://elcomercio.pe/resizer/LXFnvL0lfcc3a2kMGbi-DIOWTMQ=/1200x1200/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/KTOTLGWUCZG6REHQS6R2URY5FA.jpg",
+      "name": "Leonardo",
+      "username": "Leo.venegas",
+      "lastname": "Venegas",
+      "email": "leo.venegas@duocuc.cl",
+      "password": "1234",
+      "birthdate": "12-05-1998",
+      "gender": "Masculino",
+      "carrera": "Ingeniería en Informática",
+      "sede": "San Joaquín",
+      "identificador": "21458973-2",
+      "telefono": "+569 98765432",
+      "address": "Calle Verdad, 123",
+      "clases": [
+        {
+          "classId": "PGY4123",
+          "nombre": "Programación",
+          "horario": "12:00 PM - 1:30 PM",
+          "yaPaso": false,
+          "asistio": false,
+          "horarios": [
+            "12:00 PM - 1:30 PM"
+          ]
+        },
+        {
+          "classId": "PGY4124",
+          "nombre": "Bases de Datos",
+          "horario": "2:00 PM - 3:30 PM",
+          "yaPaso": true,
+          "asistio": true,
+          "horarios": [
+            "2:00 PM - 3:30 PM"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "picture": "https://cdn.discordapp.com/attachments/803069581001621548/1295957341551988777/22b6463788b6799f2cd65fd85fb174cd.png?ex=671fb313&is=671e6193&hm=b195c94622482d47f600644d9eb31ebd7f4eac8cd4e41cb28f9f76d7e0e7502b&",
+      "name": "María José",
+      "username": "Maria.perez",
+      "lastname": "Pérez Rodríguez",
+      "email": "maria.perez@duocuc.cl",
+      "password": "12345",
+      "birthdate": "15-09-2002",
+      "gender": "Femenino",
+      "carrera": "Ingeniería en Informática",
+      "sede": "Plaza Vespucio",
+      "identificador": "21399856-4",
+      "telefono": "+569 12345678",
+      "address": "Avenida Siempre Viva, 742",
+      "clases": [
+        {
+          "classId": "PGY4125",
+          "nombre": "Inglés",
+          "horario": "4:00 PM - 5:30 PM",
+          "yaPaso": false,
+          "asistio": false,
+          "horarios": [
+            "4:00 PM - 5:30 PM"
+          ]
+        },
+        {
+          "classId": "PGY4126",
+          "nombre": "Cálculo",
+          "horario": "6:00 PM - 7:30 PM",
+          "yaPaso": true,
+          "asistio": true,
+          "horarios": [
+            "6:00 PM - 7:30 PM"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "picture": "https://media.discordapp.net/attachments/803069581001621548/1294873809978916924/image0.jpg?ex=671fb675&is=671e64f5&hm=53f9853baf5264947b51c797d164421c4f377878a9a4a7276b401563cde9df8a&=&format=webp",
+      "name": "Fernando",
+      "username": "Fer.lopez",
+      "lastname": "López Martínez",
+      "email": "fernando.lopez@duocuc.cl",
+      "password": "12345678",
+      "birthdate": "02-07-2003",
+      "gender": "Masculino",
+      "carrera": "Ingeniería en Informática",
+      "sede": "Plaza Vespucio",
+      "identificador": "21678945-7",
+      "telefono": "+569 76543210",
+      "address": "Calle Real, 456",
+      "clases": [
+        {
+          "classId": "PGY4127",
+          "nombre": "Bases de Datos",
+          "horario": "8:00 AM - 9:30 AM",
+          "yaPaso": true,
+          "asistio": true,
+          "horarios": [
+            "8:00 AM - 9:30 AM"
+          ]
+        },
+        {
+          "classId": "PGY4128",
+          "nombre": "Redes",
+          "horario": "10:00 AM - 11:30 AM",
+          "yaPaso": false,
+          "asistio": false,
+          "horarios": [
+            "10:00 AM - 11:30 AM"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "picture": "https://media.discordapp.net/attachments/803069581001621548/1294871735945920523/image0.jpg?ex=671fb487&is=671e6307&hm=2729b96464f0d36216e307c138baaf956ecfddd6a751f6b7a18a7ea064550170&=&format=webp",
+      "name": "Lucas",
+      "username": "Lucas.martinez",
+      "lastname": "Martínez",
+      "email": "lucas.martinez@duocuc.cl",
+      "password": "123456789",
+      "birthdate": "20-08-2001",
+      "gender": "Masculino",
+      "carrera": "Ingeniería en Informática",
+      "sede": "San Joaquín",
+      "identificador": "21647890-5",
+      "telefono": "+569 12345679",
+      "address": "Calle Verde, 789",
+      "clases": [
+        {
+          "classId": "PGY4129",
+          "nombre": "Análisis de Sistemas",
+          "horario": "1:00 PM - 2:30 PM",
+          "yaPaso": false,
+          "asistio": false,
+          "horarios": [
+            "1:00 PM - 2:30 PM"
+          ]
+        },
+        {
+          "classId": "PGY4130",
+          "nombre": "Ingeniería en Informática",
+          "horario": "3:00 PM - 4:30 PM",
+          "yaPaso": true,
+          "asistio": true,
+          "horarios": [
+            "3:00 PM - 4:30 PM"
+          ]
+        }
+      ]
+    }
+  ]
+}

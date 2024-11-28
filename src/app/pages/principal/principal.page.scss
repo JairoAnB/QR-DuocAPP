@@ -1,0 +1,32 @@
+.menu-image {
+    display: block;
+    max-width: 92%;
+    height: auto;
+    margin: 20px auto;
+  }
+  .custom-bg {
+    background-color: rgba(45, 55, 72, 0.75); 
+    border-radius: 2.1rem; 
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); 
+    padding: 1.5rem; 
+    width: 90%;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .weathertitle{
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 21px;
+    font-weight: bold;
+  }
+  .Temp {
+    font-size:18px;
+    font-weight: bold;
+  }
+.btn-mostrar {
+
+  color:rgb(196, 193, 193);
+  font-size: 14px;
+  border: 14px;
+  font-weight:lighter;
+  
+}

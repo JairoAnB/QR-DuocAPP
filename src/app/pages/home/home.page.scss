@@ -1,0 +1,49 @@
+ion-content {
+  --background: url('../../../assets/img/apple-table-classroom.jpg') no-repeat center center / cover;
+}
+
+#container {
+  text-align: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#container strong {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #8c8c8c;
+
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+.Cursor a:hover{ 
+  cursor: pointer;
+  text-decoration: underline;
+  color: #607ee4;
+  transition: color 0,3 ease; 
+
+}
+ion-button.custom-button {
+  --background: #197278;   
+  --color: #EDDDD4;         
+  --border-radius: 20px;    
+  --min-height: 50px;       
+  --box-shadow: none;       
+}
+
+ion-button.custom-button:hover {
+  --background: #C44536;    
+}

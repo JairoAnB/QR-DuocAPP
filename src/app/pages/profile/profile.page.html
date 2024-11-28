@@ -1,0 +1,156 @@
+<ion-app>
+  <!-- Menú lateral -->
+  <ion-menu contentId="main-content" side="start" class="bg-opacity-80 backdrop-filter backdrop-blur-lg">
+    <ion-header class="ion-no-border">
+      <ion-toolbar class="bg-transparent">
+        <div class="flex justify-center items-center p-4">
+          <img src="assets/img/logo_duoc_white.png" class="w-32 h-auto" alt="duoc" />
+        </div>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="bg-transparent">
+      <ion-list lines="none" class="px-4 py-6 bg-transparent">
+        <ion-item routerLink="/principal" routerDirection="root" detail="false" class="mb-4 bg-transparent">
+          <ion-icon slot="start" name="home-outline" color="primary" class="text-xl"></ion-icon>
+          <ion-label class="font-medium text-[#283D3B]">Inicio</ion-label>
+        </ion-item>
+        <ion-item routerLink="/asistencia-page" routerDirection="root" detail="false" class="mb-4 bg-transparent">
+          <ion-icon slot="start" name="qr-code-outline" color="primary" class="text-xl"></ion-icon>
+          <ion-label class="font-medium text-[#283D3B]">Leer QR</ion-label>
+        </ion-item>
+        <ion-item routerLink="/profile" routerDirection="root" detail="false" class="mb-4 bg-transparent">
+          <ion-icon slot="start" name="person-outline" color="primary" class="text-xl"></ion-icon>
+          <ion-label class="font-medium text-[#283D3B]">Perfil Estudiantil</ion-label>
+        </ion-item>
+        <ion-item routerLink="/soporte" routerDirection="root" detail="false" class="mb-4 bg-transparent">
+          <ion-icon slot="start" name="hammer-outline" color="primary" class="text-xl"></ion-icon>
+          <ion-label class="font-medium text-[#283D3B]">Soporte</ion-label>
+        </ion-item>
+        <ion-item (click)="logout()" detail="false" class="mb-4 bg-transparent">
+          <ion-icon slot="start" name="log-out-outline" color="primary" class="text-xl"></ion-icon>
+          <ion-label class="font-medium text-[#283D3B]">Cerrar Sesión</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <!-- Contenido principal -->
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+
+  <ion-header [translucent]="true" mode="ios">
+    <ion-toolbar class="bg-gradient-to-r from-[#197278] to-[#C44536]">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title class="text-center flex items-center text-xl text-[#EDDDD4]">
+        <ion-icon name="person" class="text-xl mb-1 align-middle"></ion-icon>
+        Perfil Estudiantil
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content [scrollY]="true" class="bg-[#197278] p-4" [scrollEvents]="true">
+    <div *ngIf="!editMode">
+      <div class="h-screen flex items-center justify-center">
+        <div class="bg-[#283D3B] rounded-2xl mr-4 ml-4 mb-20 p-6 max-w-md w-full mx-auto">
+          <div class="flex flex-col items-center">
+            <div class="relative group w-36 h-36" (click)="cambiarEditMode()">
+              <div class="absolute inset-0 rounded-full border-4 border-[#C44536] overflow-hidden transition duration-300 ease-in-out transform hover:scale-105">
+                <ion-img [src]="student?.picture" alt="Foto de perfil" class="w-full h-full object-cover transition duration-200 ease-in-out group-hover:opacity-35"></ion-img>
+              </div>
+              <ion-icon name="pencil" class="absolute inset-0 flex items-center justify-center opacity-75 transition-opacity duration-200 ease-in-out group-hover:opacity-100 text-white" style="font-size: 24px; bottom: 8px; right: 8px;"></ion-icon>
+            </div>
+            <h2 class="text-3xl font-bold text-[#EDDDD4] mb-2 text-center">{{student?.name}} {{student?.lastname}}</h2>
+            <div class="mt-4 w-full">
+              <h3 class="text-xl mb-2 font-semibold text-[#EDDDD4]">Datos Institucionales</h3>
+              <p class="text-lg text-[#EDDDD4] flex justify-between">
+                <span class="font-semibold">Correo Electrónico:</span>
+                <span class="font-medium text-[#EDDDD4]">{{student?.email}}</span>
+              </p>
+              <p class="text-lg text-[#EDDDD4] flex justify-between mt-2">
+                <span class="font-semibold">Nombre de usuario:</span>
+                <span class="font-medium text-[#EDDDD4]">{{student?.username}}</span>
+              </p>
+              <p class="text-lg text-[#EDDDD4] flex justify-between mt-2">
+                <span class="font-semibold">Carrera:</span>
+                <span class="font-medium text-[#EDDDD4]">{{student?.carrera}}</span>
+              </p>
+              <p class="text-lg text-[#EDDDD4] flex justify-between mt-2">
+                <span class="font-semibold">Sede:</span>
+                <span class="font-medium text-[#EDDDD4]">{{student?.sede}}</span>
+              </p>
+              <h3 class="text-xl font-semibold text-[#EDDDD4] mt-6">Datos personales</h3>
+              <p class="text-lg text-[#EDDDD4] flex justify-between mt-2">
+                <span class="font-semibold">Identificador:</span>
+                <span class="font-medium text-[#EDDDD4]">{{student?.identificador}}</span>
+              </p>
+              <p class="text-lg text-[#EDDDD4] flex justify-between mt-2">
+                <span class="font-semibold">Género:</span>
+                <span class="font-medium text-[#EDDDD4]">{{student?.gender}}</span>
+              </p>
+              <p class="text-lg text-[#EDDDD4] flex justify-between mt-2">
+                <span class="font-semibold">Teléfono celular:</span>
+                <span class="font-medium text-[#EDDDD4]">{{student?.telefono}}</span>
+              </p>
+              <p class="text-lg text-[#EDDDD4] flex justify-between mt-2">
+                <span class="font-semibold">Dirección:</span>
+                <span class="font-medium text-[#EDDDD4]">{{student?.address}}</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modo edición -->
+    <div *ngIf="editMode" class="min-h-screen flex items-center mr-4 ml-4 justify-center overflow-hidden">
+      <div class="bg-[#283D3B] rounded-xl mb-20 p-6 max-w-md w-full">
+        <div class="flex flex-col items-center">
+          <!-- Foto de perfil sigue siendo el botón para activar edición -->
+          <div class="relative w-36 h-36 mx-auto mt-4 active:scale-95 transition-transform duration-150" (click)="selectProfilePicture()" style="cursor: pointer;">
+            <!-- Imagen de perfil con borde -->
+            <div class="absolute inset-0 rounded-full border-4 border-[#C44536] overflow-hidden">
+              <ion-img [src]="student?.picture" alt="Foto de perfil" class="w-full h-full object-cover opacity-50"></ion-img>
+            </div>
+          
+            <!-- Texto e ícono superpuestos -->
+            <div class="absolute inset-0 flex flex-col items-center justify-center rounded-full bg-black bg-opacity-50">
+              <ion-icon name="create-outline" class="text-white mb-1" style="font-size: 24px;"></ion-icon>
+              <span class="text-white font-semibold text-lg">Editar Perfil</span>
+            </div>
+          </div>
+          
+
+          <div class="mt-4 w-full">
+            <ion-label class="text-[#EDDDD4] mt-1">Ingresa tu nombre de usuario:</ion-label>
+            <ion-input [(ngModel)]="student!.username" type="text" class="mb-3 w-full rounded-md shadow-md bg-[#283D3B] text-white placeholder-[#EDDDD4] transition duration-300 ease-in-out focus:bg-[#197278] focus:ring-2 focus:ring-[#C44536]"></ion-input>
+            <ion-label class="text-[#EDDDD4] mt-1">Ingresa tu teléfono:</ion-label>
+            <ion-input [(ngModel)]="student!.telefono" type="text" class="mb-3 w-full rounded-md shadow-md bg-[#283D3B] text-white placeholder-[#EDDDD4] transition duration-300 ease-in-out focus:bg-[#197278] focus:ring-2 focus:ring-[#C44536]"></ion-input>
+            <ion-label class="text-[#EDDDD4] mt-1">Ingresa tu dirección:</ion-label>
+            <ion-input [(ngModel)]="student!.address" type="text" class="mb-3 w-full rounded-md shadow-md bg-[#283D3B] text-white placeholder-[#EDDDD4] transition duration-300 ease-in-out focus:bg-[#197278] focus:ring-2 focus:ring-[#C44536]"></ion-input>
+            <ion-label class="text-[#EDDDD4] mt-1">Ingresa tu género:</ion-label>
+            <ion-input [(ngModel)]="student!.gender" type="text" class="mb-3 w-full rounded-md shadow-md bg-[#283D3B] text-white placeholder-[#EDDDD4] transition duration-300 ease-in-out focus:bg-[#197278] focus:ring-2 focus:ring-[#C44536]"></ion-input>
+          </div>
+          <ion-button class="mt-4 mb-2 inline-flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105 w-full" expand="full" fill="outline" shape="round" color="primary" (click)="alertaCambios()">
+            <ion-icon slot="start" name="create" class="mb-1"></ion-icon>
+            <span>Guardar Cambios</span>
+          </ion-button>
+          <!-- Botón Cancelar -->
+          <ion-button class="mt-4  inline-flex items-center space-x-2 transition duration-300 ease-in-out transform hover:scale-105 w-full" expand="full" fill="outline" shape="round" color="danger" (click)="cambiarEditMode()">
+            <ion-icon slot="start" name="close"></ion-icon>
+            <span>Cancelar</span>
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+
+  <!-- Footer -->
+  <ion-footer [translucent]="true" mode="ios">
+    <ion-toolbar class="bg-gradient-to-r from-[#197278] to-[#C44536]">
+      <ion-title class="text-center text-white text-xl">
+        © Duoc UC 2024
+      </ion-title>
+    </ion-toolbar>
+  </ion-footer>
+</ion-app>
