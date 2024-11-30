@@ -27,8 +27,8 @@ export class AsistenciaPagePage implements OnInit {
   isSupported = false;
   result = '';
   NoDisponible: boolean = false;
-  universidadLatitud: number = -33.4999912338583;
-  universidadLongitud: number = -70.6160540863554;
+  universidadLatitud: number = -33.51598315555912;
+  universidadLongitud: number = -70.63612166990613;
   radio: number = 100;
 
   constructor(
@@ -91,7 +91,8 @@ export class AsistenciaPagePage implements OnInit {
     });}
 
   clasesTerminadas(){
-    let clasesTerminadas = this.student?.clases?.every(clase => clase.asistio) || false;
+    let clasesTerminadas = this.clases.some(clase => clase.asistio === true);
+    console.log('Clases terminadas:', clasesTerminadas);
     if(clasesTerminadas){
       this.NoDisponible = true;
       this.reloadPage();
@@ -180,7 +181,6 @@ export class AsistenciaPagePage implements OnInit {
     });
     this.result = result.ScanResult;
   
-    // Trasformo los datos del qr provenientes de un json a strings para comprarlos.
     let data;
     try {
       data = JSON.parse(this.result);
@@ -189,11 +189,10 @@ export class AsistenciaPagePage implements OnInit {
       await this.DenegarAsistencia();
       return;
     }
-    //Obtengo globalmente las coordenadas del usuario.
+  
     let latitud: number | null = null;
     let longitud: number | null = null;
   
-    // primero verifico si si esta en movil o en pc para obtener la ubicacion
     try {
       if (isPlatform('hybrid')) {
         const position = await Geolocation.getCurrentPosition();
@@ -220,52 +219,39 @@ export class AsistenciaPagePage implements OnInit {
       return;
     }
   
-    //Calculo la distancia con la libreria geolib
     const distancia = getDistance(
       { latitude: latitud!, longitude: longitud! },
       { latitude: this.universidadLatitud, longitude: this.universidadLongitud }
     );
-    // Verifico si el estudiante se encuentra dentro del radio permitido
     if (distancia > this.radio) {
       console.log('Fuera del área permitida');
       await this.noEnSede();
       return;
     }
   
-    // Evaluar si el QR corresponde a la clase seleccionada
-    if (
-      data.id === this.student?.id &&
-      data.nombre === this.claseSeleccionada?.nombre &&
-      data.horario === this.horarioSeleccionado &&
-      data.classId === this.claseSeleccionada?.classId
-    ) {
+    if (!this.clases.length) {
+      await this.cargarClases(); 
+      console.log('Clases cargadas:', this.clases);
+    }
+  
+    const claseEncontrada = this.clases.find(
+      (clase) => clase.classId === data.classId && clase.nombre === data.nombre
+    );
+    console.log('Clase encontrada:', claseEncontrada);
+    if (claseEncontrada) {
       try {
-        if (this.student && this.student.clases) {
-          const claseEncontrada = this.student.clases.find(
-            (clase) => clase.classId === data.classId
-          );
-  
-          if (claseEncontrada) {
-            claseEncontrada.asistio = true;
-            const response = await this.studentsApiService
-              .actualizarStudent(this.student!)
-              .toPromise();
-  
-            if (this.claseSeleccionada) {
-              this.claseSeleccionada.asistio = true;
-              await this.registrarAsistencia();
-              this.clasesTerminadas();
-            }
-          }
-        }
+            await this.studentsApiService.updateClassAttendance(this.student?.id!,claseEncontrada.classId, true);
+            await this.studentsApiService.updateStudent(this.student!);
+            await this.cargarClases();
+            await this.registrarAsistencia();
+            this.clasesTerminadas();
       } catch (error) {
         console.error('Error al registrar la asistencia:', error);
         await this.DenegarAsistencia();
       }
-    } else {
-      await this.DenegarAsistencia();
     }
   }
+  
   
 
   async presentAlert(): Promise<void> {

@@ -45,6 +45,29 @@ export class StudentsApiService {
       .doc(`${this.studentsCollection}/${student.id}`)
       .update(student);
   }
+  async updateClassAttendance(studentId: string, classId: string, asistio: boolean): Promise<void> {
+    try {
+      const docRef = this.firestore
+        .collection('students')
+        .doc(studentId)
+        .collection('clases')
+        .doc(classId);
+  
+      const docSnapshot = await docRef.get().toPromise();
+  
+      if (docSnapshot!.exists) {
+        await docRef.update({ asistio });
+        console.log(`Asistencia actualizada para la clase ${classId} del estudiante ${studentId}`);
+      } else {
+        console.error(`No se encontró el documento con ID ${classId} para el estudiante ${studentId}`);
+        throw new Error(`No existe un documento con el ID ${classId}`);
+      }
+    } catch (error) {
+      console.error('Error al actualizar la asistencia:', error);
+      throw error;
+    }
+  }
+  
   getClasses(studentId: string): Observable<ClassData[]> {
     return this.firestore
       .collection(`students/${studentId}/clases`)
