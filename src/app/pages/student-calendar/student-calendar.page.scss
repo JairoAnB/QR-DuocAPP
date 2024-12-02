@@ -1,0 +1,19 @@
+/* Personaliza el ion-datetime */
+ion-datetime {
+    --background: #283D3B;
+    --background-rgb: 40, 61, 59; 
+  }
+.slide-in-left {
+    animation: slideInLeft 0.5s ease-out forwards;
+  }
+  
+  @keyframes slideInLeft {
+    0% {
+      opacity: 0;
+      transform: translateY(100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }

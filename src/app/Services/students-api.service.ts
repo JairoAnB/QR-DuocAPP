@@ -67,6 +67,10 @@ export class StudentsApiService {
       throw error;
     }
   }
+
+  getClassesByDay(studentId: string, dia: string): Observable<any[]>{
+    return this.firestore.collection(`students/${studentId}/clases`, (ref) => ref.where('dia', 'array-contains', dia)).valueChanges();
+  }
   
   getClasses(studentId: string): Observable<ClassData[]> {
     return this.firestore
@@ -81,6 +85,8 @@ export class StudentsApiService {
             seccion: clase.seccion || 'Sin sección', 
             yaPaso: clase.yaPaso || false,
             asistio: clase.asistio || false,
+            sala: clase.sala || 'Sin sala',
+            dia: Array.isArray(clase.dia) ? clase.dia : [clase.dia]
           }))
         )
       );

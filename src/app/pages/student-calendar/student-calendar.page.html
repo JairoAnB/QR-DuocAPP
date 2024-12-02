@@ -1,0 +1,97 @@
+<ion-app class="bg-white">
+  <!-- Menú lateral -->
+  <ion-menu contentId="main-content" side="start" class="bg-transparent backdrop-filter backdrop-blur-lg">
+    <ion-header class="ion-no-border" [translucent]="true" mode="ios">
+      <ion-toolbar class="bg-[#283D3B]">
+        <div class="flex justify-center items-center p-4">
+          <img src="assets/img/logo_duoc_white.png" class="w-32 h-auto" alt="duoc" />
+        </div>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="bg-[#EDDDD4]">
+      <ion-list lines="none" class="px-4 py-6">
+        <ion-item routerLink="/principal" routerDirection="root" detail="false" class="mb-4">
+          <ion-icon slot="start" name="home-outline" color="primary" class="text-[#197278] text-xl"></ion-icon>
+          <ion-label class="font-medium text-[#2C3E50]">Inicio</ion-label> <!-- Contraste mejorado -->
+        </ion-item>
+        <ion-item routerLink="/asistencia-page" routerDirection="root" detail="false" class="mb-4">
+          <ion-icon slot="start" name="qr-code-outline" color="primary" class="text-[#197278] text-xl"></ion-icon>
+          <ion-label class="font-medium text-[#2C3E50]">Leer QR</ion-label> <!-- Contraste mejorado -->
+        </ion-item>
+        <ion-item routerLink="/student-calendar" routerDirection="root" detail="false" class="mb-4">
+          <ion-icon slot="start" name="calendar" color="primary" class="text-[#197278] text-xl"></ion-icon>
+          <ion-label class="font-medium text-[#2C3E50]">Calendario</ion-label> <!-- Contraste mejorado -->
+        </ion-item>
+        <ion-item routerLink="/profile" routerDirection="root" detail="false" class="mb-4">
+          <ion-icon slot="start" name="person-outline" color="primary" class="text-[#197278] text-xl"></ion-icon>
+          <ion-label class="font-medium text-[#2C3E50]">Perfil Estudiantil</ion-label> <!-- Contraste mejorado -->
+        </ion-item>
+        <ion-item routerLink="/soporte" routerDirection="root" detail="false" class="mb-4">
+          <ion-icon slot="start" name="hammer-outline" color="primary" class="text-[#197278] text-xl"></ion-icon>
+          <ion-label class="font-medium text-[#2C3E50]">Soporte</ion-label> <!-- Contraste mejorado -->
+        </ion-item>
+
+        <!-- Cerrar sesión -->
+        <ion-item (click)="logout()" detail="false" class="mb-4">
+          <ion-icon slot="start" name="log-out-outline" color="primary" class="text-[#197278] text-xl"></ion-icon>
+          <ion-label class="font-medium text-[#C44536]">Cerrar Sesión</ion-label> <!-- Contraste mejorado -->
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+
+  <!-- Header -->
+  <ion-header [translucent]="true" mode="ios">
+    <ion-toolbar class="bg-gradient-to-r from-[#197278] to-[#C44536]">
+      <ion-buttons class="text-[#EDDDD4]" slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title class="text-xl text-[#EDDDD4] text-center flex items-center">
+        <ion-icon name="calendar" class="text-xl text-[#EDDDD4] mb-1 align-middle"></ion-icon>
+        Calendario
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <!-- Contenido principal -->
+  <ion-content class="ion-padding bg-[#EDDDD4] shadow-xl">
+    <div class="flex justify-center items-center mb-3">
+      <img src="assets/img/calendar.png" alt="Asistencia" class="rounded-lg max-w-[350px] min-h-[200]">
+    </div>
+
+    <!--calendario-->
+    <div>
+      <ion-datetime class="rounded-2xl ml-1" [(ngModel)]="diaSeleccionado" (ionChange)="cambioCalendario($event)"
+        presentation="date" [min]="2025-01-01"></ion-datetime>
+    </div>
+
+    <div class="mt-6 mb-2" [ngClass]="{'slide-in-left': clasesFiltradas.length > 0}">
+      <!--Itero con un ngfor las clases filtradas guardandolo en clase
+      despues obtengo los valores mediante interpolacion.-->
+      <ion-card class="rounded-2xl w-[100%] bg-[#1e2b29] mx-auto mb-3" *ngFor="let clase of clasesFiltradas">
+        <ion-card-header>
+          <ion-card-title class="text-white">{{clase.nombre}}</ion-card-title>
+          <ion-card-subtitle class="text-[#EDDDD4]">Sala de clases</ion-card-subtitle> 
+        </ion-card-header>
+        <hr class="border-gray-600">
+        <ion-card-content>
+          <ion-icon slot="start" name="time-outline" class="text-[#EDDDD4]"></ion-icon> 
+          {{clase.horarios}}
+          <br>
+          <ion-icon name="compass-outline" class="text-[#EDDDD4]"></ion-icon> 
+          {{clase.sala}}
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </ion-content>
+
+  <!-- Footer -->
+  <ion-footer [translucent]="true" mode="ios">
+    <ion-toolbar class="bg-gradient-to-r from-[#197278] to-[#C44536]">
+      <ion-title class="text-center text-white text-xl">
+        © Duoc UC 2024
+      </ion-title>
+    </ion-toolbar>
+  </ion-footer>
+</ion-app>

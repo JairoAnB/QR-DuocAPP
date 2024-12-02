@@ -252,7 +252,7 @@ export class AsistenciaPagePage implements OnInit {
     }
   }
   
-  
+
 
   async presentAlert(): Promise<void> {
     const alert = await this.alertController.create({

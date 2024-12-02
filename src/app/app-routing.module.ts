@@ -43,12 +43,18 @@ const routes: Routes = [
     path: 'asistencia-page',
     loadChildren: () => import('./pages/asistencia-page/asistencia-page.module').then( m => m.AsistenciaPagePageModule),
     canActivate: [AuthenticatorGuardGuard]
+  }, 
+  {
+    path: 'student-calendar',
+    loadChildren: () => import('./pages/student-calendar/student-calendar.module').then( m => m.StudentCalendarPageModule)
   },
   {
     path: '**',
     loadChildren: () => import('./pages/error-404/error-404.module').then( m => m.Error404PageModule),
     canActivate: [noAuthenticatorGuardGuard]
   },
+  
+
 
 ];
 

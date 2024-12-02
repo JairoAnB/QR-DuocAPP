@@ -9,26 +9,26 @@
       </ion-toolbar>
     </ion-header>
     <ion-content class="bg-transparent">
-      <ion-list lines="none" class="px-4 py-6 bg-transparent">
+      <ion-list lines="none" class="px-4 py-6">
         <ion-item routerLink="/principal" routerDirection="root" detail="false" class="mb-4">
-          <ion-icon slot="start" name="home-outline" color="primary" class="text-xl"></ion-icon>
-          <ion-label class="font-medium text-[#283D3B]">Inicio</ion-label>
+          <ion-icon slot="start" name="home-outline" color="primary" class="text-[#197278] text-xl"></ion-icon>
+          <ion-label class="font-medium text-[#772E25]">Inicio</ion-label>
         </ion-item>
         <ion-item routerLink="/asistencia-page" routerDirection="root" detail="false" class="mb-4">
-          <ion-icon slot="start" name="qr-code-outline" color="primary" class="text-xl"></ion-icon>
-          <ion-label class="font-medium text-[#283D3B]">Leer QR</ion-label>
+          <ion-icon slot="start" name="qr-code-outline" color="primary" class="text-[#197278] text-xl"></ion-icon>
+          <ion-label class="font-medium text-[#772E25]">Leer QR</ion-label>
+        </ion-item>
+        <ion-item routerLink="/student-calendar" routerDirection="root" detail="false" class="mb-4">
+          <ion-icon slot="start" name="calendar" color="primary" class="text-[#197278] text-xl"></ion-icon>
+          <ion-label class="font-medium text-[#772E25]">Calendario</ion-label>
         </ion-item>
         <ion-item routerLink="/profile" routerDirection="root" detail="false" class="mb-4">
-          <ion-icon slot="start" name="person-outline" color="primary" class="text-xl"></ion-icon>
-          <ion-label class="font-medium text-[#283D3B]">Perfil Estudiantil</ion-label>
+          <ion-icon slot="start" name="person-outline" color="primary" class="text-[#197278] text-xl"></ion-icon>
+          <ion-label class="font-medium text-[#772E25]">Perfil Estudiantil</ion-label>
         </ion-item>
         <ion-item routerLink="/soporte" routerDirection="root" detail="false" class="mb-4">
-          <ion-icon slot="start" name="hammer-outline" color="primary" class="text-xl"></ion-icon>
-          <ion-label class="font-medium text-[#283D3B]">Soporte</ion-label>
-        </ion-item>
-        <ion-item (click)="logout()" detail="false" class="mb-4">
-          <ion-icon slot="start" name="log-out-outline" color="primary" class="text-xl"></ion-icon>
-          <ion-label class="font-medium text-[#283D3B]">Cerrar Sesión</ion-label>
+          <ion-icon slot="start" name="hammer-outline" color="primary" class="text-[#197278] text-xl"></ion-icon>
+          <ion-label class="font-medium text-[#772E25]">Soporte</ion-label>
         </ion-item>
       </ion-list>
     </ion-content>
@@ -45,7 +45,7 @@
       </ion-buttons>
       <ion-title class="text-xl text-center flex items-center text-white">
         <ion-icon name="qr-code-outline" class="text-xl mb-1 align-middle"></ion-icon>
-        Registrar Asistencia
+        Asistencia
       </ion-title>
     </ion-toolbar>
   </ion-header>
@@ -53,8 +53,8 @@
   <!-- Saludo de Bienvenida -->
   <ion-content class="text-center bg-[#EDDDD4]" [scrollY]="false">
     <!-- Imagen en el menú principal -->
-    <div class="menu-content block rounded-xl max-w-[350px] h-auto my-5 mx-auto">
-      <ion-img class="backdrop-blur-sm" src="assets/img/asistencia.jpg"></ion-img>
+    <div class="menu-content block  max-w-[350px] h-auto my-5 mx-auto">
+      <ion-img class="backdrop-blur-sm " src="assets/img/asistencia.jpg"></ion-img>
     </div>
     <div class="bg-[#283D3B] rounded-2xl mr-3 ml-3">
       <div class="container mx-auto p-4 mt-4 rounded-lg">

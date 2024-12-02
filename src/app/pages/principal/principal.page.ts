@@ -6,6 +6,7 @@ import { WeatherService } from 'src/app/Services/weather.service';
 import { StorageService } from 'src/app/Services/storage.service';
 import { ServiceAlertServiceService } from 'src/app/Services/service-alert-service.service';
 import { NavController } from '@ionic/angular';
+import { StudentsData } from 'src/app/models/students-data';
 
 @Component({
   selector: 'app-principal',
@@ -17,6 +18,7 @@ export class PrincipalPage implements OnInit {
   weatherData: any;
   weatherIcon: string = "";
   showDetails: boolean = false;
+  student: StudentsData | null = null;
 
   constructor(
     private weatherservice: WeatherService,
@@ -34,11 +36,9 @@ export class PrincipalPage implements OnInit {
     const formattedCorreo = await this.storage.getCorreo();
     if (formattedCorreo) {
       const correoCompleto = `${formattedCorreo}@duocuc.cl`;
-      console.log(`Correo formateado recuperado: ${formattedCorreo}`);
       const userData = await this.storage.get(`user_data_${correoCompleto}`);
       if (userData) {
         this.correo = userData.correo.split('@')[0];
-        console.log(`Correo del usuario: ${this.correo}`);
       } else {
         console.log('No se encontraron datos de usuario en el almacenamiento.');
       }
@@ -46,6 +46,23 @@ export class PrincipalPage implements OnInit {
       console.log('No se encontró un correo formateado en el almacenamiento.');
     }
     this.getLocation(); 
+    const email = localStorage.getItem('email');
+    if (email) {
+      this.Students.getStudents(email).subscribe(
+        (studentData) => {
+          if (studentData) {
+            this.student = studentData;
+          } else {
+            console.log('No se encontró ningún estudiante con ese correo.');
+          }
+        },
+        (error) => {
+          console.error('Error al obtener los datos del estudiante:', error);
+        }
+      );
+    } else {
+      console.log('No hay correo almacenado en localStorage.');
+    }
   }
 
   getLocation() {
@@ -60,6 +77,7 @@ export class PrincipalPage implements OnInit {
     }
   }
 
+  
   getWeatherByCoordinates(lat: number, lon: number) {
     this.weatherservice.getWeatherByCoordinates(lat, lon).subscribe(
       data => {

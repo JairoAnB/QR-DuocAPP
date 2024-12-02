@@ -22,4 +22,6 @@ export interface ClassData {
     yaPaso: boolean;
     classId: string;
     asistio?: boolean;
+    sala: string;
+    dia: string[];
 }
