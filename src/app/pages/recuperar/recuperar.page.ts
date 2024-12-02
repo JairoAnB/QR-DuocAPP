@@ -34,12 +34,11 @@ export class RecuperarPage implements OnInit {
       this.denegarVacio();
       return;
     }
-    this.StudentsApiService.getStudent(this.recuperacionCorreo).subscribe(
+    this.StudentsApiService.getStudents(this.recuperacionCorreo).subscribe(
       (data) => {
-        if (data.length > 0) {
-          this.estudiante = data[0]; 
+        if (data) {
+          this.estudiante = data; 
           this.passwordChangeEnabled = true; 
-          this.validar();
         } else {
           this.denegar();
         }
@@ -48,14 +47,7 @@ export class RecuperarPage implements OnInit {
     );
   }
 
-  async validar() {
-    const mensaje = await this.alercontroller.create({
-      header: 'ATENCIÓN',
-      message: 'El correo ingresado fue correctamente validado',
-      buttons: [{ text: 'Aceptar' }]
-    });
-    await mensaje.present();
-  }
+
 
   async denegar() {
     const mensaje = await this.alercontroller.create({
@@ -77,14 +69,14 @@ export class RecuperarPage implements OnInit {
   cambiarContrasena() {
     if (this.contra1 === this.contra2 && this.estudiante) {
       this.estudiante.password = this.contra1;
-      this.StudentsApiService.actualizarStudent(this.estudiante).subscribe(
+      this.StudentsApiService.updateStudent(this.estudiante).then(
         async () => {
-          const mensaje = await this.toastController.create({
+          const mensajeToast = await this.toastController.create({
             message: 'Contraseña actualizada correctamente.',
             duration: 2000,
             color: 'success'
           });
-          mensaje.present();
+          mensajeToast.present();
           this.router.navigate(['/home']); 
         },
         async (error) => {
