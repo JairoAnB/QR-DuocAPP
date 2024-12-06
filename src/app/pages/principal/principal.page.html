@@ -76,35 +76,63 @@
     <!-- Inicio de la Api -->
     <form class="custom-bg rounded-3xl mx-6 shadow-xl p-6 bg-white">
       <div class="weather-container text-[#197278] text-center" *ngIf="weatherData">
-        <h2 class="weathertitle">Clima en {{ weatherData.name }}</h2>
-        <div class="Weather-Info"
-          style="display: flex; justify-content: center; align-items: center; margin-top: 10px;">
-          <img [src]="'http://openweathermap.org/img/wn/' + weatherIcon + '@2x.png'" alt="Icono del clima"
-            class="weather-icon" />
-          <p class="Temp">Temperatura {{ weatherData.main.temp }}°C</p>
-        </div>
-        <p> {{ traductor(weatherData.weather[0].description) }}</p>
-        <ion-button (click)="toggleDetails()" class="btn-mostrar text-[#197278]">Ver más</ion-button>
-        <div *ngIf="showDetails" class="ver-mas">
-          <p>Sensación térmica: {{ weatherData.main.feels_like }}°C</p>
-          <p>Humedad: {{ weatherData.main.humidity }}%</p>
-          <p>Velocidad del viento: {{ weatherData.wind.speed }} m/s</p>
-        </div>
+          <h2 class="weathertitle">Clima en {{ weatherData.name }}</h2>
+          <div class="weather-icon-container">
+             
+              <img [src]="'http://openweathermap.org/img/wn/' + weatherIcon + '@2x.png'" alt="Icono del clima" class="weather-icon" style="position: relative; z-index: 1;" />
+          </div>
+          <div class="ContenedorPalabras">
+              <p class="Temp">Temperatura {{ weatherData.main.temp }}°C</p>
+              <p class="Description">{{ traductor(weatherData.weather[0].description)}}</p>
+          </div>
+          <div class="toggle-details mt-4 text-[#197278]" (click)="botonClima()">
+              <ion-icon [name]="BtnClima ? 'chevron-up-outline' : 'chevron-down-outline'" class="text-xl"></ion-icon>
+          </div>
+          <div *ngIf="BtnClima" class="ver-mas mt-4">
+              <p class="text-lg">Sensación térmica: {{ weatherData.main.feels_like }}°C</p>
+              <p class="text-lg">Humedad: {{ weatherData.main.humidity }}%</p>
+              <p class="text-lg">Velocidad del viento: {{ weatherData.wind.speed }} m/s</p>
+          </div>
       </div>
       <div *ngIf="!weatherData">
-        <p>Cargando datos del clima...</p>
+          <p>Cargando datos del clima...</p>
       </div>
-    </form>
+  </form>
 
+    <!-- Fin de la Api -->
+  
     <!-- Botón para registrar asistencia -->
     <div class="flex justify-center">
       <ion-button
-        class="mt-6 hover:bg-[#197278] text-white font-bold py-2 px-4 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
-        expand="block" routerLink="/asistencia-page" routerDirection="root">
-        <ion-icon class="mr-2 text-xl" name="qr-code-outline"></ion-icon>
-        <ion-label class="text-lg">Registrar Asistencia</ion-label>
-      </ion-button>
+      class="mt-6 hover:bg-[#197278] text-white font-bold py-2 px-4 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105"
+      expand="block" routerLink="/asistencia-page" routerDirection="root">
+      <ion-icon class="mr-2 text-xl" name="qr-code-outline"></ion-icon>
+      <ion-label class="text-lg">Registrar Asistencia</ion-label>
+    </ion-button>
+  </div>
+  
+<!-- Mostrador -->
+<form class="containerCalendar rounded-full mx-auto shadow-xl p-4 bg-white max-w-sm">
+  <div class="text-center">
+    <h2 class="calendarTitel text-2xl font-bold mb-4">Hoy</h2>
+    <p class="text-lg">{{ today }} </p>
+    <p class="text-lg">{{ todayDate }}</p>
+  </div>
+  <div class="toggle-details mt-4 text-center" (click)="botonMostrador()">
+    <ion-icon [name]="BotonContenido ? 'chevron-up-outline' : 'chevron-down-outline'" class="text-xl"></ion-icon>
+  </div>
+  <div *ngIf="BotonContenido" class="text-center">
+    <div *ngIf="todayClasses.length > 0; else noClasses">
+      <div class="day-item" *ngFor="let clase of todayClasses">
+      </div>
     </div>
+    <ng-template #noClasses>
+      <p class="text-[#197278]">No hay clases hoy.</p>
+    </ng-template>
+  </div>
+</form>
+<!-- Fin Mostrador -->
+  
   </ion-content>
 
   <!-- Footer -->

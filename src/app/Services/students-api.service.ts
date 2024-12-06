@@ -63,7 +63,7 @@ export class StudentsApiService {
   //FUNCION PARA CONSEGUIR LAS CLASES DE UN ESTUDIANTE, AQUI BUSCA MEDIANTE EL STUDENTID DENTRO DE LAS COLECCIONES DE FIRESTORE, MAPEA TODOS LOS ATRIBUTOS DE CLASSDATA Y DEVUELVE LOS VALORES DE LA BASE DE DATOS.
   getClasses(studentId: string): Observable<ClassData[]> {
     return this.firestore
-      .collection(`students/${studentId}/clases`)
+    .collection<ClassData>(`${this.studentsCollection}/${studentId}/clases`)
       .valueChanges({ idField: 'classId' })
       .pipe(
         map((classes: any[]) =>

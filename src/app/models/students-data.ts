@@ -24,4 +24,6 @@ export interface ClassData {
     asistio?: boolean;
     sala: string;
     dia: string[];
+    asignatura?: string; 
+    profesor?: string;
 }

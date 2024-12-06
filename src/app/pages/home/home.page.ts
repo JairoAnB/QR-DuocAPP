@@ -1,10 +1,13 @@
 import { StudentsApiService } from './../../Services/students-api.service';
+import { TeachersApiService } from './../../Services/teachers-api.service';
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { VariableSaludoService } from '../../Services/variable-saludo.service'; 
 import { StorageService } from '../../Services/storage.service'; 
 import { UserData } from '../../models/user-data';
+import { TeachersData } from 'src/app/models/teachers-data';
+
 
 @Component({
   selector: 'app-home',
@@ -20,7 +23,9 @@ export class HomePage implements OnInit {
     private router: Router, 
     private services: VariableSaludoService, 
     private storageService: StorageService,
-    private StudentsApiService: StudentsApiService
+    private StudentsApiService: StudentsApiService,
+    private TeachersApiService: TeachersApiService
+ 
   ) {}
 
   async ngOnInit() {
@@ -85,6 +90,8 @@ export class HomePage implements OnInit {
   }
 
   validacionCredenciales() {
+    console.log('Validando credenciales para:', this.correo, this.password);
+
     this.StudentsApiService.loginStudents(this.correo, this.password).subscribe(
       (student) => {
         if (student) {
@@ -94,18 +101,39 @@ export class HomePage implements OnInit {
           this.guardarDatos();
           this.router.navigate(['/principal']);
         } else {
-          console.error('Usuario no encontrado');
-          this.mostrarError();
+          console.error('Usuario no encontrado como estudiante');
+          this.TeachersApiService.loginTeachers(this.correo, this.password).subscribe(
+            (teacher) => {
+              if (teacher) {
+                console.log('Usuario encontrado como profesor:', teacher);
+                this.mostrarValidacion();
+                this.guardarUsuarioCompleto();
+                this.guardarDatos();
+                this.router.navigate(['/principal']);
+              } else {
+                console.error('Usuario no encontrado como profesor');
+                this.mostrarError();
+              }
+            },
+            (error: any) => {
+              console.error('Error al buscar el usuario:', error);
+              this.mostrarError();
+            }
+          );
         }
+      },
+      (error: any) => {
+        console.error('Error al buscar el usuario:', error);
+        this.mostrarError();
       }
-    )
+    );
   }
-
+  
   verificarDatos() {
     const correoL = this.correo.trim().toLowerCase().replace(/\s+/g, "");
     const passwordL = this.password.trim().replace(/\s+/g, "");
 
-    if (correoL.includes("@") && passwordL.length >= 4 || correoL.endsWith("@duocuc.cl")) {
+    if ((correoL.includes("@") && passwordL.length >= 4) || correoL.endsWith("@duocuc.cl") || correoL.endsWith("@profesor.duoc.cl")) {
       this.validacionCredenciales();
     } else {
       this.mostrarError();

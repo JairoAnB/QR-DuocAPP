@@ -27,3 +27,8 @@ Ahora la aplicación cuenta con autenticación a través de JSON-SERVER. A conti
 | fernando.lopez@duocuc.cl        | 12345678        |
 | lucas.martinez@duocuc.cl        | 123456789       |
 
+### Perfiles de Profesores
+
+| **Correo**                       | **Contraseña** |
+|----------------------------------|-----------------       |
+| jojojo@profesor.duoc.cl          | jojojo         |

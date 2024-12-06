@@ -22,11 +22,82 @@
     font-size:18px;
     font-weight: bold;
   }
-.btn-mostrar {
 
-  color:rgb(196, 193, 193);
-  font-size: 14px;
-  border: 14px;
-  font-weight:lighter;
+.containerCalendar {
+  background-color: #197278;   
+  color: #ffffff; /* Color del texto blanco */
+  padding: 10px; 
+  border-radius: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+.ContenedorPalabras {
+    color:rgb(196, 193, 193);
+    font-size: 14px;
+    border: 14px;
+    font-weight:lighter; 
+}
+
+
+.circular-text span {
+  position: absolute;
+  transform: rotate(calc(var(--i) * 4deg));
+  transform-origin: 0 144px;
+}
+
+
+
+.weather-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.weather-icon {
+  width: 150px; 
+  height: 150px; 
+}
+
+.centered-icon {
+  display: block;
+  margin: 0 auto;
+}
+.calendarTitel {
+  color: #ffffff
+}
+
+.days-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.day-item {
+  background-color: 		#0a555a; 
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  flex: 1 1 calc(20.333% - 1rem); /* Ajusta el ancho de los contenedores */
+  box-sizing: border-box;
+  text-align: center;
+  height: 150px; /* Ajusta la altura para que sean cuadrados */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.day-title {
+  font-size: 1.25rem;
+  font-weight: bold;
   
+  margin-bottom: 0.5rem;
+}
+.containerCalendar {
+  border-radius: 1rem;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  width: 90%;
+  max-width: 800px; /* Ajusta el ancho máximo según tus necesidades */
+  margin: 20px auto;
 }

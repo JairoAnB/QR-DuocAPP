@@ -6,7 +6,10 @@ import { WeatherService } from 'src/app/Services/weather.service';
 import { StorageService } from 'src/app/Services/storage.service';
 import { ServiceAlertServiceService } from 'src/app/Services/service-alert-service.service';
 import { NavController } from '@ionic/angular';
-import { StudentsData } from 'src/app/models/students-data';
+import { ClassData, StudentsData } from 'src/app/models/students-data';
+import { TeachersApiService } from 'src/app/Services/teachers-api.service';
+import { TeachersData } from 'src/app/models/teachers-data';
+
 
 @Component({
   selector: 'app-principal',
@@ -19,6 +22,14 @@ export class PrincipalPage implements OnInit {
   weatherIcon: string = "";
   showDetails: boolean = false;
   student: StudentsData | null = null;
+  teachers: TeachersData | null = null;
+  BotonContenido: boolean = false;
+  BtnClima: boolean = false;
+  clases: ClassData[] = [];
+  todayClasses: ClassData[] = [];
+  today: string = '';
+  todayDate: string = '';
+
 
   constructor(
     private weatherservice: WeatherService,
@@ -27,7 +38,9 @@ export class PrincipalPage implements OnInit {
     private storage: StorageService,
     private serviceAlert: ServiceAlertServiceService,
     private navCtrl: NavController,
-    private Students: StudentsApiService
+    private Students: StudentsApiService,
+    private Teachers: TeachersApiService,
+    private studentsApiService: StudentsApiService
   ) {}
 
   async ngOnInit() {
@@ -35,25 +48,51 @@ export class PrincipalPage implements OnInit {
     await this.storage.init();
     const formattedCorreo = await this.storage.getCorreo();
     if (formattedCorreo) {
-      const correoCompleto = `${formattedCorreo}@duocuc.cl`;
-      const userData = await this.storage.get(`user_data_${correoCompleto}`);
-      if (userData) {
-        this.correo = userData.correo.split('@')[0];
+      const correoCompletoEstudiante = `${formattedCorreo}@duocuc.cl`;
+      const correoCompletoProfesor = `${formattedCorreo}@profesor.duoc.cl`;
+      const userDataEstudiante = await this.storage.get(`user_data_${correoCompletoEstudiante}`);
+      const userDataProfesor = await this.storage.get(`user_data_${correoCompletoProfesor}`);
+      
+      if (userDataEstudiante) {
+        this.correo = userDataEstudiante.correo.split('@')[0];
+        this.student = userDataEstudiante;
+        this.today = this.getToday(); // Asegúrate de obtener el día actual antes de cargar el horario
+        this.todayDate = this.getTodayDate();
+        this.cargarHorario();
+      } else if (userDataProfesor) {
+        this.correo = userDataProfesor.correo.split('@')[0];
       } else {
         console.log('No se encontraron datos de usuario en el almacenamiento.');
       }
     } else {
       console.log('No se encontró un correo formateado en el almacenamiento.');
     }
-    this.getLocation(); 
+    
+    this.getLocation();
+    
     const email = localStorage.getItem('email');
     if (email) {
       this.Students.getStudents(email).subscribe(
         (studentData) => {
           if (studentData) {
             this.student = studentData;
+            this.today = this.getToday(); // Asegúrate de obtener el día actual antes de cargar el horario
+            this.todayDate = this.getTodayDate();
+            this.cargarHorario();
           } else {
             console.log('No se encontró ningún estudiante con ese correo.');
+            this.Teachers.getTeachers(email).subscribe(
+              (teacherData) => {
+                if (teacherData) {
+                  this.teachers = teacherData.length > 0 ? teacherData[0] : null;
+                } else {
+                  console.log('No se encontró ningún profesor con ese correo.');
+                }
+              },
+              (error) => {
+                console.error('Error al obtener los datos del profesor:', error);
+              }
+            );
           }
         },
         (error) => {
@@ -63,6 +102,39 @@ export class PrincipalPage implements OnInit {
     } else {
       console.log('No hay correo almacenado en localStorage.');
     }
+  }
+
+  cargarHorario() {
+    if (this.student && this.student.id) {
+      this.studentsApiService.getClasses(this.student.id).subscribe(
+        (data: ClassData[]) => {
+          this.clases = data;
+          this.todayClasses = this.getClasesByDay(this.today);
+          console.log('Datos de las clases:', this.clases); // Verifica que los datos se obtengan correctamente
+        },
+        (error) => {
+          console.error('Error al obtener los datos de las clases:', error);
+        }
+      );
+    }
+  }
+
+  getToday(): string {
+    const days = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    const todayIndex = new Date().getDay();
+    return days[todayIndex];
+  }
+
+  getTodayDate(): string {
+    const today = new Date();
+    const day = today.getDate();
+    const month = today.getMonth() + 1; // Los meses empiezan en 0
+    const year = today.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
+
+  getClasesByDay(day: string): ClassData[] {
+    return this.clases.filter(clase => clase.dia.includes(day));
   }
 
   getLocation() {
@@ -90,24 +162,48 @@ export class PrincipalPage implements OnInit {
       }
     );
   }
-
-  toggleDetails() { 
-    this.showDetails = !this.showDetails;
-  }
-
   traductor(description: string): string {
     const translations: { [key: string]: string } = {
-      "clear sky": "Cielo despejado",
-      "few clouds": "Pocas nubes",
-      "scattered clouds": "Nubes dispersas",
-      "broken clouds": "Nubes rotas",
+      "clear sky": "Cielo Despejado",
+      "few clouds": "Pocas Nubes",
+      "scattered clouds": "Nubes Dispersas",
+      "broken clouds": "Nubes Rotas",
       "shower rain": "Chubascos",
-      "rain": "lluvia",
+      "rain": "Lluvia",
       "thunderstorm": "Tormenta",
       "snow": "Nieve",
       "mist": "Neblina"
     };
     return translations[description] || description; 
+  }
+
+  botonClima() {
+    this.BtnClima = !this.BtnClima;
+  }
+  botonMostrador() { 
+    this.BotonContenido = !this.BotonContenido;
+  }
+
+
+  
+  redirectUser(email: string) {
+    let role: string;
+
+    if (email.endsWith('@profesor.duoc.cl')) {
+      role = 'teacher';
+    } else if (email.endsWith('@duocuc.cl')) {
+      role = 'student';
+    } else {
+      role = 'unknown';
+    }
+
+    if (role === 'teacher') {
+      this.navCtrl.navigateRoot('/principal');
+    } else if (role === 'student') {
+      this.navCtrl.navigateRoot('/principal');
+    } else {
+      console.log('Correo no reconocido.');
+    }
   }
 
   alertaError() {
